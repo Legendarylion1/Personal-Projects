@@ -7,6 +7,7 @@ those music files publically either so you would have to add your own. Lastly, I
 journey as a programmer alongside me. :)
 
 Casino
+
 For all of my projects I used py-to-exe to make an executable for my friends to use, but I have not included that in this repository for any of them. To use the casino you must
 first type in your username press enter, type in your password and press new user. Then you repeat the process of typing in your username and password but this time you press
 enter. Along the left side of the screen you can select your betting amount, and in the bottom right you can spin the casino. When you are all done playing you can simply press
