@@ -1,20 +1,22 @@
 # Personal-Projects
-My attempt at making my personal projects public
+Thanks for coming to check out my personal projects. In this repository are my 3 favorite projects I have worked on so far. Each project had a different goal or challenge that I was trying to overcome. For Pong, I wanted to test my knowledge of C++ and of using OpenGL for the first time. For the Casino, I wanted to spend real time working on a project to see if I could complete something of considerable size in my favorite language. Lastly, for “Torin’s Hardest Game” I wanted to try my best to complete an original game idea working about 3 hours a day in the 4 days leading up to Christmas. Lastly, I want to say that I am proud of everything that I have worked on and I hope you can appreciate my journey as a programmer alongside me.
 
-Currently, there are 4 projects in this repository. Some of my other projects and accomplishments in other programming languages are technically school work, so I am not sure if I am able to share those publically. Also for my music program. Yes, there was actual music and not just me yelling into my mic for sound, but I don't think I am allowed to share those music files publically either so you would have to add your own. Lastly, I want to say that I am proud of everything that I have worked on and I hope you can appreciate my journey as a programmer alongside me. :)
+## Pong Game
+#### Completed Dec 29, 2022
 
-Casino
--------
-To start the casino you need to locate the "main" file and double click it. For all of my projects I used py-to-exe to make an executable for my friends to use, but I have not included that in this repository for any of them. To use the casino you must first type in your username press enter, type in your password and press new user. Then you repeat the process of typing in your username and password but this time you press enter. Along the left side of the screen you can select your betting amount, and in the bottom right you can spin the casino. When you are all done playing you can simply press escape and the game should close
+Fun project creating pong with openGL32 and glfw. The thing that I can say I learned the most while creating this was abstraction. As I created more things in the project I found myself needing to use similar functionality more often meaning that I should try to refactor my old code to work with the new code that I was trying to write. This led to the creation of the objectRenderer class. I also left up the square renderer class as a look of what I started with but there was a lot of refactoring with this project once I realized what I was doing.
 
-MP3 Project
------------
-Like I said before I do not have actual music in this file because of copyright issues. I do not want to be sued. You can add your own or listen to me scream nonsense into my mic for my tests. To add music drag and drop mp3 files into the "Music Files" folder. To start the project locate the "main" file and double click it. Before I stopped working on the project, and I will finish it I was working on implementing the UI over the base console representation. So some of the functions work on the UI and other functions work on the console. I apologize for that. But if you want to simply play a song press 1 on the black UI. Then on the console type the number of the song that you would like to play. You can press 2 on the black UI to display the current song. You can press 3 on the black UI to skip to the next song in your folder of songs. I have not implemented the length of the song yet as number 4. Number 5 and 6 may give you a seizure from flashing white and black very quickly. I was trying to implement a search feature, and it is not yet operable. On the UI however if you have it pulled up next to the console you can see that when you type letters into the UI that the console displays different songs based on your search criteria. 
+Something I would do better. For the numbers, I had the idea to create a function that just takes in the score, figures out the number of digits in the score, for spacing purposes, and displays the correct score to the screen with only the need for numbers 0-9. There is no need to implement this for this project though but it will be in the next one.
 
-Snow
-----
-This is just something I made for my little sister. She said that she wanted me to make snow, so I tried my best to give her snow.
+One last thing I would've done differently is to have the game render the objects rather than the objects each having their own renderer. I don't think it is the object's responsibility to render themselves, but the game should do that. 
 
-Torin's Hardest Game
---------------------
-To open this project you need to double click the "Hardest_Game_Main". This is my most recent project that I wanted to try and make over my holiday break. I wanted to make a game for my friends and I to speedrun, and it worked out pretty well for the time spent on it. The file system from my casino game was being abused by my friends so I changed how that worked as well as the login in general. To create an account click the plus botton in the bottom right corner. Type in a 4 digit username, and add a password of any length to protect your account using only lowercase letters. Press enter and you should return to the main screen. If you press the plus button you will be prompted to add another account. After you have added your accounts you can press the back button to go back to the main login screen. Click on the bubble of the account that you would like to log into and type in your password. The attempt counter may be off. I will fix it later. The main point of the game is to try and speedrun it. Also another art of the game is that I am not supposed to explain to you how to play. So have fun, and dont cheat! I will implement anti cheating checkpoints later.
+Thanks for checking it out!
+
+
+## Torin's Hardest Game
+#### Completed Dec 25, 2021
+This is a project that I wanted to try and make over my holiday break. I wanted to make a game for my friends and I to speedrun, and it worked out pretty well for the time spent on it. The file system from my casino game was being abused by my friends so I changed how that worked as well as the login in general. The attempt counter may be off. I ran out of time to debug that problem. The main point of the game is to try and complete it as fast as possible. Also, another part of the game is that I am not supposed to explain to you how to play. So have fun, and don't cheat!
+
+## Casino
+#### Completed Sept 13, 2021
+This casino project was inspired by a trip I took with my grandma to the casinos. I don’t know much about gambling but every time I saw the spin on the digital computer screen I thought to myself. I think I can do that. I would brainstorm the entire trip home, and then I got to work. I had a fun time completing that project. Writing this description a year later I can look back on the project and say that I wish I had used classes a lot more. It would've saved me so much time and headache lol. In “casinoBack.py” the spin function is 600 lines longer than it needs to be if I had just used a class, but that comes with learning. Again, thanks for supporting my journey as a programmer.
