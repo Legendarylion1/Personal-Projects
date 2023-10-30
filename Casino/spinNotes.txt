@@ -1,6 +1,0 @@
-Lion       = 1     10%  Need to win back 1085% OnScreen - 3
-Sharingan  = 2-3   20%  Need to win back 125%  OnScreen - 4
-Jersey     = 4-6   30%  Need to win back 75%  OnScreen - 3
-Watermelon = 7-10  40%  Need to win back 55%   OnScreen - 4
-
-
