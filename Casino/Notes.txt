@@ -1,0 +1,34 @@
+We are going with a 1/6 design
+so it is 320/1080 for each section vertical slice
+
+x - 580 - 700
+y - 500 - 520
+
+,akali,ultimate,1000,torin,middlebrooks,1000,sion,passive,1000
+
+9/8/21:
+Worked on the casino project. 
+I have nearly finished the login screen. 
+I want to tweak a few design flaws and implement the actual file login portion.
+
+9/10/21
+Officially finished the login screen getting to work on the actual casino today probably
+Everything goes back to main and the login fully works with no real bugs besides of course
+the size of text that people input to the systems
+	TODO: I need to take notice of where the username was input so that I can pop it 3 times to erase it 
+	and put in the new values for the user
+	Otherwise we are giving them a "new account" everytime they play to update their winnings
+	 
+9/11/21 2:02 AM
+I finished the TODO from above
+
+9/13/21
+I seem to have neglected this notes page, but I have finished the casino project
+5 days it seems I have worked on it, but it is fully complete with all of the functions
+of a casino. The only thing left to do that I am not going to be doing is allowing for people to
+have more control over their user names and passwords, but I dont care to do that
+The project was about the main aspect and feel that I got from going to the casino with grandma
+and I made it a reality. It was a lot of fun and I am proud to say that the job is finished
+RIP KOBE
+
+P.S. Idk if kobe would be happy with me ending it without changing the login lmfao
