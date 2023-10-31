@@ -39,3 +39,6 @@ This is a project that I wanted to try and make over my holiday break. I wanted 
 [Casino Branch](../Casino)
 
 This casino project was inspired by a trip I took with my grandma to the casinos. I don’t know much about gambling but every time I saw the spin on the digital computer screen I thought to myself. I think I can do that. I would brainstorm the entire trip home, and then I got to work. I had a fun time completing that project. Writing this description a year later I can look back on the project and say that I wish I had used classes a lot more. It would've saved me so much time and headache lol. In “casinoBack.py” the spin function is 600 lines longer than it needs to be if I had just used a class, but that comes with learning. Again, thanks for supporting my journey as a programmer.
+
+
+![Casino Gameplay of me losing money on a pretty good roll](/Images/Casino/casinoGif.gif)
