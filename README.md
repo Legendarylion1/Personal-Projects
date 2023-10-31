@@ -2,7 +2,9 @@
 Thanks for coming to check out my personal projects. In this repository are my 3 favorite projects I have worked on so far. Each project had a different goal or challenge that I was trying to overcome. For Pong, I wanted to test my knowledge of C++ and of using OpenGL for the first time. For the Casino, I wanted to spend real time working on a project to see if I could complete something of considerable size in my favorite language. Lastly, for “Torin’s Hardest Game” I wanted to try my best to complete an original game idea working about 3 hours a day in the 4 days leading up to Christmas. Lastly, I want to say that I am proud of everything that I have worked on and I hope you can appreciate my journey as a programmer alongside me.
 
 ## Projects
-
+- [Pong Game](../main#pong-game)
+- [Torin's Hardest Game](../main#torins-hardest-game)
+- [Casino](../main#casino)
 
 ## Pong Game
 #### Completed Dec 29, 2022
