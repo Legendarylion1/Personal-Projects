@@ -32,8 +32,8 @@
    - First-time users can go back and repeat steps 3-6 as a returning user.
 7. Now that you are in the game you can click the big red button to test your odds in the casino
 8. On the left is a set of buttons that allow you to change the amount you are betting
-9. To close the application you should use the command line. Either close the command prompt or stop the program with `CTRL+C`
-10. The final step is to HAVE FUN. Try and make as much money as you can.
+9. To close the application you can use the command line by either closing the command prompt or by stopping the program with `CTRL+C`. You can also hit `ESC` on your keyboard with the application up to close the program
+10. The final step is to HAVE FUN. Try and make as much money as you can
 
 ## Challenges and Lessons Learned
 I remember the two biggest challenges for me were the login screen and the spin function.
