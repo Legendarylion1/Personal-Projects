@@ -6,7 +6,7 @@ Thanks for coming to check out my personal projects. In this repository are my 3
 - [Torin's Hardest Game](#torins-hardest-game)
 - [Casino](#casino)
 
-# Pong Game
+## Pong Game
 #### Completed Dec 29, 2022
 [Pong Game Branch](../Pong-Game)
 
@@ -19,13 +19,13 @@ One last thing I would've done differently is to have the game render the object
 Thanks for checking it out!
 
 
-# Torin's Hardest Game
+## Torin's Hardest Game
 #### Completed Dec 25, 2021
 [Torin's Hardest Game Branch](../Torins-Hardest-Game)
 
 This is a project that I wanted to try and make over my holiday break. I wanted to make a game for my friends and I to speedrun, and it worked out pretty well for the time spent on it. The file system from my casino game was being abused by my friends so I changed how that worked as well as the login in general. The attempt counter may be off. I ran out of time to debug that problem. The main point of the game is to try and complete it as fast as possible. Also, another part of the game is that I am not supposed to explain to you how to play. So have fun, and don't cheat!
 
-# Casino
+## Casino
 #### Completed Sept 13, 2021
 [Casino Branch](../Casino)
 
