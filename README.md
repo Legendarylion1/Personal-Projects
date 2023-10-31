@@ -1,6 +1,13 @@
 # Casino
    As I said in the main readme I created this project as an inspiration from a trip to the casino with my grandmom. I coded this a long time ago now, but I still remember how much fun I had coding it. I put in a lot of time for this project and this is the biggest project that I have fully finished in Python. This is my favorite Python project that I have created and the one that I am most proud of. This is a casino application that performs just like a casino. My friend Watson really likes the casino. Even to this day if he is bored he will sometimes run the code and just spin the casino for 30 minutes. There is literally no monetary gain but he finds it fun nonetheless. The odds of winning are a little too in favor of the player because he manages to always win, but for some reason when I play, I always lose my money. Maybe I am just unlucky lol. But I hope you enjoy my first big project.
 
+## Contents
+   - [How To Build](#how-to-build)
+   - [How To Play](#how-to-play)
+   - [Challenges and Lessons Learned](#challenges-and-lessons-learned)
+      - [Login Screen](#login-screen)
+      - [Spin Function](#spin-function)
+
 ## How to build
 1. Be sure to have Python with PIP installed
 2. Git clone the project to your local computer
