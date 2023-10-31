@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Pokemon">
+      <UniqueIdentifier>{8e9ae383-9eb3-49c9-8861-545b8cb15bbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Pokemon\Headers">
+      <UniqueIdentifier>{ed397007-ad1a-41b5-b4a5-76359bf21e59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Trainer">
+      <UniqueIdentifier>{91b297dc-c552-4449-8f6c-45a291b81f45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Encounters">
+      <UniqueIdentifier>{4bb1ba36-0e96-42a8-804a-43739b9bdbf6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Items">
+      <UniqueIdentifier>{716723e8-ab92-4f48-9d7b-60b8a6e64eac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\World">
+      <UniqueIdentifier>{d00ffeaa-ee40-4f7b-b371-e68b7aa77361}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Charts">
+      <UniqueIdentifier>{62cb10f6-8627-4d23-8ba8-7817c324ffeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Trainer\AI">
+      <UniqueIdentifier>{cdfaf671-368f-4b64-b129-eaea0691b14e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphics">
+      <UniqueIdentifier>{60a0f73c-94e7-472a-9e73-b0dac6689fb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphics\Buffers">
+      <UniqueIdentifier>{ca68cf33-4c8d-4e5f-ab90-337395177780}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Images">
+      <UniqueIdentifier>{15a5bf70-cb97-416a-8af3-8bacb2dd42cb}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Pokemon_Species.cpp">
+      <Filter>Source Files\Pokemon</Filter>
+    </ClCompile>
+    <ClCompile Include="Pokemon.cpp">
+      <Filter>Source Files\Pokemon</Filter>
+    </ClCompile>
+    <ClCompile Include="Attack.cpp">
+      <Filter>Source Files\Pokemon</Filter>
+    </ClCompile>
+    <ClCompile Include="Status.cpp">
+      <Filter>Source Files\Pokemon</Filter>
+    </ClCompile>
+    <ClCompile Include="Trainer.cpp">
+      <Filter>Source Files\Trainer</Filter>
+    </ClCompile>
+    <ClCompile Include="Encounter.cpp">
+      <Filter>Source Files\Encounters</Filter>
+    </ClCompile>
+    <ClCompile Include="NPT.cpp">
+      <Filter>Source Files\Trainer\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="Items.cpp">
+      <Filter>Source Files\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="PC.cpp">
+      <Filter>Source Files\World</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\std_image.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextRenderer.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="EBO.cpp">
+      <Filter>Source Files\Graphics\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Source Files\Graphics\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="VAO.cpp">
+      <Filter>Source Files\Graphics\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="VBO.cpp">
+      <Filter>Source Files\Graphics\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderClass.cpp">
+      <Filter>Source Files\Graphics\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMap.cpp">
+      <Filter>Source Files\World</Filter>
+    </ClCompile>
+    <ClCompile Include="MapSection.cpp">
+      <Filter>Source Files\World</Filter>
+    </ClCompile>
+    <ClCompile Include="Cutscene.cpp">
+      <Filter>Source Files\World</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Pokemon.h">
+      <Filter>Source Files\Pokemon\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Pokemon_Species.h">
+      <Filter>Source Files\Pokemon\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Attack.h">
+      <Filter>Source Files\Pokemon\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Status.h">
+      <Filter>Source Files\Pokemon\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Formulas.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Encounter.h">
+      <Filter>Source Files\Encounters</Filter>
+    </ClInclude>
+    <ClInclude Include="NPT.h">
+      <Filter>Source Files\Trainer\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="Items.h">
+      <Filter>Source Files\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="PC.h">
+      <Filter>Source Files\World</Filter>
+    </ClInclude>
+    <ClInclude Include="SpeciesChart.h">
+      <Filter>Source Files\Charts</Filter>
+    </ClInclude>
+    <ClInclude Include="TypeChart.h">
+      <Filter>Source Files\Charts</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackChart.h">
+      <Filter>Source Files\Charts</Filter>
+    </ClInclude>
+    <ClInclude Include="StatusChart.h">
+      <Filter>Source Files\Charts</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemChart.h">
+      <Filter>Source Files\Charts</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Source Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\stb_image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TextRenderer.h">
+      <Filter>Source Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="EBO.h">
+      <Filter>Source Files\Graphics\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Source Files\Graphics\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="VAO.h">
+      <Filter>Source Files\Graphics\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="VBO.h">
+      <Filter>Source Files\Graphics\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderClass.h">
+      <Filter>Source Files\Graphics\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMap.h">
+      <Filter>Source Files\World</Filter>
+    </ClInclude>
+    <ClInclude Include="MapSection.h">
+      <Filter>Source Files\World</Filter>
+    </ClInclude>
+    <ClInclude Include="Trainer.h">
+      <Filter>Source Files\Trainer</Filter>
+    </ClInclude>
+    <ClInclude Include="Cutscene.h">
+      <Filter>Source Files\World</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="default.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="default.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Images\playerOptionSelectResized.png">
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="Images\alphaNumerics.png">
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
