@@ -1,10 +1,15 @@
-## Pong Game
-#### Completed Dec 29, 2022
+# Pong Game
+   This pong game was my first attempt at rendering in C++. Making games is the way that I get to learn new techniques and show off my progress. I've made a lot of projects in Python so I figured that I would try my hand at making a game in C++. It took a while to learn how to render graphics to a graphics card. I took C++ classes at Princeton back during my freshman and sophomore years in high school, but I was rusty. This project allowed me to relearn C++ and get an idea of the advantages that the languages offered over Python. I believe that knowing the different advantages of each programming language is very important for a software engineer. I didn't dive into pointers and memory for this project, but my Dungeon Crawler game shows my first use of memory in a project. Pong is a very simple application, and for all of the games that I code, I try to do them from scratch without a tutorial. Graphics programming however required a tutorial and it was very helpful to learn how the different pipelines functioned. With many trips back and forth between documentation and visual studio I was able to create my first graphical application in C++. Enjoy.
 
-Fun project creating pong with openGL32 and glfw. The thing that I can say I learned the most while creating this was abstraction. As I created more things in the project I found myself needing to use similar functionality more often meaning that I should try to refactor my old code to work with the new code that I was trying to write. This led to the creation of the objectRenderer class. I also left up the square renderer class as a look of what I started with but there was a lot of refactoring with this project once I realized what I was doing.
+## Contents
+   - [How To Build](#how-to-build)
+   - [How To Play](#how-to-play)
+   - [Challenges and Lessons Learned](#challenges-and-lessons-learned)
 
-Something I would do better. For the numbers, I had the idea to create a function that just takes in the score, figures out the number of digits in the score, for spacing purposes, and displays the correct score to the screen with only the need for numbers 0-9. There is no need to implement this for this project though but it will be in the next one.
+## How to build
 
-One last thing I would've done differently is to have the game render the objects rather than the objects each having their own renderer. I don't think it is the object's responsibility to render themselves, but the game should do that. 
 
-Thanks for checking it out!
+## How to play
+
+
+## Challenges and Lessons Learned
