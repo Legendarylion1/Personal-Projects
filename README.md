@@ -3,8 +3,8 @@ Hi, I just wanted to say that I am getting a lot of traffic into my GitHub which
 
 Thanks for coming to check out my personal projects. In this repository are my 4 favorite projects I have worked on so far. Each project had a different goal or challenge that I was trying to overcome. For Pong, I wanted to test my knowledge of C++ and of using OpenGL for the first time. For the Casino, I wanted to spend real time working on a project to see if I could complete something of considerable size in my favorite language. Lastly, for “Torin’s Hardest Game” I wanted to try my best to complete an original game idea working about 3 hours a day in the 4 days leading up to Christmas. Lastly, I want to say that I am proud of everything that I have worked on and I hope you can appreciate my journey as a programmer alongside me.
 
-For all of my projects here you can click on the branch below the title or at the top to get more information and to pull the code.
 ## Projects
+For all of my projects here you can click on the branch below the title or at the top to get more information and to pull the code.
 - [Pokemon Game](#pokemon-game)
 - [Pong Game](#pong-game)
 - [Torin's Hardest Game](#torins-hardest-game)
