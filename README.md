@@ -6,6 +6,8 @@ Thanks for coming to check out my personal projects. In this repository are my 4
 ## Projects
 For all of my projects here you can click on the branch below the title or at the top to get more information and to pull the code.
 - [Pokemon Game](#pokemon-game)
+- [Dungeon Crawler](#dungeon-crawler)
+- [Chess Game](#chess-game)
 - [Pong Game](#pong-game)
 - [Torin's Hardest Game](#torins-hardest-game)
 - [Casino](#casino)
@@ -18,6 +20,11 @@ This Pokemon game is a really fun project. Recently my friends and I got back in
 
 ![pokemongif](https://github.com/Legendarylion1/Personal-Projects/assets/74434159/6b69e2d8-7e4a-4a1a-83f7-d1e847e67bb8)
 
+## Dungeon Crawler
+#### Completed May 25, 2023
+
+## Chess Game
+#### Completed April 8, 2023
 
 ## Pong Game
 #### Completed Dec 29, 2022
