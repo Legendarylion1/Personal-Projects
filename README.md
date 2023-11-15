@@ -25,6 +25,9 @@ This Pokemon game is a really fun project. Recently my friends and I got back in
 
 This dungeon crawler was a challenging one. I would say that this is the most challenging coding project that I have ever done. The goal was to create an infinite scrolling fighting game that I could play online with my friends. A lot of the code in the project looks weird, but it was designed with multiplayer in mind. I learned a lot of lessons from the project that will be more explained in the branch's readme. This code was so much fun to design because of the numerous challenges that I had to overcome. Solving problems and having to come up with creative solutions is my favorite part of programming. My favorite parts of this project were figuring out how to design the levels, and figuring out the math behind the items and particles. I try not to look up things when I am coding these personal projects so my math is kind of wrong which I go into more detail about, but trying to figure out a solution is the fun part for me. I really enjoy problem solving and I get to share my creative solutions with you. I was doing an internship at Lockheed Martin at the time that I was coding this, so I wasn't able to finish development, but this code gave me the building blocks for my Pokemon Project. I wanted to explore pointers and complex mathematics in this project which I think I did successfully. I left the game in a playable state where you can run around an infinite dungeon and fight enemies, but multiplayer and menu screens were never created. I had SO much fun with this project and I hope you enjoy exploring the complexities of this one.
 
+![Dungeon Crawler Gif](https://github.com/Legendarylion1/Personal-Projects/assets/74434159/92e54f8a-9fde-42c3-86eb-b0de70623514)
+
+
 ## Chess Game
 #### Completed April 8, 2023
 
