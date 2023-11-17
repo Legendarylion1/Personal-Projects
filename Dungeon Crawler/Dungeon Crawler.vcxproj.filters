@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Resource Files\Shaders">
+      <UniqueIdentifier>{f9fe5733-50bb-44a7-bd7c-a58f7234e427}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Images">
+      <UniqueIdentifier>{a4380f6c-32c8-45ba-ac89-dac3fd8a782f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Images\map">
+      <UniqueIdentifier>{8fe20331-1aae-46fe-ae1e-4f75279a96da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphics">
+      <UniqueIdentifier>{51bc05b6-ecb6-45e4-9666-2d9f1c1c9e0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Graphics">
+      <UniqueIdentifier>{e808de4b-5de4-430c-b02f-e352b299f429}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Player">
+      <UniqueIdentifier>{12689b1a-ee5b-4d5c-931e-8ba83e4a5b50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Player">
+      <UniqueIdentifier>{dbe5126d-304a-4631-a459-fa18154b0359}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Images\Characters">
+      <UniqueIdentifier>{5ecd5e58-1ffd-4326-b6ba-69dcae888ac8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Images\Items_Armor">
+      <UniqueIdentifier>{a0a4310c-ae27-4a2c-ad75-f2c6b0df229c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EBO.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="MapSection.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="shaderClass.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="stb.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="VBO.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="VAO.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="glad.c">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMap.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Source Files\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Source Files\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Armor.cpp">
+      <Filter>Source Files\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AIStats.cpp">
+      <Filter>Source Files\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="TextRenderer.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Displays.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleSystem.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="default.vert">
+      <Filter>Resource Files\Shaders</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="default.frag">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="EBO.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="MapSection.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="shaderClass.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="VBO.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="VAO.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMap.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Header Files\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Armor.h">
+      <Filter>Header Files\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TorinDefinitions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerUI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AIStats.h">
+      <Filter>Header Files\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="TextRenderer.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Displays.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleSystem.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Images\map-up.png">
+      <Filter>Resource Files\Images\map</Filter>
+    </Image>
+    <Image Include="Images\map-right.png">
+      <Filter>Resource Files\Images\map</Filter>
+    </Image>
+    <Image Include="Images\map-omni-directional.png">
+      <Filter>Resource Files\Images\map</Filter>
+    </Image>
+    <Image Include="Images\map-left.png">
+      <Filter>Resource Files\Images\map</Filter>
+    </Image>
+    <Image Include="Images\map-horizontal-hall.png">
+      <Filter>Resource Files\Images\map</Filter>
+    </Image>
+    <Image Include="Images\map-down-right.png">
+      <Filter>Resource Files\Images\map</Filter>
+    </Image>
+    <Image Include="Images\map-down-left-right.png">
+      <Filter>Resource Files\Images\map</Filter>
+    </Image>
+    <Image Include="Images\map-down-left.png">
+      <Filter>Resource Files\Images\map</Filter>
+    </Image>
+    <Image Include="Images\map-down.png">
+      <Filter>Resource Files\Images\map</Filter>
+    </Image>
+    <Image Include="Images\map-left-right.png">
+      <Filter>Resource Files\Images\map</Filter>
+    </Image>
+    <Image Include="Images\map-vertical-hall.png">
+      <Filter>Resource Files\Images\map</Filter>
+    </Image>
+    <Image Include="Images\map-up-right.png">
+      <Filter>Resource Files\Images\map</Filter>
+    </Image>
+    <Image Include="Images\map-up-left-right.png">
+      <Filter>Resource Files\Images\map</Filter>
+    </Image>
+    <Image Include="Images\map-up-left.png">
+      <Filter>Resource Files\Images\map</Filter>
+    </Image>
+    <Image Include="Images\map-up-down-right.png">
+      <Filter>Resource Files\Images\map</Filter>
+    </Image>
+    <Image Include="Images\map-up-down-left.png">
+      <Filter>Resource Files\Images\map</Filter>
+    </Image>
+    <Image Include="Images\map-up-down.png">
+      <Filter>Resource Files\Images\map</Filter>
+    </Image>
+    <Image Include="Images\Characters\Torin-Idle.png">
+      <Filter>Resource Files\Images\Characters</Filter>
+    </Image>
+    <Image Include="Images\Items_Armor\items.png">
+      <Filter>Resource Files\Images\Items_Armor</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

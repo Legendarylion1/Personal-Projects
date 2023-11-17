@@ -1,0 +1,115 @@
+﻿  AIStats.cpp
+  Armor.cpp
+  Camera.cpp
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Camera.cpp(11,18): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Camera.cpp(12,19): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  Displays.cpp
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Displays.cpp(184,26): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Displays.cpp(185,34): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+  ParticleSystem.cpp
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\ParticleSystem.cpp(94,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\ParticleSystem.cpp(133,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\ParticleSystem.cpp(419,23): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\ParticleSystem.cpp(422,14): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\ParticleSystem.cpp(423,14): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+  Player.cpp
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Player.cpp(26,42): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Player.cpp(27,42): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Player.cpp(28,42): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Player.cpp(30,21): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Player.cpp(34,21): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Player.cpp(38,21): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Player.cpp(497,16): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Player.cpp(499,41): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  Game.cpp
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Game.cpp(550,18): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  GameMap.cpp
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\GameMap.cpp(10,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\GameMap.cpp(145,59): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\GameMap.cpp(764,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\GameMap.cpp(767,12): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\GameMap.cpp(768,12): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  Item.cpp
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Item.cpp(47,44): warning C4018: '<=': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Item.cpp(49,36): warning C4018: '<=': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Item.cpp(49,56): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Item.cpp(51,25): warning C4018: '<=': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Item.cpp(51,45): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Item.cpp(61,42): warning C4018: '<=': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Item.cpp(66,35): warning C4018: '<=': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Item.cpp(66,55): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Item.cpp(71,19): warning C4018: '<=': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Item.cpp(71,39): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Item.cpp(114,18): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Item.cpp(115,18): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Item.cpp(167,18): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Item.cpp(179,21): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Item.cpp(188,21): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Item.cpp(244,27): warning C4244: '=': conversion from 'T' to 'unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
+  main.cpp
+  MapSection.cpp
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\MapSection.cpp(190,15): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\MapSection.cpp(190,15): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\MapSection.cpp(190,52): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\MapSection.cpp(190,52): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\MapSection.cpp(194,2): warning C4305: 'initializing': truncation from 'double' to 'GLfloat'
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\MapSection.cpp(191,15): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\MapSection.cpp(191,15): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\MapSection.cpp(191,49): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\MapSection.cpp(191,49): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\MapSection.cpp(192,16): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\MapSection.cpp(192,16): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\MapSection.cpp(192,50): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\MapSection.cpp(192,50): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\MapSection.cpp(193,16): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\MapSection.cpp(193,16): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\MapSection.cpp(193,53): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\MapSection.cpp(193,53): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\MapSection.cpp(760,2): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\MapSection.cpp(854,64): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\MapSection.cpp(894,73): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\MapSection.cpp(900,73): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\MapSection.cpp(909,73): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\MapSection.cpp(915,73): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  PlayerUI.cpp
+  Projectile.cpp
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Projectile.cpp(109,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Projectile.cpp(110,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Projectile.cpp(264,2): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Projectile.cpp(269,2): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Projectile.cpp(274,2): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Projectile.cpp(294,2): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Projectile.cpp(306,2): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  TextRenderer.cpp
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\TextRenderer.cpp(100,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\TextRenderer.cpp(165,20): warning C4018: '<': signed/unsigned mismatch
+  Texture.cpp
+  Generating Code...
+glfw3.lib(window.obj) : warning LNK4099: PDB 'glfw3.pdb' was not found with 'glfw3.lib(window.obj)' or at 'V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\x64\Debug\glfw3.pdb'; linking object as if no debug info
+glfw3.lib(input.obj) : warning LNK4099: PDB 'glfw3.pdb' was not found with 'glfw3.lib(input.obj)' or at 'V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\x64\Debug\glfw3.pdb'; linking object as if no debug info
+glfw3.lib(context.obj) : warning LNK4099: PDB 'glfw3.pdb' was not found with 'glfw3.lib(context.obj)' or at 'V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\x64\Debug\glfw3.pdb'; linking object as if no debug info
+glfw3.lib(init.obj) : warning LNK4099: PDB 'glfw3.pdb' was not found with 'glfw3.lib(init.obj)' or at 'V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\x64\Debug\glfw3.pdb'; linking object as if no debug info
+glfw3.lib(win32_window.obj) : warning LNK4099: PDB 'glfw3.pdb' was not found with 'glfw3.lib(win32_window.obj)' or at 'V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\x64\Debug\glfw3.pdb'; linking object as if no debug info
+glfw3.lib(win32_thread.obj) : warning LNK4099: PDB 'glfw3.pdb' was not found with 'glfw3.lib(win32_thread.obj)' or at 'V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\x64\Debug\glfw3.pdb'; linking object as if no debug info
+glfw3.lib(win32_joystick.obj) : warning LNK4099: PDB 'glfw3.pdb' was not found with 'glfw3.lib(win32_joystick.obj)' or at 'V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\x64\Debug\glfw3.pdb'; linking object as if no debug info
+glfw3.lib(win32_time.obj) : warning LNK4099: PDB 'glfw3.pdb' was not found with 'glfw3.lib(win32_time.obj)' or at 'V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\x64\Debug\glfw3.pdb'; linking object as if no debug info
+glfw3.lib(win32_init.obj) : warning LNK4099: PDB 'glfw3.pdb' was not found with 'glfw3.lib(win32_init.obj)' or at 'V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\x64\Debug\glfw3.pdb'; linking object as if no debug info
+glfw3.lib(win32_monitor.obj) : warning LNK4099: PDB 'glfw3.pdb' was not found with 'glfw3.lib(win32_monitor.obj)' or at 'V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\x64\Debug\glfw3.pdb'; linking object as if no debug info
+glfw3.lib(monitor.obj) : warning LNK4099: PDB 'glfw3.pdb' was not found with 'glfw3.lib(monitor.obj)' or at 'V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\x64\Debug\glfw3.pdb'; linking object as if no debug info
+glfw3.lib(vulkan.obj) : warning LNK4099: PDB 'glfw3.pdb' was not found with 'glfw3.lib(vulkan.obj)' or at 'V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\x64\Debug\glfw3.pdb'; linking object as if no debug info
+glfw3.lib(wgl_context.obj) : warning LNK4099: PDB 'glfw3.pdb' was not found with 'glfw3.lib(wgl_context.obj)' or at 'V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\x64\Debug\glfw3.pdb'; linking object as if no debug info
+glfw3.lib(egl_context.obj) : warning LNK4099: PDB 'glfw3.pdb' was not found with 'glfw3.lib(egl_context.obj)' or at 'V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\x64\Debug\glfw3.pdb'; linking object as if no debug info
+glfw3.lib(osmesa_context.obj) : warning LNK4099: PDB 'glfw3.pdb' was not found with 'glfw3.lib(osmesa_context.obj)' or at 'V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\x64\Debug\glfw3.pdb'; linking object as if no debug info
+  Dungeon Crawler.vcxproj -> V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\x64\Debug\Dungeon Crawler.exe

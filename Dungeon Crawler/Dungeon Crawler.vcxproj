@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{7bb2a61e-9496-4e75-b6da-74ec15489838}</ProjectGuid>
+    <RootNamespace>DungeonCrawler</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Libraries\include;C:\Users\0tmid\OneDrive\Desktop\PC Link\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Libraries\include;$(IncludePath)</IncludePath>
+    <LibraryPath>V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Libraries\lib;C:\Users\0tmid\OneDrive\Desktop\PC Link\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Libraries\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Libraries\include;C:\Users\0tmid\OneDrive\Desktop\PC Link\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Libraries\include;$(IncludePath)</IncludePath>
+    <LibraryPath>V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Libraries\lib;C:\Users\0tmid\OneDrive\Desktop\PC Link\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Libraries\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Libraries\include;C:\Users\0tmid\OneDrive\Desktop\PC Link\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Libraries\include;$(IncludePath)</IncludePath>
+    <LibraryPath>V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Libraries\lib;C:\Users\0tmid\OneDrive\Desktop\PC Link\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Libraries\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Libraries\include;C:\Users\0tmid\OneDrive\Desktop\PC Link\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Libraries\include;$(IncludePath)</IncludePath>
+    <LibraryPath>V:\GitHub Stuff and Things\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Libraries\lib;C:\Users\0tmid\OneDrive\Desktop\PC Link\Laptop-PC-Link\Dungeon Crawler 2.0\Dungeon Crawler\Libraries\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="AIStats.cpp" />
+    <ClCompile Include="Armor.cpp" />
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Displays.cpp" />
+    <ClCompile Include="ParticleSystem.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="EBO.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameMap.cpp" />
+    <ClCompile Include="glad.c" />
+    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="MapSection.cpp" />
+    <ClCompile Include="PlayerUI.cpp" />
+    <ClCompile Include="Projectile.cpp" />
+    <ClCompile Include="shaderClass.cpp" />
+    <ClCompile Include="stb.cpp" />
+    <ClCompile Include="TextRenderer.cpp" />
+    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="VAO.cpp" />
+    <ClCompile Include="VBO.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="default.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="default.frag" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AIStats.h" />
+    <ClInclude Include="Armor.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="Displays.h" />
+    <ClInclude Include="ParticleSystem.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="EBO.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GameMap.h" />
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="MapSection.h" />
+    <ClInclude Include="PlayerUI.h" />
+    <ClInclude Include="Projectile.h" />
+    <ClInclude Include="shaderClass.h" />
+    <ClInclude Include="TextRenderer.h" />
+    <ClInclude Include="Texture.h" />
+    <ClInclude Include="TorinDefinitions.h" />
+    <ClInclude Include="VAO.h" />
+    <ClInclude Include="VBO.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Images\Characters\Torin-Idle.png" />
+    <Image Include="Images\Items_Armor\items.png" />
+    <Image Include="Images\map-down-left-right.png" />
+    <Image Include="Images\map-down-left.png" />
+    <Image Include="Images\map-down-right.png" />
+    <Image Include="Images\map-down.png" />
+    <Image Include="Images\map-horizontal-hall.png" />
+    <Image Include="Images\map-left-right.png" />
+    <Image Include="Images\map-left.png" />
+    <Image Include="Images\map-omni-directional.png" />
+    <Image Include="Images\map-right.png" />
+    <Image Include="Images\map-up-down-left.png" />
+    <Image Include="Images\map-up-down-right.png" />
+    <Image Include="Images\map-up-down.png" />
+    <Image Include="Images\map-up-left-right.png" />
+    <Image Include="Images\map-up-left.png" />
+    <Image Include="Images\map-up-right.png" />
+    <Image Include="Images\map-up.png" />
+    <Image Include="Images\map-vertical-hall.png" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
