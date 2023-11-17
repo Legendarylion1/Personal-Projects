@@ -10,7 +10,7 @@
 1. git clone the repository to your local computer
 2. I do not yet have makefiles for this project, so you will need to run the Visual Studio community solution
    - The file is "`Dungeon Crawler.sln`"
-3. When you open the solution set the build platform to win32 or x86 at the top middle
+3. When you open the solution set the build platform to x64 at the top middle
    - I believe that it defaults to x64
    - If you are having trouble finding it. It is under that menu tab at the top that says "`Test`"
    - It is also to the left of the green arrow for the "`local windows debugger`"
