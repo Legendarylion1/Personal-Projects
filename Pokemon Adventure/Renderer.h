@@ -64,24 +64,26 @@ const unsigned int indiceCount = (boxesWide * boxesTall * iDataPoints) + boxBann
 const unsigned int pokemonIndiceCount = (boxesWide * boxesTall * iDataPoints);
 
 
-
-//TODO: Turn this into a namespace
-const static unsigned int BLACKSCREEN		= 0;
-const static unsigned int DEFAULT_ENCOUNTER = 1;
-const static unsigned int SELECT_ATTACK		= 2;
-const static unsigned int SELECT_POKEMON	= 3;
-const static unsigned int SELECT_ITEM		= 4;
-const static unsigned int DISPLAY_MAP		= 5;
-const static unsigned int DISPLAY_ESCAPE	= 6;
-const static unsigned int DISPLAY_PC		= 7;
-const static unsigned int DISPLAY_BUY_ITEMS	= 8;
-
-namespace SpriteState
+static enum Renderer_State
 {
-	static unsigned int STEP1 = 0;
-	static unsigned int IDLE = 1;
-	static unsigned int STEP2 = 2;
-}
+	BLACKSCREEN,
+	DEFAULT_ENCOUNTER,
+	SELECT_ATTACK,
+	SELECT_POKEMON,
+	SELECT_ITEM,
+	DISPLAY_MAP,
+	DISPLAY_ESCAPE,
+	DISPLAY_PC,
+	DISPLAY_BUY_ITEMS,
+	DISPLAY_SETTINGS
+};
+
+static enum SpriteState
+{
+	STEP1,
+	IDLE,
+	STEP2
+};
 
 class Renderer
 {
@@ -98,6 +100,7 @@ public:
 	void setMapStats(std::string texturePath, int width, int height);
 	void setPlayerState(float playerX, float playerY, unsigned int walkDirection, unsigned int walkState);
 	void setPlayerCoords(float playerX, float playerY);
+	void setPlayerScale(float playerScale);
 	void setPlayerAnimation(unsigned int walkDirection, unsigned int walkState);
 	void setGrassPosition(int x, int y);
 	void setRosterIndex(unsigned int index);
@@ -109,11 +112,15 @@ public:
 	void setAvailableItems(std::vector<std::string> availableItems);
 	void setExclamationSize(unsigned int size);
 	void setExclamationPos(glm::vec2 pos);
+	void setUserSettingBooleans(bool showFps, bool autoSave, bool fasterText);
+	void setUserSettingStrings(std::string up, std::string down, std::string left, std::string right, std::string interact);
 	void onUpdate();
 
 	void shutdown();
 
 private:
+	void showFPS();
+
 	void drawDefaultEncounter();
 	void drawAttacks();
 	void drawPokemonSelect();
@@ -128,6 +135,7 @@ private:
 	void drawPCPokemon(GLfloat vertices[640], GLuint indices[120]);
 	void drawExclamation();
 	void drawTrainerDialogue();
+	void drawSettings();
 
 	void drawEscapeMenu();
 
@@ -142,6 +150,9 @@ private:
 	Trainer* m_trainer = nullptr;
 	Pokemon* m_playerPokemon = nullptr;
 	Pokemon* m_opponentPokemon = nullptr;
+
+	float m_deltaTime = 0.0f;
+	float m_lastTime = 0.0f;
 
 	unsigned int m_state = 0;
 	unsigned int m_bagIndex = 0;
@@ -175,8 +186,9 @@ private:
 	unsigned int playerWalkingDirection = 0;
 	unsigned int playerWalkingState = 0;
 
-	float m_playerX = 0;
-	float m_playerY = 0;
+	float m_playerX = 0.0f;
+	float m_playerY = 0.0f;
+	float m_playerScale = 0.0f;
 
 	bool m_inGrass = false;
 	std::vector<glm::vec2> m_grassPositions = {glm::vec2(-1.0f,-1.0f) };
@@ -190,10 +202,19 @@ private:
 
 	glm::vec3 m_camPosition = glm::vec3(0.0f, 0.0f, 0.0f);
 
+	bool m_showFps = false;
+	bool m_autoSave = false;
+	bool m_fasterText = false;
+
+	std::string m_upTxt, m_downTxt, m_leftTxt, m_rightTxt, m_interactTxt;
+
+
 private:
 	void setupPokemonRenderPositions();
 
 	void drawFightingPokemon();
 	void drawBackGroundBlur();
 	void drawTextBox();
+	void drawInputKey(float centerX, float centerY, float size, std::string key);
+	void drawSettingOption(float farRight, float y, float size, std::string settingText, bool on);
 };

@@ -68,13 +68,24 @@ void MapSection::setNptData(std::vector<bool> nptData)
 	}
 }
 
+void MapSection::addToCutScene(std::string command)
+{
+	m_cutsceneScript += command;
+}
+
+void MapSection::addToCutScene(std::string command, unsigned int value)
+{
+	std::string newCommand = command + std::to_string(value);
+	m_cutsceneScript += newCommand;
+}
+
 std::vector<bool> MapSection::getNptData()
 {
 	std::vector<bool> nptData;
 
 	for (int i = 0; i < m_assignedAI.size(); i++)
 	{
-		nptData.push_back(m_assignedAI.at(i).nptResources.hasPokemon());
+		nptData.push_back(m_assignedAI.at(i).hasPokemon());
 	}
 
 	return nptData;

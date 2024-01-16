@@ -33,7 +33,7 @@ void Encounter::setupEncounter(Trainer& trainer, NPT& npt)
 	
 	m_activeTrainer = &trainer;
 	m_activeNPT = &npt;
-	m_activeAIPokemon = npt.nptResources.getPokemon(0);
+	m_activeAIPokemon = npt.getPokemon(0);
 }
 
 void Encounter::setupEncounter(Trainer& trainer, Pokemon& pokemon, PC& pc)
@@ -58,42 +58,35 @@ void Encounter::setupEncounter(Trainer& trainer, Pokemon& pokemon, PC& pc)
 
 void Encounter::beginEncounter()
 {
-	//TODO: Refactor how encounters are handled
+	//TODO: Add animations and graphics
+	//TODO: Add move selection when leveling up
+
 	m_renderer->setPokemon(m_activeTrainerPokemon, m_activeAIPokemon);
 	m_renderer->setEncounter(true);
 
 	while (!glfwWindowShouldClose(m_window))
 	{
 		getPlayerAction();
+		getAIAction();
 
-		if (m_activeTrainerPokemon->getHealth() == 0)
-			break;
-		if (m_activeAIPokemon->getHealth() == 0)
-			break;
-		if (m_flee)
+		simulateActions();
+
+		if (battleEnded())
 			break;
 
 		onUpdate();
 	}
 
-	//TODO: Add white out for player
+	checkEvolutions();
 
-	if (m_activeNPT != nullptr && m_activeNPT->nptResources.hasWhiteOut())
-	{
-		//TODO: Add visual and text for this
-		std::cout << "Trainer is being given $" << m_activeNPT->nptResources.getMoneyBalance();
-		m_activeTrainer->giveMoney(m_activeNPT->nptResources.getMoneyBalance());
-		std::cout << "Trainer balance is now $" << m_activeTrainer->getMoneyBalance();
-
-		m_activeNPT->removePokemon();
-	}
-
-	m_renderer->setPokemon(nullptr, nullptr);
-	m_renderer->setEncounter(false);
+	awardPlayer();
 }
 
 void Encounter::clearEncounter()
 {
+	m_renderer->setPokemon(nullptr, nullptr);
+	m_renderer->setEncounter(false);
+
 	m_activeTrainer = nullptr;
 	m_activeNPT = nullptr;
 	m_activeTrainerPokemon = nullptr;
@@ -103,6 +96,7 @@ void Encounter::clearEncounter()
 	m_AIPokemonIndex = 0;
 
 	m_xpRecords.clear();
+	m_evolutionIndexes.clear();
 	m_renderer->setState(DISPLAY_MAP);
 	m_renderer->setTextBox("", "");
 }
@@ -113,74 +107,57 @@ void Encounter::onUpdate()
 	m_renderer->onUpdate();
 }
 
+bool Encounter::battleEnded()
+{
+	if (m_flee)
+		return true;
+	if (!m_activeTrainer->hasPokemon())
+		return true;
+
+	replacePlayerPokemon();
+
+	if (AIOutOfPokemon())
+		return true;
+
+	return false;
+}
+
 void Encounter::getPlayerAction()
 {
 	m_renderer->setState(DEFAULT_ENCOUNTER);
 	bool firstEntered = true;
 
-	std::cout << "\n\nWhat would you like to do\n1: Fight\t2: Pokemon\n3: Items\t4: Run" << std::endl;
-
 	m_renderer->setTextBox("What should", m_activeTrainerPokemon->getName() + " do");
 
 	while (!glfwWindowShouldClose(m_window))
 	{
-		
-		int option = 0;
 
 		if (*m_clicked && !firstEntered)
 		{
-			if (*m_mouseX >= 970.0f && *m_mouseX <= 1445.0f && *m_mouseY >= 150.0f && *m_mouseY <= 250.0f)
+			if (mouseOverFightOption())
 			{
 				if (playerSelectedMove())
-				{
-					evaluateStatus(m_activeTrainerPokemon);
-					handleFaint(*m_activeTrainerPokemon);
-					evaluateStatus(m_activeAIPokemon);
-					handleFaint(*m_activeAIPokemon);
 					break;
-				}
-				m_renderer->setState(DEFAULT_ENCOUNTER);
-				firstEntered = true;
 			}
-			else if (*m_mouseX >= 970.0f && *m_mouseX <= 1445.0f && *m_mouseY >= 0.0f && *m_mouseY <= 150.0f)
+			else if (mouseOverPokemonOption())
 			{
-				if (playerSelecetedPokemon(false))
-				{
-					evaluateStatus(m_activeTrainerPokemon);
-					handleFaint(*m_activeTrainerPokemon);
-					evaluateStatus(m_activeAIPokemon);
-					handleFaint(*m_activeAIPokemon);
+				if (playerSelecetedPokemon(true))
 					break;
-				}
-				m_renderer->setState(DEFAULT_ENCOUNTER);
-				firstEntered = true;
 			}
-			else if (*m_mouseX >= 1445.0f && *m_mouseX <= 1920.0f && *m_mouseY >= 150.0f && *m_mouseY <= 250.0f)
+			else if (mouseOverItemOption())
 			{
 				if (playerSelectedItem())
-				{
-					if (m_flee)
-						break;
-					evaluateStatus(m_activeTrainerPokemon);
-					handleFaint(*m_activeTrainerPokemon);
-					evaluateStatus(m_activeAIPokemon);
-					handleFaint(*m_activeAIPokemon);
 					break;
-				}
-				m_renderer->setState(DEFAULT_ENCOUNTER);
-				firstEntered = true;
 			}
-			else if (*m_mouseX >= 1445.0f && *m_mouseX <= 1920.0f && *m_mouseY >= 0.0f && *m_mouseY <= 150.0f)
+			else if (mouseOverFleeOption())
 			{
-				if (runSuccesful())
+				if (playerSelectedFlee())
 					break;
-				m_renderer->setState(DEFAULT_ENCOUNTER);
-				firstEntered = true;
 			}
+
+			m_renderer->setState(DEFAULT_ENCOUNTER);
 		}
-
 		
-
 		firstEntered = false;
 		onUpdate();
 	}
@@ -188,35 +165,196 @@ void Encounter::getPlayerAction()
 
 bool Encounter::getAIAction()
 {
+
+	std::cout << "Getting AI Action" << std::endl;
+
+	//TODO: Make this a void function
 	if (m_activeNPT == nullptr)
-		calculateDamageTaken(*m_activeAIPokemon, *m_activeTrainerPokemon, m_activeAIPokemon->getAttack(m_activeAIPokemon->determineAttack(*m_activeTrainerPokemon)));
+	{
+		m_aiAction = FIGHT;
+		m_aiActionIndex = m_activeAIPokemon->determineAttack(*m_activeTrainerPokemon);
+	}
 	else
 	{
-		int action = m_activeNPT->performAction(*m_activeAIPokemon, *m_activeTrainerPokemon, false);
+		int action = m_activeNPT->performAction(*m_activeAIPokemon, *m_activeTrainerPokemon);
 
 		if (action >= 0 && action < 4)
 		{
-			//ATTACK
-			calculateDamageTaken(*m_activeAIPokemon, *m_activeTrainerPokemon, m_activeAIPokemon->getAttack(action));
+			m_aiAction = FIGHT;
+			m_aiActionIndex = action;
 		}
 		else if (action == 4)
 		{
-			//STRUGGLE
-			calculateDamageTaken(*m_activeAIPokemon, *m_activeTrainerPokemon, m_activeAIPokemon->struggle());
+			m_aiAction = FIGHT;
+			m_aiActionIndex = action;
 		}
 		else if (action == 5)
 		{
-			//HEAL
-			Item* item = m_activeNPT->getNextHeal();
-			useItem(m_activeNPT->nptResources, m_activeAIPokemon, *item);
-			m_activeNPT->removeHeal();
+			m_aiAction = HEAL;
 		}
 	}
 
-	if (handleFaint(*m_activeTrainerPokemon))
-		return true;
+	return true;
+}
+
+void Encounter::simulateActions()
+{
+	//Priority actions
+	if (m_playerAction == POKEMON)
+	{
+		swapPlayerPokemon();
+	}
+	else if (m_playerAction == POKEBALL)
+	{
+		if (caughtPokemon())
+			return;
+	}
+	else if (m_playerAction == HEAL || m_playerAction == MISC)
+	{
+		useItem(true);
+	}
+	else if (m_playerAction == FLEE)
+	{
+		if (fleeSuccessful())
+			return;
+	}
+
+	if (m_aiAction == HEAL)
+	{
+		useItem(false);
+	}
+	
+	//FIGHT SIMULATION
+	simulateCombat();
+}
+
+void Encounter::simulateCombat()
+{
+	if (m_playerAction != FIGHT)
+	{
+		if (m_aiAction != HEAL)
+			simulateAIAttack();
+	}
+	else if (m_aiAction == HEAL)
+	{
+		simulatePlayerAttack();
+	}
 	else
-		return false;
+	{
+		if (m_activeTrainerPokemon->getSpeed() >= m_activeAIPokemon->getSpeed())
+		{
+			simulatePlayerAttack();
+
+			if (pokemonFainted(m_activeAIPokemon))
+			{
+				evaluateStatus(m_activeTrainerPokemon);
+				pokemonFainted(m_activeTrainerPokemon);
+				return;
+			}
+			
+			simulateAIAttack();
+		}
+		else
+		{
+			simulateAIAttack();
+			
+			if (pokemonFainted(m_activeTrainerPokemon))
+			{
+				evaluateStatus(m_activeAIPokemon);
+				pokemonFainted(m_activeAIPokemon);
+				return;
+			}
+
+			simulatePlayerAttack();
+		}
+
+
+		evaluateStatus(m_activeTrainerPokemon);
+		pokemonFainted(m_activeTrainerPokemon);
+
+		evaluateStatus(m_activeAIPokemon);
+		pokemonFainted(m_activeAIPokemon);
+	}
+}
+
+void Encounter::simulatePlayerAttack()
+{
+	calculateDamageTaken( *m_activeTrainerPokemon, *m_activeAIPokemon, m_activeTrainerPokemon->getAttack(m_playerActionIndex));
+}
+
+void Encounter::simulateAIAttack()
+{
+	//TODO: Make this 4 a known value for struggle
+	if (m_aiActionIndex == 4)
+	{
+		calculateDamageTaken(*m_activeAIPokemon, *m_activeTrainerPokemon, m_activeAIPokemon->struggle());
+	}
+	else
+	{
+		calculateDamageTaken(*m_activeAIPokemon, *m_activeTrainerPokemon, m_activeAIPokemon->getAttack(m_aiActionIndex));
+	}
+}
+
+bool Encounter::fleeSuccessful()
+{
+	if (m_activeTrainerPokemon->getSpeed() > m_activeAIPokemon->getSpeed())
+	{
+		m_renderer->setTextBox("You have fled", "successfully");
+		onUpdate();
+		Sleep(1500);
+		m_flee = true;
+		return true;
+	}
+
+	// 50/50 to run away. Just be lucky lol
+	if (odds(50))
+	{
+		std::cout << " You have fled successfully" << std::endl;
+		m_renderer->setTextBox("You have", "fled successfully");
+		onUpdate();
+		Sleep(1500);
+		m_flee = true;
+		return true;
+	}
+
+	std::cout << "Flee attempt was unsuccessful" << std::endl;
+	m_renderer->setTextBox("Flee attempt was", "un successful");
+	onUpdate();
+	Sleep(1500);
+	return false;
+}
+
+void Encounter::swapPlayerPokemon()
+{
+	std::cout << "\n" << m_activeTrainerPokemon->getName() << " withdraw for now.\n" << std::endl;
+	m_activeTrainerPokemon = m_activeTrainer->getPokemon(m_playerActionIndex);
+	std::cout << m_activeTrainerPokemon->getName() << " I choose you!\n" << std::endl;
+
+	m_trainerPokemonIndex = m_playerActionIndex;
+	m_renderer->setPokemon(m_activeTrainerPokemon, m_activeAIPokemon);
+}
+
+void Encounter::useItem(bool playerItem)
+{
+	if (playerItem)
+	{
+		int pokeballCount = m_activeTrainer->getUniquePokeballCount();
+		int healCount = m_activeTrainer->getUniqueHealCount();
+
+		if (m_playerAction == HEAL)
+		{
+			healedPokemon(pokeballCount);
+		}
+		else if (m_playerAction == MISC)
+		{
+			appliedItem(*m_activeTrainer->getMiscItem(m_playerActionIndex - pokeballCount - healCount));
+		}
+	}
+	else
+	{
+		useItem(*m_activeNPT, m_activeAIPokemon, *m_activeNPT->getNextHeal());
+		m_activeNPT->removeHeal();
+	}
 }
 
 bool Encounter::playerSelectedMove()
@@ -224,36 +362,34 @@ bool Encounter::playerSelectedMove()
 	bool firstEntered = true;
 	m_renderer->setState(SELECT_ATTACK);
 
-	std::cout << "\n\nSelect Your Move\n" << std::endl;
 	m_activeTrainerPokemon->printMoves();
 
 	while (!glfwWindowShouldClose(m_window))
 	{
 		
-		int move = 0;
+		int move = -1;
 
 		//Move Click
 		if (*m_clicked && !firstEntered)
 		{
 			if (*m_mouseX >= 505.0f && *m_mouseX <= 940.0f && *m_mouseY >= 145.0f && *m_mouseY <= 230.0f)
-				move = 1;
+				move = 0;
 			else if (*m_mouseX >= 980.0f && *m_mouseX <= 1415.0f && *m_mouseY >= 145.0f && *m_mouseY <= 230.0f)
-				move = 2;
+				move = 1;
 			else if (*m_mouseX >= 505.0f && *m_mouseX <= 940.0f && *m_mouseY >= 20.0f && *m_mouseY <= 105.0f)
-				move = 3;
+				move = 2;
 			else if (*m_mouseX >= 980.0f && *m_mouseX <= 1415.0f && *m_mouseY >= 20.0f && *m_mouseY <= 105.0f)
-				move = 4;
+				move = 3;
 			else
 				return false;
 		}
 
 		
-
-		if (move != 0)
+		if (move != -1)
 		{
 			bool struggle = false;
 
-			if (m_activeTrainerPokemon->getAttack(move - 1).getCurrentPP() == 0)
+			if (m_activeTrainerPokemon->getAttack(move).getCurrentPP() == 0)
 			{
 			
 				struggle = m_activeTrainerPokemon->outOfMoves();
@@ -262,86 +398,16 @@ bool Encounter::playerSelectedMove()
 				{
 					std::cout << " You cannot use a move with 0pp" << std::endl;
 					m_renderer->setTextBox("You cannot use a", "move with 0pp ");
+					m_renderer->setState(DEFAULT_ENCOUNTER);
 					onUpdate();
 					Sleep(1500);
 					return false;
 				}
 			}
-
-
-			if (m_activeTrainerPokemon->getSpeed() > m_activeAIPokemon->getSpeed())
-			{
-				//Heal Priority for AI
-				if (m_activeNPT != nullptr)
-					m_activeNPT->performAction(*m_activeAIPokemon, *m_activeTrainerPokemon, true);
-
-				if (!struggle)
-				{
-					calculateDamageTaken(*m_activeTrainerPokemon, *m_activeAIPokemon, m_activeTrainerPokemon->getAttack(move - 1));
-					recordAttack();
-				}
-				else
-				{
-					calculateDamageTaken(*m_activeTrainerPokemon, *m_activeAIPokemon, m_activeTrainerPokemon->struggle());
-				}
-			
-
-				if (!handleFaint(*m_activeAIPokemon))
-					getAIAction();
-			}
-			else if (m_activeAIPokemon->getSpeed() > m_activeTrainerPokemon->getSpeed())
-			{
-				if (!getAIAction())
-				{
-					if (!struggle)
-					{
-						calculateDamageTaken(*m_activeTrainerPokemon, *m_activeAIPokemon, m_activeTrainerPokemon->getAttack(move - 1));
-						recordAttack();
-					}
-					else
-					{
-						calculateDamageTaken(*m_activeTrainerPokemon, *m_activeAIPokemon, m_activeTrainerPokemon->struggle());
-					}
-
-					handleFaint(*m_activeAIPokemon);
-				}
-			}
 			else
 			{
-				if (odds(50))
-				{
-					if (m_activeNPT != nullptr)
-						m_activeNPT->performAction(*m_activeAIPokemon, *m_activeTrainerPokemon, true);
-
-					if (!struggle)
-					{
-						calculateDamageTaken(*m_activeTrainerPokemon, *m_activeAIPokemon, m_activeTrainerPokemon->getAttack(move - 1));
-						recordAttack();
-					}
-					else
-					{
-						calculateDamageTaken(*m_activeTrainerPokemon, *m_activeAIPokemon, m_activeTrainerPokemon->struggle());
-					}
-
-					if (!handleFaint(*m_activeAIPokemon))
-						getAIAction();
-				}
-				else
-				{
-					if (!getAIAction())
-					{
-						if (!struggle)
-						{
-							calculateDamageTaken(*m_activeTrainerPokemon, *m_activeAIPokemon, m_activeTrainerPokemon->getAttack(move - 1));
-							recordAttack();
-						}
-						else
-						{
-							calculateDamageTaken(*m_activeTrainerPokemon, *m_activeAIPokemon, m_activeTrainerPokemon->struggle());
-						}
-						handleFaint(*m_activeAIPokemon);
-					}
-				}
+				m_playerAction = FIGHT;
+				m_playerActionIndex = move;
 			}
 
 			return true;
@@ -356,18 +422,8 @@ bool Encounter::playerSelectedMove()
 	return false;
 }
 
-bool Encounter::playerSelecetedPokemon(bool fainted)
+bool Encounter::playerSelecetedPokemon(bool mainAction)
 {
-	bool keepGoing = false;
-	for (int i = 0; i < 6; i++)
-	{
-		if (m_activeTrainer->getPokemon(i)->getLevel() != 0 && m_activeTrainer->getPokemon(i)->getHealth() != 0)
-			keepGoing = true;
-	}
-
-	if (!keepGoing)
-		return true;
-
 	std::cout << "\n Select A Pokemon \n" << std::endl;
 
 	m_activeTrainer->printPokemon();
@@ -376,14 +432,23 @@ bool Encounter::playerSelecetedPokemon(bool fainted)
 	bool firstEntered = true;
 	while (!glfwWindowShouldClose(m_window))
 	{
-		int selectedPokemon = 0;
+		int selectedPokemon = -1;
 
 		// Select Pokemon
-
-		//TODO: Make for loop
 		if (*m_clicked && !firstEntered)
 		{
 			if (*m_mouseX >= 495.0f && *m_mouseX <= 940.0f)
+			{
+				if (*m_mouseY >= 627.5f && *m_mouseY <= 722.5f)
+					selectedPokemon = 0;
+				else if (*m_mouseY >= 492.5f && *m_mouseY <= 587.5f)
+					selectedPokemon = 2;
+				else if (*m_mouseY >= 357.5f && *m_mouseY <= 452.5f)
+					selectedPokemon = 4;
+				else
+					return false;
+			}
+			else if (*m_mouseX >= 980.0f && *m_mouseX <= 1425.0f)
 			{
 				if (*m_mouseY >= 627.5f && *m_mouseY <= 722.5f)
 					selectedPokemon = 1;
@@ -394,39 +459,29 @@ bool Encounter::playerSelecetedPokemon(bool fainted)
 				else
 					return false;
 			}
-			else if (*m_mouseX >= 980.0f && *m_mouseX <= 1425.0f)
-			{
-				if (*m_mouseY >= 627.5f && *m_mouseY <= 722.5f)
-					selectedPokemon = 2;
-				else if (*m_mouseY >= 492.5f && *m_mouseY <= 587.5f)
-					selectedPokemon = 4;
-				else if (*m_mouseY >= 357.5f && *m_mouseY <= 452.5f)
-					selectedPokemon = 6;
-				else
-					return false;
-			}
 			else
 				return false;
 				
 		}
 
 
-		if (selectedPokemon >= 1 && selectedPokemon <= 6)
+		if (selectedPokemon >= 0 && selectedPokemon <= 5)
 		{
-			if (m_activeTrainer->getPokemon(selectedPokemon - 1)->getLevel() != 0 && m_activeTrainer->getPokemon(selectedPokemon - 1)->getHealth() != 0)
+			if (m_activeTrainer->getPokemon(selectedPokemon)->getLevel() != 0)
 			{
-				if (m_activeTrainer->getPokemon(selectedPokemon - 1) != m_activeTrainerPokemon)
+
+				if (mainAction)
 				{
-					std::cout << "\n" << m_activeTrainerPokemon->getName() << " withdraw for now.\n" << std::endl;
-					m_activeTrainerPokemon = m_activeTrainer->getPokemon(selectedPokemon - 1);
-					std::cout << m_activeTrainerPokemon->getName() << " I choose you!\n" << std::endl;
-
-					m_trainerPokemonIndex = selectedPokemon - 1;
-					m_renderer->setPokemon(m_activeTrainerPokemon, m_activeAIPokemon);
-
-					if (!fainted)
-						getAIAction();
-
+					if (m_activeTrainer->getPokemon(selectedPokemon) != m_activeTrainerPokemon && m_activeTrainer->getPokemon(selectedPokemon)->getHealth() != 0)
+					{
+						m_playerAction = POKEMON;
+						m_playerActionIndex = selectedPokemon;
+						return true;
+					}
+				}
+				else
+				{
+					m_selectionIndex = selectedPokemon;
 					return true;
 				}
 			}
@@ -452,106 +507,93 @@ bool Encounter::playerSelectedItem()
 	m_activeTrainer->printItems();
 	std::cout << "\n\n";
 
+	int pokeballCount = m_activeTrainer->getUniquePokeballCount();
+	int healCount = m_activeTrainer->getUniqueHealCount();
+	int miscCount = m_activeTrainer->getUniqueMiscCount();
+
 	while (!glfwWindowShouldClose(m_window))
 	{
-		int selection = 0;
 
-		int pokeballCount = m_activeTrainer->getUniquePokeballCount();
-		int healCount = m_activeTrainer->getUniqueHealCount();
-		int miscCount = m_activeTrainer->getUniqueMiscCount();
-
-		//TODO: Maybe for loop this
-		if (*m_clicked && !firstEntered)
+		if (!*m_clicked || firstEntered)
 		{
-			if (*m_mouseX >= 737.5f && *m_mouseX <= 1182.5f)
-			{
-				
-				if (*m_mouseY >= 897.5f && *m_mouseY <= 992.5f)			// Up Arrow
-				{
-					if (bagIndex > 0)
-					{
-						bagIndex--;
-						m_renderer->setBagIndex(bagIndex);
-					}
-				}
-				else if (*m_mouseY >= 762.5f && *m_mouseY <= 857.5f)	//First Box
-				{
-					if (bagIndex + 1 <= pokeballCount + healCount + miscCount)
-						selection = 1;
-				}
-				else if (*m_mouseY >= 627.5f && *m_mouseY <= 722.5f)	//Second Box
-				{
-					if (bagIndex + 2 <= pokeballCount + healCount + miscCount)
-						selection = 2;
-				}
-				else if (*m_mouseY >= 492.5f && *m_mouseY <= 587.5f)	//Third Box
-				{
-					if (bagIndex + 3 <= pokeballCount + healCount + miscCount)
-						selection = 3;
-				}
-				else if (*m_mouseY >= 357.5f && *m_mouseY <= 452.5f)	//Fourth Box
-				{
-					if (bagIndex + 4 <= pokeballCount + healCount + miscCount)
-						selection = 4;
-				}
-				else if (*m_mouseY >= 222.5f && *m_mouseY <= 317.5f)	//Fifth Box
-				{
-					if (bagIndex + 5 <= pokeballCount + healCount + miscCount)
-						selection = 5;
-				}
-				else if (*m_mouseY >= 87.5f && *m_mouseY <= 182.5f)		// Down Arrow
-				{
-					if (bagIndex + 5 < pokeballCount + healCount + miscCount)
-					{
-						bagIndex++;
-						m_renderer->setBagIndex(bagIndex);
-					}
-				}
-				else
-				{
-					return false;
-				}
-			
-			}
-			else
-			{
-				return false;
-			}
+			firstEntered = false;
+			onUpdate();
+			continue;
 		}
 
-		
+		if (!mouseOverItem(true))
+			return false;
 
-		if (selection > 0 && selection <= pokeballCount + healCount + miscCount)
+		if (mouseOverItem(false, 0))			// Up Arrow
 		{
-			Item* item = nullptr;
-			if (selection > 0 && selection <= pokeballCount)
+			if (bagIndex > 0)
 			{
-				item = m_activeTrainer->getPokeball(selection - 1);
-				caughtPokemon(*item);
-				return true;
+				bagIndex--;
+				m_renderer->setBagIndex(bagIndex);
 			}
-			else if (selection > pokeballCount && selection <= pokeballCount + healCount)
+			firstEntered = true;
+			onUpdate();
+		}
+		else if (mouseOverItem(false, 6))		// Down Arrow
+		{
+			if (bagIndex + 5 < pokeballCount + healCount + miscCount)
 			{
-				item = m_activeTrainer->getHealItem(selection - 1 - pokeballCount);
-				if (healedPokemon(*item))
-					return true;
+				bagIndex++;
+				m_renderer->setBagIndex(bagIndex);
 			}
-			else
-			{
-				item = m_activeTrainer->getMiscItem(selection - 1 - pokeballCount - healCount);
-				if (appliedItem(*item))
-					return true;
-			}
+			firstEntered = true;
+			onUpdate();
+		}
+		else										// Item Options - Boxes between the arrows
+		{
 
+			for (int boxNumber = 0; boxNumber < 5; boxNumber++)
+			{
+				if (!mouseOverItem(false, boxNumber + 1))
+					continue;
+
+				if (bagIndex + boxNumber >= pokeballCount + healCount + miscCount)
+					break;
+				
+
+
+				m_playerActionIndex = bagIndex + boxNumber;
+
+				findItemType(pokeballCount, healCount, miscCount);
+
+				if (m_playerAction == POKEBALL)
+				{
+					if (canCatchPokemon())
+						return true;
+
+					continue;
+				}
+
+				if (!playerSelecetedPokemon(false))
+					return false;
+				
+				if (m_playerAction == HEAL)
+				{
+					if (canUseItem(m_activeTrainer->getPokemon(m_selectionIndex), *m_activeTrainer->getHealItem(m_playerActionIndex)))
+					{
+						return true;
+					}
+				}
+				else if (m_playerAction == MISC)
+				{
+					if (canUseItem(m_activeTrainer->getPokemon(m_selectionIndex), *m_activeTrainer->getMiscItem(m_playerActionIndex)))
+					{
+						return true;
+					}
+				}
+			}
 			return false;
 		}
-
-		firstEntered = false;
-		onUpdate();
 	}
+	return true;
 }
 
-bool Encounter::runSuccesful()
+bool Encounter::playerSelectedFlee()
 {
 	if (m_activeNPT != nullptr)
 	{
@@ -562,75 +604,33 @@ bool Encounter::runSuccesful()
 		return false;
 	}
 
-	if (m_activeTrainerPokemon->getSpeed() > m_activeAIPokemon->getSpeed())
-	{
-		m_renderer->setTextBox("You have fled", "successfully");
-		onUpdate();
-		Sleep(1500);
-		m_flee = true;
-		return true;
-	}
-
-	// 50/50 to run away. Just be lucky lol
-	if (odds(50))
-	{
-		std::cout << " You have fled successfully" << std::endl;
-		m_renderer->setTextBox("You have", "fled successfully");
-		onUpdate();
-		Sleep(1500);
-		m_flee = true;
-		return true;
-	}
-
-	std::cout << "Flee attempt was unsuccessful" << std::endl;
-	m_renderer->setTextBox("Flee attempt was", "un successful");
-	onUpdate();
-	Sleep(1500);
-	getAIAction();
-
-	//m_activeTrainerPokemon->evaluateStatus();
-	evaluateStatus(m_activeTrainerPokemon);
-	handleFaint(*m_activeTrainerPokemon);
-	//m_activeAIPokemon->evaluateStatus();
-	evaluateStatus(m_activeAIPokemon);
-	handleFaint(*m_activeAIPokemon);
-
-	return false;
+	m_playerAction = FLEE;
+	return true;
 }
 
-bool Encounter::handleFaint(Pokemon& pokemon)
+bool Encounter::pokemonFainted(Pokemon* pokemon)
 {
-	if (!pokemon.hasFainted())
+	//TODO: Add text for pokemon fainting
+	if (!pokemon->hasFainted())
 		return false;
 	
-	if( &pokemon == m_activeAIPokemon )
+	if( pokemon == m_activeAIPokemon )
 	{
 		m_renderer->setState(DEFAULT_ENCOUNTER);
-		int xpGain = calculateXPGain(pokemon);
+		int xpGain = calculateXPGain(*pokemon);
 
 		for (int i = 0; i < m_xpRecords.at(m_AIPokemonIndex).size(); i++)
 		{
 			animateXPGain(m_activeTrainer->getPokemon(m_xpRecords.at(m_AIPokemonIndex).at(i)), xpGain);
 		}
-
-		if (m_activeNPT != nullptr)
-			swapAIPokemon();
-
-		return true;
 	}
 	else
 	{
 		std::cout << m_activeTrainerPokemon->getName() << " has fainted" << std::endl;
 
 		removeAttackRecord();
-
-		//TODO: Compress while loop here
-		while (true)
-		{
-			if (playerSelecetedPokemon(true))
-				return true;
-		}
 	}
+	return true;
 }
 
 int Encounter::calculateXPGain(Pokemon& pokemon)
@@ -650,22 +650,25 @@ int Encounter::calculateXPGain(Pokemon& pokemon)
 
 void Encounter::animateXPGain(Pokemon* pokemon, int xpGain)
 {
+	if (pokemon->getLevel() == 100)
+		return;
+
 	int currentLevel = pokemon->getLevel();
 
 	std::string nameGained = pokemon->getName() + " gained";
 	std::string xpAmount = std::to_string(xpGain) + " EXP";
 
 	m_renderer->setTextBox(nameGained, xpAmount);
+	awaitClick();
 
 	for (int i = 0; i < xpGain; i++)
 	{
-		if (pokemon->getLevel() == 100)
-			return;
-
 		pokemon->gainXP(1);
 
 		if (pokemon->getLevel() != currentLevel)
 		{
+			
+			recordLevelUp();
 			//TODO: Ask for evolve and moves to be learned
 			//Only Evolve after the battle
 			currentLevel = pokemon->getLevel();
@@ -681,10 +684,43 @@ void Encounter::animateXPGain(Pokemon* pokemon, int xpGain)
 			m_renderer->setTextBox(nameGained, xpAmount);
 
 			awaitClick();
+
 		}
 
 		onUpdate();
 	}
+}
+
+void Encounter::replacePlayerPokemon()
+{
+	if (m_activeTrainerPokemon->getHealth() == 0)
+	{
+		while (true)
+		{
+			if (playerSelecetedPokemon(false))
+				break;
+		}
+
+		m_activeTrainerPokemon = m_activeTrainer->getPokemon(m_selectionIndex);
+		m_trainerPokemonIndex = m_selectionIndex;
+		m_renderer->setPokemon(m_activeTrainerPokemon, m_activeAIPokemon);
+	}
+}
+
+bool Encounter::AIOutOfPokemon()
+{
+	if (m_activeAIPokemon->getHealth() == 0)
+	{
+		if (m_activeNPT == nullptr)
+			return true;
+
+		if (!m_activeNPT->hasWhiteOut())
+			swapAIPokemon();
+		else
+			return true;
+	}
+
+	return false;
 }
 
 int Encounter::calculateDamageTaken(Pokemon& attackingPokemon, Pokemon& defendingPokemon, Attack& attack)
@@ -759,6 +795,7 @@ int Encounter::calculateDamageTaken(Pokemon& attackingPokemon, Pokemon& defendin
 		}
 
 		giveStatus(defendingPokemon, attack);
+		recordAttack();
 	}
 	else
 	{
@@ -819,13 +856,6 @@ void Encounter::evaluateStatus(Pokemon* pokemon)
 
 bool Encounter::useItem(Trainer& trainer, Pokemon* pokemon, Item& item)
 {
-
-	if ((item.isRevive() && pokemon->getHealth() != 0) || (!item.isRevive() && pokemon->getHealth() == 0))
-		return false;
-
-	if (!item.isRevive() && item.getHealAmount() == 0 && pokemon->getStatus() != item.getStatus())
-		return false;
-
 	std::cout << trainer.getName() << " has used " << item.getName() << std::endl;
 	m_renderer->setTextBox(trainer.getName() + " has", "used " + item.getName());
 
@@ -855,6 +885,27 @@ bool Encounter::useItem(Trainer& trainer, Pokemon* pokemon, Item& item)
 		Sleep(1000);
 	}
 
+	return true;
+}
+
+void Encounter::findItemType(int pokeballCount, int healCount, int miscCount)
+{
+
+	if (m_playerActionIndex < pokeballCount)
+	{
+		m_playerAction = POKEBALL;
+	}
+	else if (m_playerActionIndex < pokeballCount + healCount)
+	{
+		m_playerActionIndex -= pokeballCount;
+
+		m_playerAction = HEAL;
+	}
+	else
+	{
+		m_playerActionIndex -= pokeballCount + healCount;
+		m_playerAction = MISC;
+	}
 }
 
 void Encounter::swapAIPokemon()
@@ -862,11 +913,11 @@ void Encounter::swapAIPokemon()
 	if (m_activeNPT == nullptr || m_AIPokemonIndex == 6)
 		return;
 
-	if (m_activeNPT->nptResources.getPokemon(m_AIPokemonIndex + 1)->getLevel() == 0)
+	if (m_activeNPT->getPokemon(m_AIPokemonIndex + 1)->getLevel() == 0)
 		return;
 
 	m_AIPokemonIndex += 1;
-	m_activeAIPokemon = m_activeNPT->nptResources.getPokemon(m_AIPokemonIndex);
+	m_activeAIPokemon = m_activeNPT->getPokemon(m_AIPokemonIndex);
 	m_renderer->setPokemon(m_activeTrainerPokemon, m_activeAIPokemon);
 }
 
@@ -889,19 +940,39 @@ void Encounter::removeAttackRecord()
 	}
 }
 
-bool Encounter::caughtPokemon(Item& item)
+void Encounter::recordLevelUp()
 {
-	//TODO: Implement Shake
-	if (m_activeNPT != nullptr)
+	if (std::find(m_evolutionIndexes.begin(), m_evolutionIndexes.end(), m_trainerPokemonIndex) == m_evolutionIndexes.end())
+		m_evolutionIndexes.push_back(m_trainerPokemonIndex);
+}
+
+void Encounter::checkEvolutions()
+{
+	for (int i = 0; i < m_evolutionIndexes.size(); i++)
 	{
-		std::cout << " No Stealing Pokemon from Trainers!" << std::endl;
-		m_renderer->setTextBox("No Stealing Pokemon", "from Trainers");
-		onUpdate();
-		Sleep(1500);
-
-		return false;
+		m_activeTrainer->getPokemon(m_evolutionIndexes.at(i))->checkEvolution();
 	}
+}
 
+void Encounter::awardPlayer()
+{
+	//TODO: Add white out for player
+	if (m_activeNPT != nullptr && m_activeNPT->hasWhiteOut())
+	{
+		//TODO: Add visual and text for this
+		std::cout << "Trainer is being given $" << m_activeNPT->getMoneyBalance();
+		m_activeTrainer->giveMoney(m_activeNPT->getMoneyBalance());
+		std::cout << "Trainer balance is now $" << m_activeTrainer->getMoneyBalance();
+
+		m_activeNPT->removePokemon();
+	}
+}
+
+bool Encounter::caughtPokemon()
+{
+	Item& item = *m_activeTrainer->getPokeball(m_playerActionIndex);
+
+	//TODO: Implement Shake
 	int catchRate = (((((3.0f * static_cast<float>(m_activeAIPokemon->getMaxHealth())) - (2.0f * static_cast<float>(m_activeAIPokemon->getHealth()))) / (3.0f * static_cast<float>(m_activeAIPokemon->getMaxHealth()))) * static_cast<float>(m_activeAIPokemon->getSpecies().getCatchRate()) * item.getPokeballBonus()) / 255.0f) * 100.0f;
 
 	m_renderer->setState(DEFAULT_ENCOUNTER);
@@ -935,70 +1006,107 @@ bool Encounter::caughtPokemon(Item& item)
 	return false;
 }
 
-bool Encounter::healedPokemon(Item& item)
+bool Encounter::healedPokemon(unsigned int pokeballCount)
 {
-	std::cout << "Using " << item.getName() << std::endl;
+	Item* item = m_activeTrainer->getHealItem(m_playerActionIndex);
 
-	m_activeTrainer->printPokemon();
+	std::cout << "Using " << item->getName() << std::endl;
 
-	bool firstEntered = true;
-	int selectedPokemon = 0;
-
-	m_renderer->setState(SELECT_POKEMON);
-
-	while (!glfwWindowShouldClose(m_window))
+	//TODO: Can remove the if statement because these checks should be happening before this point
+	
+	if (m_selectionIndex >= 0 && m_selectionIndex <= 5 && m_activeTrainer->getPokemon(m_selectionIndex)->getLevel() != 0)
 	{
-		int selectedPokemon = 0;
-
-		// Select Pokemon
-		if (*m_clicked && !firstEntered)
-		{
-			if (*m_mouseX >= 495.0f && *m_mouseX <= 940.0f)
-			{
-				if (*m_mouseY >= 627.5f && *m_mouseY <= 722.5f)
-					selectedPokemon = 1;
-				else if (*m_mouseY >= 492.5f && *m_mouseY <= 587.5f)
-					selectedPokemon = 3;
-				else if (*m_mouseY >= 357.5f && *m_mouseY <= 452.5f)
-					selectedPokemon = 5;
-				else
-					return false;
-			}
-			else if (*m_mouseX >= 980.0f && *m_mouseX <= 1425.0f)
-			{
-				if (*m_mouseY >= 627.5f && *m_mouseY <= 722.5f)
-					selectedPokemon = 2;
-				else if (*m_mouseY >= 492.5f && *m_mouseY <= 587.5f)
-					selectedPokemon = 4;
-				else if (*m_mouseY >= 357.5f && *m_mouseY <= 452.5f)
-					selectedPokemon = 6;
-				else
-					return false;
-			}
-			else
-				return false;
-
-		}
-
-		if (selectedPokemon >= 1 && selectedPokemon <= 6 && m_activeTrainer->getPokemon(selectedPokemon - 1)->getLevel() != 0)
-		{
-			//m_activeTrainer->getPokemon(selectedPokemon - 1)->usedItem(m_activeTrainer->getName(), item);
-			if (!useItem(*m_activeTrainer, m_activeTrainer->getPokemon(selectedPokemon - 1), item))
-				return false;
-			m_activeTrainer->removeItem(item);
-			getAIAction();
-			return true;
-		}
-
-		firstEntered = false;
-		onUpdate();
+		useItem(*m_activeTrainer, m_activeTrainer->getPokemon(m_selectionIndex), *item);
+		m_activeTrainer->removeItem( *item );
+		//getAIAction();
+		return true;
 	}
+
 	return false;
 }
 
 bool Encounter::appliedItem(Item& item)
 {
 	std::cout << "Using " << item.getName() << std::endl;
+	return false;
+}
+
+bool Encounter::canUseItem(Pokemon* pokemon, Item& item)
+{
+	if ((item.isRevive() && pokemon->getHealth() != 0) || (!item.isRevive() && pokemon->getHealth() == 0))
+		return false;
+
+	if (!item.isRevive() && item.getHealAmount() == 0 && pokemon->getStatus() != item.getStatus())
+		return false;
+
+	return true;
+}
+
+bool Encounter::canCatchPokemon()
+{
+	if (m_activeNPT == nullptr)
+		return true;
+
+	std::cout << " No Stealing Pokemon from Trainers!" << std::endl;
+	m_renderer->setTextBox("No Stealing Pokemon", "from Trainers");
+	onUpdate();
+	Sleep(1500);
+
+	return false;
+}
+
+bool Encounter::mouseOverFightOption()
+{
+	if (*m_mouseX >= 970.0f && *m_mouseX <= 1445.0f && *m_mouseY >= 150.0f && *m_mouseY <= 250.0f)
+		return true;
+	return false;
+}
+
+bool Encounter::mouseOverPokemonOption()
+{
+	if (*m_mouseX >= 970.0f && *m_mouseX <= 1445.0f && *m_mouseY >= 0.0f && *m_mouseY <= 150.0f)
+		return true;
+	return false;
+}
+
+bool Encounter::mouseOverItemOption()
+{
+	if (*m_mouseX >= 1445.0f && *m_mouseX <= 1920.0f && *m_mouseY >= 150.0f && *m_mouseY <= 250.0f)
+		return true;
+	return false;
+}
+
+bool Encounter::mouseOverFleeOption()
+{
+	if (*m_mouseX >= 1445.0f && *m_mouseX <= 1920.0f && *m_mouseY >= 0.0f && *m_mouseY <= 150.0f)
+		return true;
+	return false;
+}
+
+bool Encounter::mouseOverItem(bool isX, int boxNumber)
+{
+	float boxDifference = 135.0f;
+
+	float leftX = 737.5f;
+	float rightX = 1182.5f;
+
+	float topY = 992.5f;
+	float botY = 897.5f;
+
+	if (isX)
+	{
+		if (*m_mouseX >= leftX && *m_mouseX <= rightX)
+		{
+			return true;
+		}
+	}
+	else
+	{
+		if (*m_mouseY >= botY - (boxNumber * boxDifference) && *m_mouseY <= topY - (boxNumber * boxDifference))
+		{
+			return true;
+		}
+	}
 	return false;
 }
 
@@ -1016,4 +1124,7 @@ void Encounter::awaitClick()
 		m_renderer->setAwaitClick(true);
 		onUpdate();
 	}
+
+	//TODO: Make sure this didnt break anything
+	m_renderer->setAwaitClick(false);
 }

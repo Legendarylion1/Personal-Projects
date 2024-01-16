@@ -8,6 +8,15 @@ class PC
 {
 public:
 
+	struct userSettings
+	{
+		std::string resolution;
+		int up, down, left, right, interact;
+		bool showFps, fasterText, autoSave;
+	};
+
+public:
+
 	bool addPokemon(Trainer& trainer, Pokemon pokemon);
 	void movePokemon(unsigned int box1, unsigned int index1, unsigned int box2, unsigned int index2);
 	void insertPokemon(Pokemon pokemon, unsigned int box, unsigned int index);
@@ -24,9 +33,15 @@ public:
 	void setBuildingEvent(unsigned int buildingEvent);
 	void setCutsceneCount(unsigned int cutsceneCount);
 	void setNptData(std::vector<std::vector<bool>> nptData);
+	void setAutoSave(bool autoSave);
 
 	void loadPC(Trainer& trainer, bool overwriteData);
 	bool savePC(Trainer& trainer);
+	void autoSave(Trainer& trainer, unsigned int mapID, unsigned int x, unsigned int y, unsigned int direction, std::vector<std::vector<bool>> nptData);
+
+	void loadUserSettings(userSettings* settings);
+	void saveUserSettings(userSettings* settings);
+
 private:
 
 	void buildPokemon(std::string line, unsigned int loadState);
@@ -37,6 +52,7 @@ private:
 	std::string getItemData(unsigned int ID);
 	std::string getCoordData();
 	std::string getNptData(std::vector<bool> data);
+	std::string getColonData(std::string data);
 
 	void buildBoxPokemon(std::string line);
 	void buildRosterPokemon(std::string line);
@@ -65,6 +81,7 @@ private:
 	std::vector<std::vector<bool>> m_nptData;
 
 	bool m_changesMade = false;
+	bool m_autoSave = false;
 	unsigned int m_boxPokemonCount[8] = {0};
 
 

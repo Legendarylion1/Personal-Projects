@@ -1,0 +1,287 @@
+﻿  Attack.cpp
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Formulas.h(24,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Formulas.h(175,20): warning C4018: '<': signed/unsigned mismatch
+  Cutscene.cpp
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Formulas.h(24,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Formulas.h(175,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Trainer.h(11,2): warning C4091: 'static ': ignored on left of 'Direction' when no variable is declared
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Renderer.h(79,2): warning C4091: 'static ': ignored on left of 'Renderer_State' when no variable is declared
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Renderer.h(86,2): warning C4091: 'static ': ignored on left of 'SpriteState' when no variable is declared
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': macro redefinition
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Dependencies\GLFW\include\GLFW\glfw3.h(123): message : see previous definition of 'APIENTRY'
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Input.h(19,2): warning C4091: 'static ': ignored on left of 'INPUT_EVENT' when no variable is declared
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Encounter.h(21,2): warning C4091: 'static ': ignored on left of 'battleActions' when no variable is declared
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Cutscene.cpp(65,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Cutscene.cpp(143,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Cutscene.cpp(165,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Cutscene.cpp(168,21): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Cutscene.cpp(178,21): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Cutscene.cpp(490,21): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Cutscene.cpp(499,21): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Cutscene.cpp(544,33): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Cutscene.cpp(572,35): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+  EBO.cpp
+  Encounter.cpp
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Formulas.h(24,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Formulas.h(175,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Trainer.h(11,2): warning C4091: 'static ': ignored on left of 'Direction' when no variable is declared
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Renderer.h(79,2): warning C4091: 'static ': ignored on left of 'Renderer_State' when no variable is declared
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Renderer.h(86,2): warning C4091: 'static ': ignored on left of 'SpriteState' when no variable is declared
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Input.h(19,2): warning C4091: 'static ': ignored on left of 'INPUT_EVENT' when no variable is declared
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Encounter.h(21,2): warning C4091: 'static ': ignored on left of 'battleActions' when no variable is declared
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Encounter.cpp(539,21): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Encounter.cpp(555,30): warning C4018: '>=': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Encounter.cpp(622,21): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Encounter.cpp(648,16): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Encounter.cpp(747,19): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Encounter.cpp(753,19): warning C4244: '*=': conversion from 'double' to 'int', possible loss of data
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Encounter.cpp(762,18): warning C4244: '*=': conversion from 'float' to 'int', possible loss of data
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Encounter.cpp(769,18): warning C4244: '*=': conversion from 'float' to 'int', possible loss of data
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Encounter.cpp(851,14): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Encounter.cpp(894,26): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Encounter.cpp(898,31): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Encounter.cpp(935,21): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Encounter.cpp(951,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Encounter.cpp(976,16): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  GameEngine.cpp
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Formulas.h(24,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Formulas.h(175,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Trainer.h(11,2): warning C4091: 'static ': ignored on left of 'Direction' when no variable is declared
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Renderer.h(79,2): warning C4091: 'static ': ignored on left of 'Renderer_State' when no variable is declared
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Renderer.h(86,2): warning C4091: 'static ': ignored on left of 'SpriteState' when no variable is declared
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\GameMap.h(42,2): warning C4091: 'static ': ignored on left of 'Events' when no variable is declared
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': macro redefinition
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Dependencies\GLFW\include\GLFW\glfw3.h(123): message : see previous definition of 'APIENTRY'
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Input.h(19,2): warning C4091: 'static ': ignored on left of 'INPUT_EVENT' when no variable is declared
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Encounter.h(21,2): warning C4091: 'static ': ignored on left of 'battleActions' when no variable is declared
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\GameEngine.cpp(231,115): warning C4244: 'argument': conversion from 'T' to 'unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\GameEngine.cpp(231,82): warning C4244: 'argument': conversion from 'T' to 'unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\GameEngine.cpp(274,112): warning C4244: 'argument': conversion from 'T' to 'unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\GameEngine.cpp(274,79): warning C4244: 'argument': conversion from 'T' to 'unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\GameEngine.cpp(307,93): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\GameEngine.cpp(307,60): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\GameEngine.cpp(309,39): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\GameEngine.cpp(309,32): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\GameEngine.cpp(420,112): warning C4244: 'argument': conversion from 'T' to 'unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\GameEngine.cpp(420,79): warning C4244: 'argument': conversion from 'T' to 'unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\GameEngine.cpp(664,52): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\GameEngine.cpp(664,34): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\GameEngine.cpp(666,111): warning C4244: 'argument': conversion from 'T' to 'unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\GameEngine.cpp(666,78): warning C4244: 'argument': conversion from 'T' to 'unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\GameEngine.cpp(676,53): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\GameEngine.cpp(676,35): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\GameEngine.cpp(677,112): warning C4244: 'argument': conversion from 'T' to 'unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\GameEngine.cpp(677,79): warning C4244: 'argument': conversion from 'T' to 'unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\GameEngine.cpp(684,53): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\GameEngine.cpp(684,35): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\GameEngine.cpp(694,52): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\GameEngine.cpp(694,34): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\GameEngine.cpp(964,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\GameEngine.cpp(1134,20): warning C4553: '==': result of expression not used; did you intend '='?
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\GameEngine.cpp(1196,23): warning C4018: '<=': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\GameEngine.cpp(1201,23): warning C4018: '<=': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\GameEngine.cpp(1206,23): warning C4018: '<=': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\GameEngine.cpp(1211,23): warning C4018: '<=': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\GameEngine.cpp(1216,23): warning C4018: '<=': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\GameEngine.cpp(1221,23): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\GameEngine.cpp(1242,34): warning C4018: '<=': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\GameEngine.cpp(1246,18): warning C4018: '>': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\GameEngine.cpp(1246,47): warning C4018: '<=': signed/unsigned mismatch
+  GameMap.cpp
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Formulas.h(24,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Formulas.h(175,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Trainer.h(11,2): warning C4091: 'static ': ignored on left of 'Direction' when no variable is declared
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Renderer.h(79,2): warning C4091: 'static ': ignored on left of 'Renderer_State' when no variable is declared
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Renderer.h(86,2): warning C4091: 'static ': ignored on left of 'SpriteState' when no variable is declared
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\GameMap.h(42,2): warning C4091: 'static ': ignored on left of 'Events' when no variable is declared
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\GameMap.cpp(380,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\GameMap.cpp(401,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\GameMap.cpp(447,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\GameMap.cpp(771,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\GameMap.cpp(812,21): warning C4018: '<=': signed/unsigned mismatch
+  Input.cpp
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Input.h(19,2): warning C4091: 'static ': ignored on left of 'INPUT_EVENT' when no variable is declared
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Input.cpp(61,18): warning C4553: '==': result of expression not used; did you intend '='?
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Input.cpp(123,20): warning C4018: '<': signed/unsigned mismatch
+  Items.cpp
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Formulas.h(24,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Formulas.h(175,20): warning C4018: '<': signed/unsigned mismatch
+  main.cpp
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Formulas.h(24,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Formulas.h(175,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Trainer.h(11,2): warning C4091: 'static ': ignored on left of 'Direction' when no variable is declared
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Renderer.h(79,2): warning C4091: 'static ': ignored on left of 'Renderer_State' when no variable is declared
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Renderer.h(86,2): warning C4091: 'static ': ignored on left of 'SpriteState' when no variable is declared
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\GameMap.h(42,2): warning C4091: 'static ': ignored on left of 'Events' when no variable is declared
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': macro redefinition
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Dependencies\GLFW\include\GLFW\glfw3.h(123): message : see previous definition of 'APIENTRY'
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Input.h(19,2): warning C4091: 'static ': ignored on left of 'INPUT_EVENT' when no variable is declared
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Encounter.h(21,2): warning C4091: 'static ': ignored on left of 'battleActions' when no variable is declared
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\main.cpp(36,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  MapSection.cpp
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Formulas.h(24,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Formulas.h(175,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Trainer.h(11,2): warning C4091: 'static ': ignored on left of 'Direction' when no variable is declared
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Renderer.h(79,2): warning C4091: 'static ': ignored on left of 'Renderer_State' when no variable is declared
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Renderer.h(86,2): warning C4091: 'static ': ignored on left of 'SpriteState' when no variable is declared
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\MapSection.cpp(64,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\MapSection.cpp(86,20): warning C4018: '<': signed/unsigned mismatch
+  NPT.cpp
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Formulas.h(24,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Formulas.h(175,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Trainer.h(11,2): warning C4091: 'static ': ignored on left of 'Direction' when no variable is declared
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\NPT.cpp(68,10): warning C4244: '=': conversion from 'unsigned int' to 'float', possible loss of data
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\NPT.cpp(74,10): warning C4244: '=': conversion from 'unsigned int' to 'float', possible loss of data
+  PC.cpp
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Formulas.h(24,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Formulas.h(175,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Trainer.h(11,2): warning C4091: 'static ': ignored on left of 'Direction' when no variable is declared
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\PC.cpp(186,22): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\PC.cpp(265,22): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\PC.cpp(458,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\PC.cpp(482,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\PC.cpp(556,20): warning C4018: '<': signed/unsigned mismatch
+  Pokemon.cpp
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Formulas.h(24,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Formulas.h(175,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Pokemon.cpp(241,42): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Pokemon.cpp(242,39): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Pokemon.cpp(243,41): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Pokemon.cpp(244,37): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  Pokemon_Species.cpp
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Formulas.h(24,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Formulas.h(175,20): warning C4018: '<': signed/unsigned mismatch
+  Renderer.cpp
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Formulas.h(24,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Formulas.h(175,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Trainer.h(11,2): warning C4091: 'static ': ignored on left of 'Direction' when no variable is declared
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Renderer.h(79,2): warning C4091: 'static ': ignored on left of 'Renderer_State' when no variable is declared
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Renderer.h(86,2): warning C4091: 'static ': ignored on left of 'SpriteState' when no variable is declared
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Renderer.cpp(71,28): warning C4244: '=': conversion from 'unsigned int' to 'float', possible loss of data
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Renderer.cpp(72,30): warning C4244: '=': conversion from 'unsigned int' to 'float', possible loss of data
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Renderer.cpp(505,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Renderer.cpp(523,17): warning C4018: '>=': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Renderer.cpp(528,22): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Renderer.cpp(536,22): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Renderer.cpp(545,22): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Renderer.cpp(914,23): warning C4244: 'initializing': conversion from 'double' to 'unsigned int', possible loss of data
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Renderer.cpp(993,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Renderer.cpp(1051,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Renderer.cpp(1513,19): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Renderer.cpp(1554,116): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Renderer.cpp(1637,67): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Renderer.cpp(1725,39): warning C4244: '=': conversion from 'unsigned int' to 'GLfloat', possible loss of data
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Renderer.cpp(1726,45): warning C4244: '=': conversion from 'unsigned int' to 'GLfloat', possible loss of data
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Renderer.cpp(1738,45): warning C4244: '=': conversion from 'unsigned int' to 'GLfloat', possible loss of data
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Renderer.cpp(1739,57): warning C4244: '=': conversion from 'unsigned int' to 'GLfloat', possible loss of data
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Renderer.cpp(1751,57): warning C4244: '=': conversion from 'unsigned int' to 'GLfloat', possible loss of data
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Renderer.cpp(1752,58): warning C4244: '=': conversion from 'unsigned int' to 'GLfloat', possible loss of data
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Renderer.cpp(1764,57): warning C4244: '=': conversion from 'unsigned int' to 'GLfloat', possible loss of data
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Renderer.cpp(1765,46): warning C4244: '=': conversion from 'unsigned int' to 'GLfloat', possible loss of data
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Renderer.cpp(1889,21): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Renderer.cpp(2205,20): warning C4018: '<': signed/unsigned mismatch
+  ShaderClass.cpp
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\ShaderClass.cpp(15,27): warning C4244: 'argument': conversion from 'std::streamoff' to 'const unsigned int', possible loss of data
+  Status.cpp
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Formulas.h(24,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Formulas.h(175,20): warning C4018: '<': signed/unsigned mismatch
+  TextRenderer.cpp
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\TextRenderer.cpp(93,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\TextRenderer.cpp(168,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\TextRenderer.cpp(238,21): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\TextRenderer.cpp(254,21): warning C4018: '<': signed/unsigned mismatch
+  Texture.cpp
+  Trainer.cpp
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Formulas.h(24,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Formulas.h(175,20): warning C4018: '<': signed/unsigned mismatch
+V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Trainer.h(11,2): warning C4091: 'static ': ignored on left of 'Direction' when no variable is declared
+  Generating Code...
+  Compiling...
+  VAO.cpp
+  VBO.cpp
+  std_image.cpp
+  Generating Code...
+LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
+glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Debug\vc120.pdb'; linking object as if no debug info
+  Pokemon Adventure.vcxproj -> V:\GitHub Stuff and Things\Public Code\Personal-Projects\Pokemon Adventure\Debug\Pokemon Adventure.exe

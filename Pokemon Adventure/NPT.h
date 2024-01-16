@@ -8,13 +8,25 @@ const static unsigned int TILE_SIZE = 16;
 const static unsigned int TILE_MULTIPLIER = 9;
 
 
-class NPT
+class NPT : public Trainer
 { 
 public:
-	NPT(std::string name, unsigned int x, unsigned int y, unsigned int direction, unsigned int detectDistance);
-	Trainer nptResources;
+	explicit NPT(std::string name, unsigned int x, unsigned int y, unsigned int direction, unsigned int detectDistance) : Trainer(name) 
+	{
+		m_name = name;
 
-	int performAction(Pokemon &aiPokemon, Pokemon &playerPokemon, bool healOnly);
+		setTileX(x);
+		setTileY(y);
+
+		m_defaultXTile = x;
+		m_defaultYTile = y;
+		m_defaultDirection = direction;
+
+		m_direction = direction;
+		m_detectDistance = detectDistance;
+	};
+
+	int performAction(Pokemon &aiPokemon, Pokemon &playerPokemon);
 	Item* getNextHeal();
 	void removeHeal();
 	void resetDefaultPosition();
@@ -52,7 +64,7 @@ private:
 	unsigned int m_tileY = 0;
 	unsigned int m_direction = Direction::DOWN;
 	unsigned int m_detectDistance = 0;
-	unsigned int m_spriteState = 1 ;//Technically this is IDLE	//TODO: Sprite information and such should be pulled from renderer. We can make a more globalized settings sheet
+	unsigned int m_spriteState = 1;
 	
 	unsigned int m_defaultXTile = 0;
 	unsigned int m_defaultYTile = 0;

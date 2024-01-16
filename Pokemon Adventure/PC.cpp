@@ -32,7 +32,8 @@ bool PC::addPokemon(Trainer& trainer, Pokemon pokemon)
 
 	std::cout << "\n" << pokemon.getName() << " has been added to PC box #" << openBox << std::endl;
 
-	savePC(trainer);
+	//TODO: Make this optional
+	//savePC(trainer);
 	return true;
 }
 
@@ -124,6 +125,11 @@ void PC::setCutsceneCount(unsigned int cutsceneCount)
 void PC::setNptData(std::vector<std::vector<bool>> nptData)
 {
 	m_nptData = nptData;
+}
+
+void PC::setAutoSave(bool autoSave)
+{
+	m_autoSave = autoSave;
 }
 
 void PC::loadPC(Trainer& trainer, bool overwriteData)
@@ -277,6 +283,86 @@ bool PC::savePC(Trainer& trainer)
 	}
 }
 
+void PC::autoSave(Trainer& trainer, unsigned int mapID, unsigned int x, unsigned int y, unsigned int direction, std::vector<std::vector<bool>> nptData)
+{
+	if (m_autoSave)
+	{
+		setPlayerPosition(mapID, x, y, direction);
+		setNptData(nptData);
+		savePC(trainer);
+	}
+}
+
+void PC::loadUserSettings(userSettings* settings)
+{	
+	try
+	{
+		std::string data;
+		std::fstream pcFile;
+		std::vector<std::string> allData;
+
+		pcFile.open("user.settings", std::ofstream::in);
+
+		if (!pcFile.is_open())
+			return;
+
+		while (getline(pcFile, data))
+		{
+			allData.push_back(getColonData(data));
+		}
+		pcFile.close();
+
+		settings->resolution = allData.at(0);
+
+		settings->up = atoi(allData.at(1).c_str());
+		settings->down = atoi(allData.at(2).c_str());
+		settings->left = atoi(allData.at(3).c_str());
+		settings->right = atoi(allData.at(4).c_str());
+		settings->interact = atoi(allData.at(5).c_str());
+
+		settings->showFps = atoi(allData.at(6).c_str());
+		settings->autoSave = atoi(allData.at(7).c_str());
+		settings->fasterText = atoi(allData.at(8).c_str());
+	}
+	catch (...)
+	{
+		std::cout << "Error Reading Data From File. " << std::endl;
+		exit(404);
+	}
+}
+
+void PC::saveUserSettings(userSettings* settings)
+{
+	try
+	{
+		std::ofstream pcFile;
+		pcFile.open("user.settings", std::ofstream::out | std::ofstream::trunc);
+
+		//TODO: Make a bool so we know that the save was a fail as well as for the load Settings
+		if (!pcFile.is_open())
+			return;
+
+		pcFile << "Resolution: " << settings->resolution << "\n";
+		pcFile << "Up: " << settings->up << "\n";
+		pcFile << "Down: " << settings->down << "\n";
+		pcFile << "Left: " << settings->left << "\n";
+		pcFile << "Right: " << settings->right << "\n";
+		pcFile << "Interact: " << settings->interact << "\n";
+		pcFile << "ShowFps: " << settings->showFps << "\n";
+		pcFile << "AutoSave: " << settings->autoSave << "\n";
+		pcFile << "FasterText: " << settings->fasterText << "\n";
+
+
+		pcFile.close();
+
+	}
+	catch (...)
+	{
+		std::cout << "Error Writing Data To File. " << std::endl;
+		exit(404);
+	}
+}
+
 //TODO: Rename from build pokemon
 void PC::buildPokemon(std::string line, unsigned int loadState)
 {
@@ -387,6 +473,24 @@ std::string PC::getNptData(std::vector<bool> data)
 	}
 
 	return nptData;
+}
+
+std::string PC::getColonData(std::string data)
+{
+	std::string value;
+	bool addData = false;
+	for (int i = 0; i < data.size(); i++)
+	{
+		if (data.at(i) == ':')
+		{
+			addData = true;
+			continue;
+		}
+
+		if (addData && data.at(i) != ' ')
+			value += data.at(i);
+	}
+	return value;
 }
 
 void PC::buildBoxPokemon(std::string line)

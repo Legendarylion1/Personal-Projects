@@ -88,6 +88,11 @@ void Renderer::setPlayerCoords(float playerX, float playerY)
 	m_camPosition = glm::vec3(m_playerX - (WIDTH / 2) + halfOfTileSize, m_playerY - (HEIGHT / 2) + halfOfTileSize, 0.0f);
 }
 
+void Renderer::setPlayerScale(float playerScale)
+{
+	m_playerScale = playerScale;
+}
+
 void Renderer::setPlayerAnimation(unsigned int walkDirection, unsigned int walkState)
 {
 	playerWalkingDirection = walkDirection;
@@ -116,6 +121,8 @@ void Renderer::setEncounter(bool inEncounter)
 
 void Renderer::onUpdate()
 {
+	if (m_window == nullptr)
+		return;
 
 	glClear(GL_COLOR_BUFFER_BIT);
 	m_shader.Activate();
@@ -150,6 +157,12 @@ void Renderer::onUpdate()
 	{
 		drawBuyItems();
 	}
+	else if (m_state == DISPLAY_SETTINGS)
+	{
+		drawSettings();
+	}
+
+	showFPS();
 
 
 	glfwSwapBuffers(m_window);
@@ -159,6 +172,19 @@ void Renderer::onUpdate()
 void Renderer::shutdown()
 {
 	m_shader.Delete();
+}
+
+void Renderer::showFPS()
+{
+	if (!m_showFps)
+		return;
+
+	float curTime = (float)glfwGetTime();
+	m_deltaTime = curTime - m_lastTime;
+	m_lastTime = curTime;
+
+	//TODO: FPS Spikes when turning because of the speed of the animation using the renderer. Fix this error
+	m_textRenderer.renderText(std::to_string((int)(1.0f / m_deltaTime)) + " FPS", WIDTH, HEIGHT - (HEIGHT / 12.0f), 35, RIGHT_ALIGN, BLACK);
 }
 
 void Renderer::drawDefaultEncounter()
@@ -462,14 +488,9 @@ void Renderer::drawItems()
 
 	mapUpImage.Delete();
 
-
 	int pokeballCount = m_trainer->getUniquePokeballCount();
 	int healCount = m_trainer->getUniqueHealCount();
 	int miscCount = m_trainer->getUniqueMiscCount();
-
-	int totalCount = pokeballCount + healCount + miscCount;
-
-
 
 	float verticalDiffererence = 135.0f;
 
@@ -477,41 +498,62 @@ void Renderer::drawItems()
 	int hCount = 0;
 	int mCount = 0;
 
-	for (int y = m_bagIndex; y < m_bagIndex + 5; y++)
+	int totalCount = pokeballCount + healCount + miscCount;
+
+	unsigned int itemIndex = m_bagIndex;
+
+	for (int i = 0; i < itemIndex; i++)
 	{
-
-		if (y >= totalCount)
+		if (pCount != pokeballCount)
 		{
-			// NONE Print
-			m_textRenderer.renderText("NONE", 1000.0f, 837.5f - (verticalDiffererence * y) - 35, 40, CENTER_ALIGN, WHITE);
-		}
-		else if (y < pokeballCount)
-		{
-			// Pokeball
-			m_textRenderer.renderText(m_trainer->getPokeball(pCount)->getName(), 1000.0f, 837.5f - (verticalDiffererence * y) - 35, 40, CENTER_ALIGN, WHITE);
-
-			std::string typeCount = "x" + std::to_string(m_trainer->getPokeballTypeCount(pCount));
-			m_textRenderer.renderText(typeCount, 1200.0f, 837.5f - (verticalDiffererence * y) - 35, 40, RIGHT_ALIGN, WHITE);
 			pCount++;
 		}
-		else if (y < pokeballCount + healCount)
+		else if (hCount != healCount)
 		{
-			// Heal
-			m_textRenderer.renderText(m_trainer->getHealItem(hCount)->getName(), 1000.0f, 837.5f - (verticalDiffererence * y) - 35, 40, CENTER_ALIGN, WHITE);
-
-			std::string typeCount = "x" + std::to_string(m_trainer->getHealTypeCount(hCount));
-			m_textRenderer.renderText(typeCount, 1200.0f, 837.5f - (verticalDiffererence * y) - 35, 40, RIGHT_ALIGN, WHITE);
 			hCount++;
 		}
-		else if (y < pokeballCount + healCount + miscCount)
+		else
 		{
-			// MISC
-			m_textRenderer.renderText(m_trainer->getMiscItem(mCount)->getName(), 1000.0f, 837.5f - (verticalDiffererence * y) - 35, 40, CENTER_ALIGN, WHITE);
-
-			std::string typeCount = "x" + std::to_string(m_trainer->getMiscTypeCount(mCount));
-			m_textRenderer.renderText(typeCount, 1200.0f, 837.5f - (verticalDiffererence * y) - 35, 40, RIGHT_ALIGN, WHITE);
 			mCount++;
 		}
+	}
+
+	for (int i = 0; i < 5; i++)
+	{
+		if (itemIndex >= totalCount)
+		{
+			// NONE Print
+			m_textRenderer.renderText("NONE", 1000.0f, 837.5f - (verticalDiffererence * i) - 35, 40, CENTER_ALIGN, WHITE);
+		}
+		else if (itemIndex < pokeballCount)
+		{
+			m_textRenderer.renderText(m_trainer->getPokeball(pCount)->getName(), 1000.0f, 837.5f - (verticalDiffererence * i) - 35, 40, CENTER_ALIGN, WHITE);
+
+			std::string typeCount = "x" + std::to_string(m_trainer->getPokeballTypeCount(pCount));
+			m_textRenderer.renderText(typeCount, 1200.0f, 837.5f - (verticalDiffererence * i) - 35, 40, RIGHT_ALIGN, WHITE);
+			pCount++;
+		}
+		else if (itemIndex < pokeballCount + healCount)
+		{
+			// Heal
+			m_textRenderer.renderText(m_trainer->getHealItem(hCount)->getName(), 1000.0f, 837.5f - (verticalDiffererence * i) - 35, 40, CENTER_ALIGN, WHITE);
+
+			std::string typeCount = "x" + std::to_string(m_trainer->getHealTypeCount(hCount));
+			m_textRenderer.renderText(typeCount, 1200.0f, 837.5f - (verticalDiffererence * i) - 35, 40, RIGHT_ALIGN, WHITE);
+			hCount++;
+		}
+		else if (itemIndex < pokeballCount + healCount + miscCount)
+		{
+			// MISC
+			m_textRenderer.renderText(m_trainer->getMiscItem(mCount)->getName(), 1000.0f, 837.5f - (verticalDiffererence * i) - 35, 40, CENTER_ALIGN, WHITE);
+
+			std::string typeCount = "x" + std::to_string(m_trainer->getMiscTypeCount(mCount));
+			m_textRenderer.renderText(typeCount, 1200.0f, 837.5f - (verticalDiffererence * i) - 35, 40, RIGHT_ALIGN, WHITE);
+			mCount++;
+		}
+
+		itemIndex++;
+		
 	}
 }
 
@@ -902,10 +944,10 @@ void Renderer::drawPlayer()
 	GLfloat fightUI[]
 	{
 		//TOP Environment
-		0.0f, 0.0f, 0.0f,					0.0f, 0.0f, 0.0f,		(playerWalkingState * 0.333f), (playerWalkingDirection * 0.25f),
-		0.0f, playerHeight, 0.0f,			0.0f, 0.0f, 0.0f,		(playerWalkingState * 0.333f), (playerWalkingDirection * 0.25f) + 0.25f,
-		playerWidth,playerHeight, 0.0f,		0.0f, 0.0f, 0.0f,		(playerWalkingState * 0.333f) + 0.333f, (playerWalkingDirection * 0.25f) + 0.25f,
-		playerWidth, 0.0f, 0.0f,			0.0f, 0.0f, 0.0f,		(playerWalkingState * 0.333f) + 0.333f, (playerWalkingDirection * 0.25f),
+		0.0f - m_playerScale, 0.0f - m_playerScale, 0.0f,					0.0f, 0.0f, 0.0f,		(playerWalkingState * 0.333f), (playerWalkingDirection * 0.25f),
+		0.0f - m_playerScale, playerHeight + m_playerScale, 0.0f,			0.0f, 0.0f, 0.0f,		(playerWalkingState * 0.333f), (playerWalkingDirection * 0.25f) + 0.25f,
+		playerWidth + m_playerScale,playerHeight + m_playerScale, 0.0f,		0.0f, 0.0f, 0.0f,		(playerWalkingState * 0.333f) + 0.333f, (playerWalkingDirection * 0.25f) + 0.25f,
+		playerWidth + m_playerScale, 0.0f - m_playerScale, 0.0f,			0.0f, 0.0f, 0.0f,		(playerWalkingState * 0.333f) + 0.333f, (playerWalkingDirection * 0.25f),
 	};
 
 	GLuint indices1[] =
@@ -1326,7 +1368,7 @@ void Renderer::drawBackGroundBlur()
 	VAO1.Bind();
 
 
-	if (m_state == DISPLAY_ESCAPE || m_state == SELECT_POKEMON || m_state == SELECT_ITEM)
+	if (m_state == DISPLAY_ESCAPE || m_state == SELECT_POKEMON || m_state == SELECT_ITEM || m_state == DISPLAY_SETTINGS)
 		positionCamera(glm::vec3(m_playerX - (WIDTH/2) + ((TILE_SIZE * TILE_MULTIPLIER) / 2.0f), m_playerY - (HEIGHT / 2) + ((TILE_SIZE * TILE_MULTIPLIER) / 2.0f), 0.0f));
 
 	glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_INT, 0);
@@ -1381,6 +1423,28 @@ void Renderer::setExclamationSize(unsigned int size)
 void Renderer::setExclamationPos(glm::vec2 pos)
 {
 	m_exclamationPosition = pos;
+}
+
+void Renderer::setUserSettingBooleans(bool showFps, bool autoSave, bool fasterText)
+{
+	m_showFps = showFps;
+	m_autoSave = autoSave;
+	m_fasterText = fasterText;
+
+	if (m_showFps)
+	{
+		m_deltaTime = 0.0f;
+		m_lastTime = 0.0f;
+	}
+}
+
+void Renderer::setUserSettingStrings(std::string up, std::string down, std::string left, std::string right, std::string interact)
+{
+	m_upTxt = up;
+	m_downTxt = down;
+	m_leftTxt = left;
+	m_rightTxt = right;
+	m_interactTxt = interact;
 }
 
 void Renderer::drawTextBox()
@@ -1442,6 +1506,135 @@ void Renderer::drawTextBox()
 	m_textRenderer.renderText(m_topLine, 75.0f, 140.0f, 60, LEFT_ALIGN, BLACK);
 	m_textRenderer.renderText(m_botLine, 75.0f,  40.0f, 60, LEFT_ALIGN, BLACK);
 
+}
+
+void Renderer::drawInputKey(float centerX, float centerY, float size, std::string key)
+{
+	float squareSize = size * .5;
+
+	GLfloat fightUI[]
+	{
+		//TOP Environment
+		centerX - squareSize, centerY - squareSize, 0.0f,	1.0f, 1.0f, 1.0f,		0.0f, 0.0f,
+		centerX - squareSize, centerY + squareSize, 0.0f,	1.0f, 1.0f, 1.0f,		0.0f, 1.0f,
+		centerX + squareSize, centerY + squareSize, 0.0f,	1.0f, 1.0f, 1.0f,		1.0f, 1.0f,
+		centerX + squareSize, centerY - squareSize, 0.0f,	1.0f, 1.0f, 1.0f,		1.0f, 0.0f,
+	};
+
+	GLuint indices1[] =
+	{
+		//BOTTOM Display Bar
+		0, 2, 1,
+		0, 3, 2
+	};
+
+	VAO VAO1;
+	VAO1.Bind();
+
+	VBO VBO1(fightUI, sizeof(fightUI));
+	EBO EBO1(indices1, sizeof(indices1));
+
+	VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
+	VAO1.LinkAttrib(VBO1, 1, 3, GL_FLOAT, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+	VAO1.LinkAttrib(VBO1, 2, 2, GL_FLOAT, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+	VAO1.Unbind();
+	VBO1.Unbind();
+	EBO1.Unbind();
+
+
+	VAO1.Bind();
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+	VAO1.Unbind();
+
+	VAO1.Delete();
+	VBO1.Delete();
+	EBO1.Delete();
+
+	//TODO: Fix Text Scaling
+	m_textRenderer.renderText(key, centerX + (squareSize / key.length()), centerY - (squareSize / key.length()), size / key.length(), CENTER_ALIGN, BLACK);
+}
+
+void Renderer::drawSettingOption(float farRight, float y, float size, std::string settingText, bool on)
+{
+	glm::vec3 color = { 1.0f,0.0f,0.0f };
+
+	float borderWidth = size;
+	float borderHeight = size / 2;
+
+
+	//TODO: Lets Have it as a flat rate for now but think about a percentage. Percentage doesnt look good on rectangles
+	float innerWidth = borderWidth - 10;
+	float innerHeight = borderHeight - 10;
+
+	float boxX = farRight + (size / 2);
+	float boxY = y;
+
+	float squareX = -(innerWidth - innerHeight);
+
+	if (on)
+	{
+		color = glm::vec3{ 0.0f, 1.0f, 0.0f };
+		squareX = innerWidth - innerHeight;
+	}
+
+	GLfloat fightUI[]
+	{
+		//Outer Box
+		boxX - borderWidth, boxY - borderHeight, 0.0f,	1.0f, 1.0f, 1.0f,		0.0f, 0.0f,
+		boxX - borderWidth, boxY + borderHeight, 0.0f,	1.0f, 1.0f, 1.0f,		0.0f, 1.0f,
+		boxX + borderWidth, boxY + borderHeight, 0.0f,	1.0f, 1.0f, 1.0f,		1.0f, 1.0f,
+		boxX + borderWidth, boxY - borderHeight, 0.0f,	1.0f, 1.0f, 1.0f,		1.0f, 0.0f,
+
+
+		//Inner Box
+		boxX - innerWidth, boxY - innerHeight, 0.0f,	color.x, color.y, color.z,		0.0f, 0.0f,
+		boxX - innerWidth, boxY + innerHeight, 0.0f,	color.x, color.y, color.z,		0.0f, 1.0f,
+		boxX + innerWidth, boxY + innerHeight, 0.0f,	color.x, color.y, color.z,		1.0f, 1.0f,
+		boxX + innerWidth, boxY - innerHeight, 0.0f,	color.x, color.y, color.z,		1.0f, 0.0f,
+
+		//Square
+		boxX - innerHeight + squareX, boxY - innerHeight, 0.0f,		0.82421875f, 0.82421875f, 0.82421875f,		0.0f, 0.0f,
+		boxX - innerHeight + squareX, boxY + innerHeight, 0.0f,		0.82421875f, 0.82421875f, 0.82421875f,		0.0f, 1.0f,
+		boxX + innerHeight + squareX, boxY + innerHeight, 0.0f,		0.82421875f, 0.82421875f, 0.82421875f,		1.0f, 1.0f,
+		boxX + innerHeight + squareX, boxY - innerHeight, 0.0f,		0.82421875f, 0.82421875f, 0.82421875f,		1.0f, 0.0f,
+	};
+
+	GLuint indices1[] =
+	{
+		0, 2, 1,
+		0, 3, 2,
+
+		4, 6, 5,
+		4, 7, 6,
+
+		8, 10, 9,
+		8, 11, 10
+	};
+
+	VAO VAO1;
+	VAO1.Bind();
+
+	VBO VBO1(fightUI, sizeof(fightUI));
+	EBO EBO1(indices1, sizeof(indices1));
+
+	VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
+	VAO1.LinkAttrib(VBO1, 1, 3, GL_FLOAT, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+	VAO1.LinkAttrib(VBO1, 2, 2, GL_FLOAT, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+	VAO1.Unbind();
+	VBO1.Unbind();
+	EBO1.Unbind();
+
+
+	VAO1.Bind();
+
+	glDrawElements(GL_TRIANGLES, 18, GL_UNSIGNED_INT, 0);
+	VAO1.Unbind();
+
+	VAO1.Delete();
+	VBO1.Delete();
+	EBO1.Delete();
+
+	m_textRenderer.renderText(settingText, farRight, y - (size / 2), size, RIGHT_ALIGN, BLACK);
 }
 
 void Renderer::drawPokeCenterPokeballs()
@@ -2180,4 +2373,74 @@ void Renderer::drawTrainerDialogue()
 
 	m_textRenderer.renderText(m_topLine, 75.0f, 140.0f, 60, LEFT_ALIGN, BLACK);
 	m_textRenderer.renderText(m_botLine, 75.0f, 40.0f, 60, LEFT_ALIGN, BLACK);
+}
+
+void Renderer::drawSettings()
+{
+	drawMap();
+	drawPlayer();
+	drawBackGroundBlur();
+
+	//Blue Background
+	GLfloat fightUI[]
+		{
+			//Outer Box
+			(WIDTH / 2.0f) - (WIDTH * (3.0f/8.0f)), (HEIGHT / 2.0f) - (HEIGHT * (3.0f/8.0f)), 0.0f,	0.537254902f, 0.8117647059f, 0.9411764706f,		0.0f, 0.0f,
+			(WIDTH / 2.0f) - (WIDTH * (3.0f/8.0f)), (HEIGHT / 2.0f) + (HEIGHT * (3.0f/8.0f)), 0.0f,	0.537254902f, 0.8117647059f, 0.9411764706f,		0.0f, 1.0f,
+			(WIDTH / 2.0f) + (WIDTH * (3.0f/8.0f)), (HEIGHT / 2.0f) + (HEIGHT * (3.0f/8.0f)), 0.0f,	0.537254902f, 0.8117647059f, 0.9411764706f,		1.0f, 1.0f,
+			(WIDTH / 2.0f) + (WIDTH * (3.0f/8.0f)), (HEIGHT / 2.0f) - (HEIGHT * (3.0f/8.0f)), 0.0f,	0.537254902f, 0.8117647059f, 0.9411764706f,		1.0f, 0.0f
+		};
+
+		GLuint indices1[] =
+		{
+			0, 2, 1,
+			0, 3, 2
+		};
+
+		VAO VAO1;
+		VAO1.Bind();
+
+		VBO VBO1(fightUI, sizeof(fightUI));
+		EBO EBO1(indices1, sizeof(indices1));
+
+		VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
+		VAO1.LinkAttrib(VBO1, 1, 3, GL_FLOAT, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+		VAO1.LinkAttrib(VBO1, 2, 2, GL_FLOAT, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+		VAO1.Unbind();
+		VBO1.Unbind();
+		EBO1.Unbind();
+
+
+		VAO1.Bind();
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		VAO1.Unbind();
+
+		VAO1.Delete();
+		VBO1.Delete();
+		EBO1.Delete();
+		
+	
+
+
+
+	//ALL MOVEMENT KEYS
+	drawInputKey(WIDTH /2.0f, 800, 70, m_upTxt);
+	drawInputKey((WIDTH / 2.0f) - 100, 700, 70, m_leftTxt);
+	drawInputKey((WIDTH / 2.0f), 700, 70, m_downTxt);
+	drawInputKey((WIDTH / 2.0f) + 100, 700, 70, m_rightTxt);
+
+	//INTERACT KEY
+	drawInputKey((WIDTH / 2.0f) + 300, 700, 70, m_interactTxt);
+
+	//LABELING KEYS
+	//m_textRenderer.renderText("UP", WIDTH / 2.0f, 850, 70.0f / 2.0f, CENTER_ALIGN, BLACK);
+	//m_textRenderer.renderText("LEFT", (WIDTH / 2.0f) - 100, 650, 70.0f / 4.0f, CENTER_ALIGN, BLACK);
+	//m_textRenderer.renderText("DOWN", (WIDTH / 2.0f), 650, 70.0f / 4.0f, CENTER_ALIGN, BLACK);
+	//m_textRenderer.renderText("RIGHT", (WIDTH / 2.0f) + 100, 650, 70.0f / 5.0f, CENTER_ALIGN, BLACK);
+	//m_textRenderer.renderText("INTERACT", (WIDTH / 2.0f) + 300, 650, 70.0f / 8.0f, CENTER_ALIGN, BLACK);
+	
+	//PLAYER QUALITY OF LIFE SETTINGS
+	drawSettingOption(1200, 500, 70 , "Show FPS", m_showFps);
+	drawSettingOption(1200, 350, 70 , "Auto Save", m_autoSave);
+	drawSettingOption(1200, 200, 70 , "Faster Text", m_fasterText);
 }

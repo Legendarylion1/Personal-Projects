@@ -3,6 +3,7 @@
 #include "PC.h"
 #include "GameMap.h"
 #include "Cutscene.h"
+#include "Animation.h"
 
 
 class GameEngine {
@@ -20,14 +21,16 @@ private:
 	void handleEvents(std::vector<unsigned int> events);
 	void handleEscape();
 	void updateGrassTiles();
+	void changeSettings();
 
 
 	bool attemptEncounter(bool isPokemon, int nptID = -1);
-	void movePlayerUp();
-	void movePlayerDown();
-	void movePlayerLeft();
-	void movePlayerRight();
+	
+	void movePlayer(Direction direction, bool jump);
 	void setPlayerPosition(int x, int y);
+	void changeInput(INPUT_EVENT event);
+
+	std::vector<animationControls::trainerAnimationPoint> getAnimationPoints(Direction direction, bool jump);
 
 
 	void turnPlayer(unsigned int direction);
@@ -53,6 +56,8 @@ private:
 	Trainer m_trainer;
 	PC m_pc;
 
+	PC::userSettings m_userSettings;
+
 	float m_deltaTime	= 0.0f;
 	float m_lastTime	= 0.0f;
 
@@ -77,5 +82,6 @@ private:
 
 	bool m_inGrass = false;
 	bool m_rightFoot = false;
+	bool m_stepped = false;
 	unsigned int m_playerDirection = Direction::UP;
 };

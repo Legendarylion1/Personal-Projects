@@ -203,6 +203,9 @@
     <ClInclude Include="Cutscene.h">
       <Filter>Source Files\World</Filter>
     </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="default.frag">

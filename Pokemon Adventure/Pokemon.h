@@ -16,17 +16,24 @@ public:
 	Pokemon(Pokemon_Species species, int level);
 	Pokemon();
 
+	bool operator==(Pokemon& other)
+	{
+		if (this == &other)
+			return true;
+		else
+			return false;
+	}
+
 	explicit operator bool() const { return m_level > 0; };
 
-	void recieveAttack(Pokemon& attacker, Attack &attack);
 	void gainXP(int xp);
 	bool hasFainted();
 	int determineAttack(Pokemon& opposingPokemon);
-	bool usedItem(std::string trainerName, Item& item);
 	void giveHP(int hp);
 	bool takeDamage(int damage);
 	void teachAttack(Attack newAttack);
 	void randomizeAttacks();
+	void checkEvolution();
 
 	std::string getName();
 	int getHealth();
@@ -47,20 +54,16 @@ public:
 	void setStatus(Status* status);
 	void setItem(Item* item);
 
-	void evaluateStatus();
 	bool outOfMoves();
 	void printMoves();
 	Attack& struggle();
 
-	void applyStatus(Status& status);
 private:
 
 	bool zeroHP();
-	bool takeDamage(Pokemon& attacker, Attack& attack);
 	void calculateBaseStats();
 
 	void checkAttack();
-	void checkEvolution();
 
 	Pokemon_Species m_species;
 

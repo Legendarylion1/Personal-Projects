@@ -56,15 +56,6 @@ Attack& Pokemon::getAttack(int attackIndex)
 	return m_attacks[attackIndex];
 }
 
-void Pokemon::recieveAttack(Pokemon& pokemon, Attack &attack)
-{
-
-	std::cout << pokemon.getName().c_str() << " used " << attack.getName() << std::endl;
-
-	takeDamage(pokemon,attack);
-	attack.usePP();
-}
-
 void Pokemon::gainXP(int xpGained)
 {
 	while (true)
@@ -80,7 +71,6 @@ void Pokemon::gainXP(int xpGained)
 			std::cout << m_name << " is level " << m_level << std::endl;
 
 			checkAttack();
-			checkEvolution();
 			calculateBaseStats();
 
 
@@ -132,30 +122,6 @@ int Pokemon::determineAttack(Pokemon& opposingPokemon)
 	return strongestAttack;
 }
 
-bool Pokemon::usedItem(std::string trainerName, Item& item)
-{
-	if ((item.isRevive() && m_currentHealth != 0) || (!item.isRevive() && m_currentHealth == 0))
-		return false;
-
-	if (!item.isRevive() && item.getHealAmount() == 0 && m_status != &item.getStatus())
-		return false;
-
-	if (item.isRevive())
-		m_currentHealth = m_maxHealth / 2;
-
-	giveHP(item.getHealAmount());
-
-	std::cout << trainerName << " has used " << item.getName() << std::endl;
-
-	if (m_status == &item.getStatus())
-	{
-		std::cout << m_name << " has been healed of its" << item.getName() << std::endl;
-		 m_status = &id_to_status[statusIDs::null];
-	}
-
-	return true;
-}
-
 void Pokemon::giveHP(int hp)
 {
 	if (m_currentHealth + hp <= m_maxHealth)
@@ -202,6 +168,7 @@ void Pokemon::checkAttack()
 
 void Pokemon::teachAttack(Attack newAttack)
 {
+	//TODO: Implement for mouse and keyboard
 	for (int i = 0; i < 4; i++)
 	{
 		if (m_attacks[i].getMaxPP() == 0)
@@ -252,25 +219,6 @@ void Pokemon::randomizeAttacks()
 	}
 }
 
-void Pokemon::evaluateStatus()
-{
-	if (m_status == &id_to_status[statusIDs::null])
-		return;
-
-	if (m_status->takeDamage())
-	{
-		std::cout << m_name << " is hurt from its" << m_status->getName() << std::endl;
-
-		if (m_maxHealth / 16 < 0)
-			m_currentHealth -= 1;
-		else
-			m_currentHealth -= m_maxHealth / 16;
-
-		if (m_currentHealth < 0)
-			m_currentHealth = 0;
-	}
-}
-
 bool Pokemon::outOfMoves()
 {
 	for (int i = 0; i < 4; i++)
@@ -280,86 +228,6 @@ bool Pokemon::outOfMoves()
 	}
 
 	return true;
-}
-
-bool Pokemon::takeDamage(Pokemon& attacker, Attack& attack)
-{
-	if (odds(attack.getAccuracy()))
-	{
-		int Power = attack.getDamage();
-		int Level = attacker.getLevel();
-		int A = attacker.getAttackStat();
-		int D = m_defense;
-		int crit = 1;
-		float random = 1;
-
-		
-
-		if (odds(attack.getCritChance()))
-		{
-			crit = 2;
-			std::cout << "Its a critical Hit!" << std::endl;
-		}
-		
-		int totalDamage = (((((2.0f * Level * crit) / 5.0f) + 2) * Power * (static_cast<float>(A) / static_cast<float>(D))) / 50.0f) + 2;
-
-
-
-		// STAB
-		if (attack.getType() == attacker.getSpecies().getType1() || attack.getType() == attacker.getSpecies().getType2())
-			totalDamage *= 1.5;
-
-		//TYPE 1 Effectiveness
-		float effectiveness = TypeChart[attack.getType()][m_species.getType1()];
-
-		//TYPE 2 Effectiveness
-		if (m_species.getType2() != NOTYPE)
-			effectiveness *= TypeChart[attack.getType()][m_species.getType2()];
-
-		if (effectiveness >= 2.0f)
-			std::cout << " It's super effective! " << std::endl;
-		else if (effectiveness <= 1.0f)
-			std::cout << " It's not very effective" << std::endl;
-
-		totalDamage *= effectiveness;
-
-
-		//TODO: Make sure random is working correctly
-		if (totalDamage != 1)
-			random = static_cast<float>((rand() % 38 + 1.0f) + 217.0f) / 255.0f;
-
-		totalDamage *= random;
-
-		if (m_currentHealth - totalDamage <= 0)
-		{
-			m_currentHealth = 0;
-		}
-		else
-		{
-			m_currentHealth -= totalDamage;
-		}
-		
-
-		applyStatus(attack.getStatus());
-	}
-	else
-	{
-		std::cout << "It Missed" << std::endl;
-		return false;
-	}
-	return true;
-}
-
-void Pokemon::applyStatus(Status& status)
-{
-	if (&status == nullptr)
-		return;
-
-	if (m_status != &status && odds(status.getApplicationOdds()))
-	{
-		m_status = &status;
-		std::cout << m_name << " has been " << m_status->getName().c_str() << std::endl;
-	}
 }
 
 void Pokemon::calculateBaseStats()

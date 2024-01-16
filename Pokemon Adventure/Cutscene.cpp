@@ -4,10 +4,11 @@ Cutscene::Cutscene()
 {
 }
 
-void Cutscene::setup(Renderer* renderer, Encounter* encounter)
+void Cutscene::setup(Renderer* renderer, Encounter* encounter, bool* fasterText)
 {
 	m_renderer = renderer;
 	m_encounter = encounter;
+	m_fasterText = fasterText;
 }
 
 void Cutscene::setCutsceneCount(unsigned int count)
@@ -58,7 +59,7 @@ bool Cutscene::storyCutscene(MapSection& mapSection)
 
 	std::cout << "Script: \"" << script.c_str() << "\"\n";
 
-	unsigned int currentOperation = cutsceneEvents::NONE;
+	std::string currentOperation = cutsceneEvents::NONE;
 	std::string currentValue = "";
 
 	for (int i = 0; i < script.size(); i++)
@@ -67,31 +68,31 @@ bool Cutscene::storyCutscene(MapSection& mapSection)
 		if (script.at(i) == 'I')
 		{
 			evaluateCutscene(currentOperation, atoi(currentValue.c_str()));
-			currentOperation = cutsceneEvents::INDEX;
+			currentOperation = cutsceneEvents::AI_INDEX;
 			currentValue = "";
 		}
 		else if (script.at(i) == 'U')
 		{
 			evaluateCutscene(currentOperation, atoi(currentValue.c_str()));
-			currentOperation = cutsceneEvents::UP;
+			currentOperation = cutsceneEvents::MOVE_UP;
 			currentValue = "";
 		}
 		else if (script.at(i) == 'D')
 		{
 			evaluateCutscene(currentOperation, atoi(currentValue.c_str()));
-			currentOperation = cutsceneEvents::DOWN;
+			currentOperation = cutsceneEvents::MOVE_DOWN;
 			currentValue = "";
 		}
 		else if (script.at(i) == 'L')
 		{
 			evaluateCutscene(currentOperation, atoi(currentValue.c_str()));
-			currentOperation = cutsceneEvents::LEFT;
+			currentOperation = cutsceneEvents::MOVE_LEFT;
 			currentValue = "";
 		}
 		else if (script.at(i) == 'R')
 		{
 			evaluateCutscene(currentOperation, atoi(currentValue.c_str()));
-			currentOperation = cutsceneEvents::RIGHT;
+			currentOperation = cutsceneEvents::MOVE_RIGHT;
 			currentValue = "";
 		}
 		else if (script.at(i) == 'S')
@@ -154,10 +155,12 @@ void Cutscene::spottedTrainer(NPT& npt, unsigned int trainerTileX, unsigned int 
 
 void Cutscene::nptDialogue(NPT& npt)
 {
-	std::cout << "[Cutscene] In npt dialogue\n";
-
 	std::string topLine = "";
 	std::string botLine = "";
+
+	float doubleSpeed = 1.0f;
+	if (*m_fasterText)
+		doubleSpeed = 2.0f;
 
 	for (int y = 0; y < npt.getTopLines().size(); y++)
 	{
@@ -168,34 +171,10 @@ void Cutscene::nptDialogue(NPT& npt)
 
 			m_renderer->setTextBox(topLine, botLine);
 			m_renderer->onUpdate();
-
-			//Loop
-			{
-				bool firstEntered = true;
-				float newY = 0.0f;
-				float oldY = 0.0f;
-				float lastTime = 0.0f;
-				float deltaTime = 0.0f;
-
-				while (newY < oldY + (TILE_SIZE * TILE_MULTIPLIER))
-				{
-					//Movement Calculations
-					float curTime = (float)glfwGetTime();
-					deltaTime = curTime - lastTime;
-					lastTime = curTime;
-
-					if (firstEntered)
-						deltaTime = 0.0f;
-
-					if (newY + ((TILE_SIZE * TILE_MULTIPLIER) * deltaTime) * m_playerSpeed * m_textWriteSpeed > oldY + (TILE_SIZE * TILE_MULTIPLIER))
-						newY = oldY + (TILE_SIZE * TILE_MULTIPLIER);
-					else
-						newY += (TILE_SIZE * TILE_MULTIPLIER) * deltaTime * m_playerSpeed * m_textWriteSpeed;
-
-					firstEntered = false;
-				}
-			}
+			
+			animationControls::animateDelay(m_playerSpeed * m_textWriteSpeed * doubleSpeed, m_renderer);
 		}
+
 		for (int i = 0; i < npt.getBotLines().at(y).size(); i++)
 		{
 			botLine += npt.getBotLines().at(y).at(i);
@@ -203,31 +182,7 @@ void Cutscene::nptDialogue(NPT& npt)
 			m_renderer->setTextBox(topLine, botLine);
 			m_renderer->onUpdate();
 
-			//Loop
-			{
-				bool firstEntered = true;
-				float newY = 0.0f;
-				float oldY = 0.0f;
-				float lastTime = 0.0f;
-				float deltaTime = 0.0f;
-				while (newY < oldY + (TILE_SIZE * TILE_MULTIPLIER))
-				{
-					//Movement Calculations
-					float curTime = (float)glfwGetTime();
-					deltaTime = curTime - lastTime;
-					lastTime = curTime;
-
-					if (firstEntered)
-						deltaTime = 0.0f;
-
-					if (newY + ((TILE_SIZE * TILE_MULTIPLIER) * deltaTime) * m_playerSpeed * m_textWriteSpeed > oldY + (TILE_SIZE * TILE_MULTIPLIER))
-						newY = oldY + (TILE_SIZE * TILE_MULTIPLIER);
-					else
-						newY += (TILE_SIZE * TILE_MULTIPLIER) * deltaTime * m_playerSpeed * m_textWriteSpeed;
-
-					firstEntered = false;
-				}
-			}
+			animationControls::animateDelay(m_playerSpeed * m_textWriteSpeed * doubleSpeed, m_renderer);
 		}
 
 		m_encounter->awaitClick();
@@ -236,40 +191,39 @@ void Cutscene::nptDialogue(NPT& npt)
 		botLine = "";
 	}
 	m_renderer->setTextBox("", "");
-	std::cout << "[Cutscene] End npt dialogue\n";
 }
 
-void Cutscene::evaluateCutscene(unsigned int cutsceneEvent, int value)
+void Cutscene::evaluateCutscene(std::string cutsceneEvent, int value)
 {
 	std::cout << "Evaluating Cutscene Event: " << cutsceneEvent << "\tValue: " << value << std::endl;
 
-	if (cutsceneEvent == cutsceneEvents::INDEX)
+	if (cutsceneEvent == cutsceneEvents::AI_INDEX)
 	{
 		std::cout << "AI index = " << value << std::endl;
 		m_aiIndex = value;
 	}
-	else if (cutsceneEvent == cutsceneEvents::UP)
+	else if (cutsceneEvent == cutsceneEvents::MOVE_UP)
 	{
 		for (int i = 0; i < value; i++)
 		{
 			moveNPTUp(m_mapSection->getAI(m_aiIndex));
 		}
 	}
-	else if (cutsceneEvent == cutsceneEvents::DOWN)
+	else if (cutsceneEvent == cutsceneEvents::MOVE_DOWN)
 	{
 		for (int i = 0; i < value; i++)
 		{
 			moveNPTDown(m_mapSection->getAI(m_aiIndex));
 		}
 	}
-	else if (cutsceneEvent == cutsceneEvents::LEFT)
+	else if (cutsceneEvent == cutsceneEvents::MOVE_LEFT)
 	{
 		for (int i = 0; i < value; i++)
 		{
 			moveNPTLeft(m_mapSection->getAI(m_aiIndex));
 		}
 	}
-	else if (cutsceneEvent == cutsceneEvents::RIGHT)
+	else if (cutsceneEvent == cutsceneEvents::MOVE_RIGHT)
 	{
 		for (int i = 0; i < value; i++)
 		{
@@ -524,6 +478,10 @@ void Cutscene::cutsceneDialogue()
 
 	NPT& npt = m_mapSection->getAI(m_aiIndex);
 
+	float doubleSpeed = 1.0f;
+	if (*m_fasterText)
+		doubleSpeed = 2.0f;
+
 	//Dialogue
 	{
 		std::string topLine = "";
@@ -536,32 +494,7 @@ void Cutscene::cutsceneDialogue()
 			m_renderer->setTextBox(topLine, botLine);
 			m_renderer->onUpdate();
 
-			//Loop
-			{
-				bool firstEntered = true;
-				float newY = 0.0f;
-				float oldY = 0.0f;
-				float lastTime = 0.0f;
-				float deltaTime = 0.0f;
-
-				while (newY < oldY + (TILE_SIZE * TILE_MULTIPLIER))
-				{
-					//Movement Calculations
-					float curTime = (float)glfwGetTime();
-					deltaTime = curTime - lastTime;
-					lastTime = curTime;
-
-					if (firstEntered)
-						deltaTime = 0.0f;
-
-					if (newY + ((TILE_SIZE * TILE_MULTIPLIER) * deltaTime) * m_playerSpeed * m_textWriteSpeed > oldY + (TILE_SIZE * TILE_MULTIPLIER))
-						newY = oldY + (TILE_SIZE * TILE_MULTIPLIER);
-					else
-						newY += (TILE_SIZE * TILE_MULTIPLIER) * deltaTime * m_playerSpeed * m_textWriteSpeed;
-
-					firstEntered = false;
-				}
-			}
+			animationControls::animateDelay(m_playerSpeed * m_textWriteSpeed * doubleSpeed, m_renderer);
 		}
 		for (int i = 0; i < npt.getCutsceneBotLines().at(m_speakIndex[m_aiIndex]).size(); i++)
 		{
@@ -570,31 +503,7 @@ void Cutscene::cutsceneDialogue()
 			m_renderer->setTextBox(topLine, botLine);
 			m_renderer->onUpdate();
 
-			//Loop
-			{
-				bool firstEntered = true;
-				float newY = 0.0f;
-				float oldY = 0.0f;
-				float lastTime = 0.0f;
-				float deltaTime = 0.0f;
-				while (newY < oldY + (TILE_SIZE * TILE_MULTIPLIER))
-				{
-					//Movement Calculations
-					float curTime = (float)glfwGetTime();
-					deltaTime = curTime - lastTime;
-					lastTime = curTime;
-
-					if (firstEntered)
-						deltaTime = 0.0f;
-
-					if (newY + ((TILE_SIZE * TILE_MULTIPLIER) * deltaTime) * m_playerSpeed * m_textWriteSpeed > oldY + (TILE_SIZE * TILE_MULTIPLIER))
-						newY = oldY + (TILE_SIZE * TILE_MULTIPLIER);
-					else
-						newY += (TILE_SIZE * TILE_MULTIPLIER) * deltaTime * m_playerSpeed * m_textWriteSpeed;
-
-					firstEntered = false;
-				}
-			}
+			animationControls::animateDelay(m_playerSpeed * m_textWriteSpeed * doubleSpeed, m_renderer);
 		}
 
 		m_encounter->awaitClick();

@@ -1,7 +1,8 @@
 # Pokemon Game
 
+I want to mention that I am also working on a reinforcement based machine learning program to play my pokemon game along side of my development of this project. I think the two will go well together and I am having fun with the development of both projects.
 
-This Pokemon game is a passion project for me. I was in love with the Pokemon games as a kid, and being able to recreate my favorite game is a dream come true. I got into programming because of the endless possibilities of creation. Through my job experience and messing around at home, I have learned so much, and it has given me the experience to make a game like this. This is a very fun project that is really testing my organizational skills when it comes to coding. The original scope of this project was for it to be a console battler. I had created a console Pokemon game in which you keep battling in the "Pokemon Tower" until you lose when I was in my ID tech camp at Princeton University. I created the text-based version of this game in about 4 days with about 4 hours of work each day. It was only a battler, but I loved it. You can see some of the remnants of the console application with my cout statements. When I was done I thought to myself. I can do more. I want to make a full Pokemon game. So that's what I did. I've refactored the entire code base twice now because my original scaffolding of a text-based battler was not working well with my graphical components. But I think the code I have right now is pretty decent. It is readable and pretty easy to follow. The game is still in development so things are subject to change but I hope you enjoy my Pokemon game.
+This Pokemon game is a passion project for me. I was in love with the Pokemon games as a kid, and being able to recreate my favorite game is a dream come true. I got into programming because of the endless possibilities of creation. Through my job experience and messing around at home, I have learned so much, and it has given me the experience to make a game like this. This is a very fun project that is really testing my organizational skills when it comes to coding. The original scope of this project was for it to be a console battler. I had created a console based Pokemon game in which you keep battling in the "Pokemon Tower" until you lose when I was in my ID tech camp at Princeton University. I created the text-based version of this game in about 4 days with about 4 hours of work each day. It was only a battler, but I loved it. You can see some of the remnants of the console application with my cout statements. When I was done I thought to myself. I can do more. I want to make a full Pokemon game. So that's what I did. I've refactored the entire code base twice now because my original scaffolding of a text-based battler was not working well with my graphical components. But I think the code I have right now is pretty decent. It is readable and pretty easy to follow. The game is still in development so things are subject to change but I hope you enjoy my Pokemon game.
 
 
 ## Contents
@@ -47,6 +48,7 @@ This Pokemon game is a passion project for me. I was in love with the Pokemon ga
 
 
 ### Key Binds
+Key Binds can be changed in the [settings](#settings)
 
 
 * **W - Up**
@@ -169,13 +171,13 @@ The bag has access to all of your items. Here you can find your heals, your Poke
 ### Save
 Save just saves the current state of the game. I think that the save happens a little too quickly and people may not understand that their game was saved, so I am going to add a popup and indicator that shows that the save occurred. For now just know that if the game sends you back to the main world without crashing, then the save is complete.
 ### Settings
-Settings are not yet implemented and will not do anything. Settings in the future will allow you to change what buttons perform each action. I will need to refactor the way I handle input so I am putting that off towards the end of development. Settings will also allow you to turn on or off auto-save for different features of the game. Lastly, I would like to add a setting for displaying framerate and changing the speed of text with dialogue.
+At the top left you are able to change your movement keybinds, and the top right you can change the key used to interact. To change a key you can click on the one the you want to change, and then click on the key that you would like to replace it with. At the bottom there are toggle-able settings that you can change by clicking on them. Show fps displays the framerate of the game, auto save will automatically save the game whenever you enter a new section of the map or building, and finally faster text will increase the speed at which the AI talks.
 ### Exit
 Exit closes the game. Please note that the game does not save on exit. This is by design. I will add a setting that will allow for saving on exit.
 
 
 ## Challenges and Lessons Learned
-My three biggest challenges right now are the renderer, code structure, and movement
+My three biggest challenges right now are the renderer, code structure, and Data Structures
 
 
 All three of these problems should be fine by the time I'm done. I really need to refactor to fix these changes. If you see anything in my code that you think can be improved. Please do not hesitate to contact me and suggest improvements. I am here to grow and I always welcome constructive criticism. Here are some of the things that I think are the biggest issues with my code at the moment. Here is an insight into my thoughts as a software engineer.
@@ -191,8 +193,8 @@ Some classes contain other classes only to use one function of the class. My cut
 
 
 
-### Movement
-Movement is an interesting one because there isn't anything wrong per se, but changes need to be made so that my future ideas can be implemented. For example, if I want the user to be able to change what button to press to move, then I can't code it as if they press "`W`", and then set "`up`" to true. It can't work like that because that code literally can't be changed. Instead, I'm going to change it to an event-based system. If you press "`W`" then it will trigger an "`UP`" event. This event will make it so that each key isn't hard coded to set a boolean true or false. I also want to change how I do the movement calculations in the first place. The code uses a timer system that I came up with. However, that same timer system is used for other functions like dialogue or AI animations. This means that it can be pulled out and help out code clarity. There are no bugs with movement so this task is going to wait until we get to the end. The last thing that I'm considering trying is to implement a subject-observer pattern for the movement. Movement is the perfect place to implement this pattern. When I refactor this will be on my list.
+### Data Structures
+A lot of the important variables in my code are shared as pointers. There is no problem with using pointers, but these varaibles can be grouped into structs and shared. I do not like that I always share the variables independently the way I do. I also want to change the way I am handling namespaces and enums. Some of the namespaces are necessary but others can be turned into enums so that I do not need to worry about the values when making calculations in the code. My favorite data structure that I use in the code is a hashmap. I have hashmaps all over, but I would like to change the location in the files that the hashmaps are declared. They can be cleaned up so that they are more easily found. Lastly I want to clean up my global variables such as using a #define. There are many ways to clean up the variables but these are some of my ideas that I plan on trying.
 
 
 

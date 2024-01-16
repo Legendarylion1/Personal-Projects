@@ -2,13 +2,13 @@
 
 #include "Pokemon.h"
 
-namespace Direction
+static enum Direction
 {
-	static unsigned int UP = 0;
-	static unsigned int DOWN = 1;
-	static unsigned int LEFT = 2;
-	static unsigned int RIGHT = 3;
-}
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT
+};
 
 class Trainer
 {

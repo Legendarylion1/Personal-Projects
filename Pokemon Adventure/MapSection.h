@@ -4,6 +4,20 @@
 
 #include "Renderer.h"
 
+//TODO: Find a place for this
+namespace cutsceneEvents
+{
+	static std::string NONE = "";
+	static std::string AI_INDEX = "I";
+	static std::string MOVE_UP = "U";
+	static std::string MOVE_DOWN = "D";
+	static std::string MOVE_LEFT = "L";
+	static std::string MOVE_RIGHT = "R";
+	static std::string SPEAK = "S";
+	static std::string SET_X_TILE = "X";
+	static std::string SET_Y_TILE = "Y";
+};
+
 class MapSection
 {
 public:
@@ -22,6 +36,9 @@ public:
 	void setCutsceneScript(std::string script);
 	void setCutsceneID(unsigned int cutsceneID);
 	void setNptData(std::vector<bool> nptData);
+
+	void addToCutScene(std::string command);
+	void addToCutScene(std::string command, unsigned int value);
 
 	std::vector<bool> getNptData();
 	std::vector<unsigned int> getPokemonIDs();

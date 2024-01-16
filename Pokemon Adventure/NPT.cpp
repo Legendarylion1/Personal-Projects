@@ -1,37 +1,16 @@
 #include "NPT.h"
 
-NPT::NPT(std::string name, unsigned int x, unsigned int y, unsigned int direction, unsigned int detectDistance):
-	nptResources(name)
+int NPT::performAction(Pokemon& aiPokemon, Pokemon& playerPokemon)
 {
-	m_name = name;
-
-	setTileX(x);
-	setTileY(y);
-
-	m_defaultXTile = x;
-	m_defaultYTile = y;
-	m_defaultDirection = direction;
-
-	m_direction = direction;
-	m_detectDistance = detectDistance;
-}
-
-int NPT::performAction(Pokemon& aiPokemon, Pokemon& playerPokemon, bool healOnly)
-{
+	//TODO: Refactor this to fit the new way the encounters work
 	//TODO: Add heal options based on the potion used
-	
-	if (m_healedThisTurn)
-	{
-		m_healedThisTurn = false;
-		return -1;
-	}
 
-	int healCount = nptResources.getTotalHealCount(); //TODO: Heal count doesnt tell how many of each item we have
+	int healCount = getTotalHealCount(); //TODO: Heal count doesnt tell how many of each item we have
 	int pokemonCount = 0;
 
 	for (int i = 0; i < 6; i++)
 	{
-		if (nptResources.getPokemon(i)->getLevel() != 0 && nptResources.getPokemon(i)->getHealth() != 0)
+		if (getPokemon(i)->getLevel() != 0 && getPokemon(i)->getHealth() != 0)
 			pokemonCount += 1;
 	}
 
@@ -44,13 +23,10 @@ int NPT::performAction(Pokemon& aiPokemon, Pokemon& playerPokemon, bool healOnly
 
 	if ((healCount == pokemonCount || pokemonCount == 1) && aiPokemon.getHealth() * 3 <= aiPokemon.getMaxHealth() && healCount >= 1)
 	{
-		m_healedThisTurn = true;
+		std::cout << "[NPT][PerformAction] Returning Heal with the following stats" << std::endl;
+		std::cout << "[NPT][PerformAction] HealCount: " << healCount << std::endl;
+		std::cout << "[NPT][PerformAction] Pokemon Count: " << pokemonCount << std::endl;
 		return 5;
-	}
-	
-	if (healOnly)
-	{
-		return -1;
 	}
 
 	if (aiPokemon.outOfMoves())
@@ -62,12 +38,12 @@ int NPT::performAction(Pokemon& aiPokemon, Pokemon& playerPokemon, bool healOnly
 
 Item* NPT::getNextHeal()
 {
-	return nullptr;
+	return getHealItem(0);
 }
 
 void NPT::removeHeal()
 {
-	nptResources.removeItem(*nptResources.getHealItem(0));
+	removeItem(*getHealItem(0));
 }
 
 void NPT::resetDefaultPosition()
@@ -134,13 +110,13 @@ void NPT::removePokemon()
 {
 	for (int i = 0; i < 6; i++)
 	{
-		nptResources.popPokemon(i);
+		popPokemon(i);
 	}
 }
 
 std::vector<std::string> NPT::getTopLines()
 {
-	if (nptResources.hasPokemon())
+	if (hasPokemon())
 	{
 		std::cout << "[NPT] Returning Fight Top Lines\n";
 		return m_fightTopLines;
@@ -154,7 +130,7 @@ std::vector<std::string> NPT::getTopLines()
 
 std::vector<std::string> NPT::getBotLines()
 {
-	if (nptResources.hasPokemon())
+	if (hasPokemon())
 		return m_fightBotLines;
 	else
 		return m_defaultBotLines;

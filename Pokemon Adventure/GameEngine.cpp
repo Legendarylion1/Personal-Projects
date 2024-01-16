@@ -34,19 +34,27 @@ bool GameEngine::setup()
 	}
 
 	m_pc.loadPC(m_trainer, true);
+	m_pc.loadUserSettings(&m_userSettings);
+
+
 	initPlayerPosition();
 
+	//Initialization
 	m_renderer.setup(m_window);
 	m_encounter.setup(m_window, &m_renderer, &m_input, &m_clicked, &m_mouseX, &m_mouseY);
 	m_input.setup(m_window, &m_clicked, &m_mouseX, &m_mouseY, &m_upPressed, &m_downPressed, &m_leftPressed, &m_rightPressed, &m_interactPressed, &m_escapePressed);
 	m_gameMap.setup(&m_upPressed, &m_downPressed, &m_leftPressed, &m_rightPressed, &m_interactPressed, &m_renderer);
-	m_cutscene.setup(&m_renderer, &m_encounter);
+	m_cutscene.setup(&m_renderer, &m_encounter, &m_userSettings.fasterText);
 
-
-
+	//Setting State
 	m_renderer.setState(DISPLAY_MAP);
 	m_renderer.setTrainer(&m_trainer);
 	m_gameMap.setNptData(m_pc.getNptData());
+
+	//Loading User Settings
+	m_input.setInputValues(m_userSettings.up, m_userSettings.down, m_userSettings.left, m_userSettings.right, m_userSettings.interact);
+	m_renderer.setUserSettingBooleans(m_userSettings.showFps, m_userSettings.autoSave, m_userSettings.fasterText);
+	m_renderer.setUserSettingStrings(keyStrings[m_userSettings.up], keyStrings[m_userSettings.down], keyStrings[m_userSettings.left], keyStrings[m_userSettings.right], keyStrings[m_userSettings.interact]);
 
 	return true;
 }
@@ -57,6 +65,7 @@ bool GameEngine::run()
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(m_window))
 	{
+		//TODO: Can Probably Remove This
 		float curTime = (float)glfwGetTime();
 		m_deltaTime = curTime - m_lastTime;
 		m_lastTime = curTime;
@@ -109,102 +118,124 @@ void GameEngine::initPlayerPosition()
 void GameEngine::handleEvents(std::vector<unsigned int> events)
 {
 	m_inGrass = false;
-	for (int i = 0; i < events.size(); i++)
+
+	for (unsigned int event : events)
 	{
-		if (events.at(i) == Events::inGrass)
+		switch (event)
 		{
-			m_inGrass = true;
-		}
-		else if (events.at(i) == Events::movedUp)
-		{
-			movePlayerUp();
-		}
-		else if (events.at(i) == Events::movedDown)
-		{
-			movePlayerDown();
-		}
-		else if (events.at(i) == Events::movedLeft)
-		{
-			movePlayerLeft();
-		}
-		else if (events.at(i) == Events::movedRight)
-		{
-			movePlayerRight();
-		}
-		else if (events.at(i) == Events::turnUp)
-		{
-			turnPlayer(Direction::UP);
-		}
-		else if (events.at(i) == Events::turnDown)
-		{
-			turnPlayer(Direction::DOWN);
-		}
-		else if (events.at(i) == Events::turnLeft)
-		{
-			turnPlayer(Direction::LEFT);
-		}
-		else if (events.at(i) == Events::turnRight)
-		{
-			turnPlayer(Direction::RIGHT);
-		}
-		else if (events.at(i) == Events::transferUp)
-		{
-			transferMaps(Direction::UP);
-		}
-		else if (events.at(i) == Events::transferDown)
-		{
-			transferMaps(Direction::DOWN);
-		}
-		else if (events.at(i) == Events::transferLeft)
-		{
-			transferMaps(Direction::LEFT);
-		}
-		else if (events.at(i) == Events::transferRight)
-		{
-			transferMaps(Direction::RIGHT);
-		}
-		else if (events.at(i) == Events::trainerSpotted)
-		{
-			attemptEncounter(false);
-		}
-		else if (events.at(i) == Events::pokeCenter)
-		{
-			transferBuilding(true);
-		}
-		else if (events.at(i) == Events::returnSection)
-		{
-			transferReturn();
-		}
-		else if (events.at(i) == Events::interactPC)
-		{
-			usePC();
-		}
-		else if (events.at(i) == Events::interactNurse)
-		{
-			nurseHeal();
-		}
-		else if (events.at(i) == Events::pokeShop)
-		{
-			transferBuilding(false);
-		}
-		else if (events.at(i) == Events::interactItemBuy)
-		{
-			buyItem();
-		}
-		else if (events.at(i) == Events::interactTrainer)
-		{
-			interactNPT();
-		}
-		else if (events.at(i) == Events::startCutScene)
-		{
-			if (m_cutscene.storyCutscene(m_gameMap.getMapSection()))
-				m_pc.setCutsceneCount(m_cutscene.getCutsceneCount());
+
+			case Events::inGrass:
+				m_inGrass = true;
+				break;
+
+			case Events::movedUp:
+				movePlayer(Direction::UP, false);
+				break;
+			
+			case Events::movedDown:
+				movePlayer(Direction::DOWN, false);
+				break;
+
+			case Events::movedLeft:
+				movePlayer(Direction::LEFT, false);
+				break;
+
+			case Events::movedRight:
+				movePlayer(Direction::RIGHT, false);
+				break;
+
+			case Events::jumpUp:
+				movePlayer(Direction::UP, true);
+				break;
+
+			case Events::jumpDown:
+				movePlayer(Direction::DOWN, true);
+				break;
+
+			case Events::jumpLeft:
+				movePlayer(Direction::LEFT, true);
+				break;
+
+			case Events::jumpRight:
+				movePlayer(Direction::RIGHT, true);
+				break;
+
+			case Events::turnUp:
+				turnPlayer(Direction::UP);
+				break;
+
+			case Events::turnDown:
+				turnPlayer(Direction::DOWN);
+				break;
+
+			case Events::turnLeft:
+				turnPlayer(Direction::LEFT);
+				break;
+
+			case Events::turnRight:
+				turnPlayer(Direction::RIGHT);
+				break;
+
+			case Events::transferUp:
+				transferMaps(Direction::UP);
+				break;
+
+			case Events::transferDown:
+				transferMaps(Direction::DOWN);
+				break;
+
+			case Events::transferLeft:
+				transferMaps(Direction::LEFT);
+				break;
+
+			case Events::transferRight:
+				transferMaps(Direction::RIGHT);
+				break;
+
+			case Events::trainerSpotted:
+				attemptEncounter(false);
+				break;
+
+			case Events::pokeCenter:
+				transferBuilding(true);
+				break;
+
+			case Events::returnSection:
+				transferReturn();
+				break;
+
+			case Events::interactPC:
+				usePC();
+				break;
+
+			case Events::interactNurse:
+				nurseHeal();
+				break;
+
+			case Events::pokeShop:
+				transferBuilding(false);
+				break;
+
+			case Events::interactItemBuy:
+				buyItem();
+				break;
+
+			case Events::interactTrainer:
+				interactNPT();
+				break;
+
+			case Events::startCutScene:
+				if (m_cutscene.storyCutscene(m_gameMap.getMapSection()))
+				{
+					m_pc.setCutsceneCount(m_cutscene.getCutsceneCount());
+					m_pc.autoSave(m_trainer, m_gameMap.getMapID(), m_gameMap.getPlayerPosition().x, m_gameMap.getPlayerPosition().y, m_playerDirection, m_gameMap.getNptData());
+				}
+				break;
 		}
 	}
 
 	if (m_inGrass)
 		attemptEncounter(true);
-
 }
 
 void GameEngine::handleEscape()
@@ -215,8 +246,6 @@ void GameEngine::handleEscape()
 
 	while (true)
 	{
-		//if (m_escapePressed)
-		//	break;
 
 		if (m_clicked)
 		{
@@ -249,9 +278,10 @@ void GameEngine::handleEscape()
 			}
 			if (m_mouseX >= 760.0f && m_mouseX <= 1160.0f && m_mouseY >= 265.0f && m_mouseY <= 415.0f)
 			{
-				//TODO:: Implement
-				//Auto Save as a setting
-				std::cout << "Settings" << std::endl;
+				changeSettings();
+				m_clicked = false;
+				m_renderer.setState(DISPLAY_ESCAPE);
+				continue;
 
 			}
 			if (m_mouseX >= 760.0f && m_mouseX <= 1160.0f && m_mouseY >= 65.0f && m_mouseY <= 215.0f)
@@ -279,9 +309,94 @@ void GameEngine::updateGrassTiles()
 		m_renderer.setGrassPosition(-1.0f, -1.0f);
 }
 
+void GameEngine::changeSettings()
+{
+	m_renderer.setState(DISPLAY_SETTINGS);
+	
+	bool firstEntered = true;
+	while (true)
+	{
+		if (m_clicked && !firstEntered)
+		{
+			
+			// Change UP
+			if (m_mouseX >= 925.0f && m_mouseX <= 995.0f && m_mouseY >= 765.0f && m_mouseY <= 835.0f )
+			{
+				m_renderer.setUserSettingStrings("", keyStrings[m_userSettings.down], keyStrings[m_userSettings.left], keyStrings[m_userSettings.right], keyStrings[m_userSettings.interact]);
+				changeInput(INPUT_EVENT::MOVE_UP);
+				firstEntered = true;
+				continue;
+			}
+
+			if (m_mouseY >= 665.0f && m_mouseY <= 735.0f)
+			{
+				//Change LEFT
+				if (m_mouseX >= 825.0f && m_mouseX <= 895.0f)
+				{
+					m_renderer.setUserSettingStrings(keyStrings[m_userSettings.up], keyStrings[m_userSettings.down],"", keyStrings[m_userSettings.right], keyStrings[m_userSettings.interact]);
+					changeInput(INPUT_EVENT::MOVE_LEFT);
+					firstEntered = true;
+					continue;
+				}
+				//Change DOWN
+				else if (m_mouseX >= 925.0f && m_mouseX <= 995.0f)
+				{
+					m_renderer.setUserSettingStrings(keyStrings[m_userSettings.up], "", keyStrings[m_userSettings.left], keyStrings[m_userSettings.right], keyStrings[m_userSettings.interact]);
+					changeInput(INPUT_EVENT::MOVE_DOWN);
+					firstEntered = true;
+					continue;
+				}
+				// Change RIGHT
+				else if (m_mouseX >= 1025.0f && m_mouseX <= 1095.0f)
+				{
+					m_renderer.setUserSettingStrings(keyStrings[m_userSettings.up], keyStrings[m_userSettings.down], keyStrings[m_userSettings.left], "", keyStrings[m_userSettings.interact]);
+					changeInput(INPUT_EVENT::MOVE_RIGHT);
+					firstEntered = true;
+					continue;
+				}
+				else if (m_mouseX >= 1225.0f && m_mouseX <= 1295.0f)
+				{
+					m_renderer.setUserSettingStrings(keyStrings[m_userSettings.up], keyStrings[m_userSettings.down], keyStrings[m_userSettings.left], keyStrings[m_userSettings.right], "");
+					changeInput(INPUT_EVENT::INTERACT);
+					firstEntered = true;
+					continue;
+				}
+			}
+
+			if (m_mouseX >= 1165 && m_mouseX <= 1305)
+			{
+				//Show Fps
+				if (m_mouseY >= 465 && m_mouseY <= 535)
+				{
+					m_userSettings.showFps = !m_userSettings.showFps;
+				}
+				//Auto Save
+				else if (m_mouseY >= 315 && m_mouseY <= 385)
+				{
+					m_userSettings.autoSave = !m_userSettings.autoSave;
+					m_pc.setAutoSave(m_userSettings.autoSave);
+				}
+				//Faster Text
+				else if (m_mouseY >= 165 && m_mouseY <= 235)
+				{
+					m_userSettings.fasterText = !m_userSettings.fasterText;
+				}
+				m_renderer.setUserSettingBooleans(m_userSettings.showFps, m_userSettings.autoSave, m_userSettings.fasterText);
+				firstEntered = true;
+				continue;
+			}
+
+			break;
+		}
+
+		firstEntered = false;
+		onUpdate();
+	}
+	m_pc.saveUserSettings(&m_userSettings);
+}
+
 bool GameEngine::attemptEncounter(bool isPokemon, int nptID)
 {
-	std::cout << "encounter being attempted\n";
 	if (isPokemon)
 	{
 		if (odds(5))
@@ -317,244 +432,50 @@ bool GameEngine::attemptEncounter(bool isPokemon, int nptID)
 	return false;
 }
 
-void GameEngine::movePlayerUp()
+void GameEngine::movePlayer(Direction direction, bool jump)
 {
-	if (m_playerDirection != Direction::UP)
+	if (m_playerDirection != direction)
 	{
-		turnPlayer(Direction::UP);
+		turnPlayer(direction);
 		return;
 	}
-	m_gameMap.adjustPlayerPosition(0, 1);
-	float oldY = m_playerY;
-	bool firstEntered = true;
-	bool stepped = false;
 
-	m_lastTime = 0.0f;
-	while (m_playerY < oldY + (TILE_SIZE * TILE_MULTIPLIER))
+	switch (direction)
 	{
-		//Movement Calculations
-		float curTime = (float)glfwGetTime();
-		m_deltaTime = curTime - m_lastTime;
-		m_lastTime = curTime;
+		case Direction::UP:
 
-		if (firstEntered)
-			m_deltaTime = 0.0f;
+			animationControls::controlAnimation(&m_playerX, &m_playerY, false, true, jump, getAnimationPoints(direction, jump), m_playerSpeed, &m_renderer);
+			m_gameMap.adjustPlayerPosition(0, 1);
+			if (jump)
+				m_gameMap.adjustPlayerPosition(0, 1);
+			break;
 
-		if (m_playerY + ((TILE_SIZE * TILE_MULTIPLIER) * m_deltaTime) * m_playerSpeed > oldY + (TILE_SIZE * TILE_MULTIPLIER))
-			m_playerY = oldY + (TILE_SIZE * TILE_MULTIPLIER);
-		else
-			m_playerY += (TILE_SIZE * TILE_MULTIPLIER) * m_deltaTime * m_playerSpeed;
+		case Direction::DOWN:
 
-		firstEntered = false;
+			animationControls::controlAnimation(&m_playerX, &m_playerY, false, false, jump, getAnimationPoints(direction, jump), m_playerSpeed, &m_renderer);
+			m_gameMap.adjustPlayerPosition(0, -1);
+			if (jump)
+				m_gameMap.adjustPlayerPosition(0, -1);
+			break;
 
+		case Direction::LEFT:
 
+			animationControls::controlAnimation(&m_playerX, &m_playerY, true, false, jump, getAnimationPoints(direction, jump), m_playerSpeed, &m_renderer);
+			m_gameMap.adjustPlayerPosition(-1, 0);
+			if (jump)
+				m_gameMap.adjustPlayerPosition(-1, 0);
+			break;
 
-		//Animation
-		if (!stepped && m_playerY >= oldY + ((TILE_SIZE * TILE_MULTIPLIER) * (1.0f / 4.0f)))
-		{
-			if (m_rightFoot)
-			{
-				m_renderer.setPlayerAnimation(Direction::UP, SpriteState::STEP1);
+		case Direction::RIGHT:
 
-				m_rightFoot = false;
-				stepped = true;
-			}
-			else
-			{
-				m_renderer.setPlayerAnimation(Direction::UP, SpriteState::STEP2);
-				m_rightFoot = true;
-				stepped = true;
-			}
-		}
-		else if (m_playerY >= oldY + ((TILE_SIZE * TILE_MULTIPLIER) * (3.0f / 4.0f)))
-		{
-			m_renderer.setPlayerAnimation(Direction::UP, SpriteState::IDLE);
-		}
-
-		m_renderer.setPlayerCoords(m_playerX, m_playerY);
-		m_renderer.onUpdate();
+			animationControls::controlAnimation(&m_playerX, &m_playerY, true, true, jump, getAnimationPoints(direction, jump), m_playerSpeed, &m_renderer);
+			m_gameMap.adjustPlayerPosition(1, 0);
+			if (jump)
+				m_gameMap.adjustPlayerPosition(1, 0);
+			break;
 	}
+
 	updateGrassTiles();
-}
-
-void GameEngine::movePlayerDown()
-{
-	if (m_playerDirection != Direction::DOWN)
-	{
-		turnPlayer(Direction::DOWN);
-		return;
-	}
-	m_gameMap.adjustPlayerPosition(0, -1);
-	updateGrassTiles();
-	float oldY = m_playerY;
-	bool firstEntered = true;
-	bool stepped = false;
-
-	m_lastTime = 0.0f;
-	while (m_playerY > oldY - (TILE_SIZE * TILE_MULTIPLIER))
-	{
-		//Movement Calculations
-		float curTime = (float)glfwGetTime();
-		m_deltaTime = curTime - m_lastTime;
-		m_lastTime = curTime;
-
-		if (firstEntered)
-			m_deltaTime = 0.0f;
-
-		if (m_playerY - ((TILE_SIZE * TILE_MULTIPLIER) * m_deltaTime) * m_playerSpeed < oldY - (TILE_SIZE * TILE_MULTIPLIER))
-			m_playerY = oldY - (TILE_SIZE * TILE_MULTIPLIER);
-		else
-			m_playerY -= (TILE_SIZE * TILE_MULTIPLIER) * m_deltaTime * m_playerSpeed;
-
-		firstEntered = false;
-
-
-
-		//Animation
-		if (!stepped && m_playerY <= oldY - ((TILE_SIZE * TILE_MULTIPLIER) * (1.0f / 4.0f)))
-		{
-			if (m_rightFoot)
-			{
-				m_renderer.setPlayerAnimation(Direction::DOWN, SpriteState::STEP1);
-
-				m_rightFoot = false;
-				stepped = true;
-			}
-			else
-			{
-				m_renderer.setPlayerAnimation(Direction::DOWN, SpriteState::STEP2);
-				m_rightFoot = true;
-				stepped = true;
-			}
-		}
-		else if (m_playerY <= oldY - ((TILE_SIZE * TILE_MULTIPLIER) * (3.0f / 4.0f)))
-		{
-			m_renderer.setPlayerAnimation(Direction::DOWN, SpriteState::IDLE);
-		}
-
-		m_renderer.setPlayerCoords(m_playerX, m_playerY);
-		m_renderer.onUpdate();
-	}
-}
-
-void GameEngine::movePlayerLeft()
-{
-	if (m_playerDirection != Direction::LEFT)
-	{
-		turnPlayer(Direction::LEFT);
-		return;
-	}
-	m_gameMap.adjustPlayerPosition(-1, 0);
-	updateGrassTiles();
-	float oldX = m_playerX;
-	bool firstEntered = true;
-	bool stepped = false;
-
-	m_lastTime = 0.0f;
-	while (m_playerX > oldX - (TILE_SIZE * TILE_MULTIPLIER))
-	{
-		//Movement Calculations
-		float curTime = (float)glfwGetTime();
-		m_deltaTime = curTime - m_lastTime;
-		m_lastTime = curTime;
-
-		if (firstEntered)
-			m_deltaTime = 0.0f;
-
-		if (m_playerX - ((TILE_SIZE * TILE_MULTIPLIER) * m_deltaTime) * m_playerSpeed < oldX - (TILE_SIZE * TILE_MULTIPLIER))
-			m_playerX = oldX - (TILE_SIZE * TILE_MULTIPLIER);
-		else
-			m_playerX -= (TILE_SIZE * TILE_MULTIPLIER) * m_deltaTime * m_playerSpeed;
-
-		firstEntered = false;
-
-
-
-		//Animation
-		if (!stepped && m_playerX <= oldX - ((TILE_SIZE * TILE_MULTIPLIER) * (1.0f / 4.0f)))
-		{
-			if (m_rightFoot)
-			{
-				m_renderer.setPlayerAnimation(Direction::LEFT, SpriteState::STEP1);
-
-				m_rightFoot = false;
-				stepped = true;
-			}
-			else
-			{
-				m_renderer.setPlayerAnimation(Direction::LEFT, SpriteState::STEP2);
-				m_rightFoot = true;
-				stepped = true;
-			}
-		}
-		else if (m_playerX <= oldX - ((TILE_SIZE * TILE_MULTIPLIER) * (3.0f / 4.0f)))
-		{
-			m_renderer.setPlayerAnimation(Direction::LEFT, SpriteState::IDLE);
-		}
-
-		m_renderer.setPlayerCoords(m_playerX, m_playerY);
-		m_renderer.onUpdate();
-	}
-}
-
-void GameEngine::movePlayerRight()
-{
-	if (m_playerDirection != Direction::RIGHT)
-	{
-		turnPlayer(Direction::RIGHT);
-		return;
-	}
-	m_gameMap.adjustPlayerPosition(1, 0);
-	updateGrassTiles();
-	float oldX = m_playerX;
-	bool firstEntered = true;
-	bool stepped = false;
-
-	m_lastTime = 0.0f;
-	while (m_playerX < oldX + (TILE_SIZE * TILE_MULTIPLIER))
-	{
-		//Movement Calculations
-		float curTime = (float)glfwGetTime();
-		m_deltaTime = curTime - m_lastTime;
-		m_lastTime = curTime;
-
-		if (firstEntered)
-			m_deltaTime = 0.0f;
-
-		if (m_playerX + ((TILE_SIZE * TILE_MULTIPLIER) * m_deltaTime) * m_playerSpeed > oldX + (TILE_SIZE * TILE_MULTIPLIER))
-			m_playerX = oldX + (TILE_SIZE * TILE_MULTIPLIER);
-		else
-			m_playerX += (TILE_SIZE * TILE_MULTIPLIER) * m_deltaTime * m_playerSpeed;
-
-		firstEntered = false;
-
-
-
-		//Animation
-		if (!stepped && m_playerX >= oldX + ((TILE_SIZE * TILE_MULTIPLIER) * (1.0f / 4.0f)))
-		{
-			if (m_rightFoot)
-			{
-				m_renderer.setPlayerAnimation(Direction::RIGHT, SpriteState::STEP1);
-
-				m_rightFoot = false;
-				stepped = true;
-			}
-			else
-			{
-				m_renderer.setPlayerAnimation(Direction::RIGHT, SpriteState::STEP2);
-				m_rightFoot = true;
-				stepped = true;
-			}
-		}
-		else if (m_playerX >= oldX + ((TILE_SIZE * TILE_MULTIPLIER) * (3.0f / 4.0f)))
-		{
-			m_renderer.setPlayerAnimation(Direction::RIGHT, SpriteState::IDLE);
-		}
-
-		m_renderer.setPlayerCoords(m_playerX, m_playerY);
-		m_renderer.onUpdate();
-	}
 }
 
 void GameEngine::setPlayerPosition(int x, int y)
@@ -576,6 +497,122 @@ void GameEngine::setPlayerPosition(int x, int y)
 	}
 
 	m_renderer.setPlayerCoords(m_playerX, m_playerY);
+}
+
+void GameEngine::changeInput(INPUT_EVENT inputEvent)
+{
+	int key = m_input.getKey(inputEvent);
+	
+	if (key == -1)
+		exit(4); //TODO: Standardize Exit Codes
+	
+	int newKey = -1;
+
+	while (newKey == -1)
+	{
+		//TODO: Display That the key is already in use
+		newKey = m_input.getNewInput(key);
+
+		m_renderer.onUpdate();
+	}
+
+	if (newKey < 0)
+	{
+
+		m_input.swapKey(key, (int)abs(newKey));
+		INPUT_EVENT swappedEvent = m_input.getEvent(key);
+
+		switch (inputEvent)
+		{
+		case INPUT_EVENT::MOVE_UP:
+			m_userSettings.up = (int)abs(newKey);
+			break;
+		case INPUT_EVENT::MOVE_DOWN:
+			m_userSettings.down = (int)abs(newKey);
+			break;
+		case INPUT_EVENT::MOVE_LEFT:
+			m_userSettings.left = (int)abs(newKey);
+			break;
+		case INPUT_EVENT::MOVE_RIGHT:
+			m_userSettings.right = (int)abs(newKey);
+			break;
+		case INPUT_EVENT::INTERACT:
+			m_userSettings.interact = (int)abs(newKey);
+		}
+
+		switch (swappedEvent)
+		{
+		case INPUT_EVENT::MOVE_UP:
+			m_userSettings.up = key;
+			break;
+		case INPUT_EVENT::MOVE_DOWN:
+			m_userSettings.down = key;
+			break;
+		case INPUT_EVENT::MOVE_LEFT:
+			m_userSettings.left = key;
+			break;
+		case INPUT_EVENT::MOVE_RIGHT:
+			m_userSettings.right = key;
+			break;
+		case INPUT_EVENT::INTERACT:
+			m_userSettings.interact = key;
+		}
+	}
+	else
+	{
+		m_input.updateKey(key, newKey);
+
+		switch (inputEvent)
+		{
+		case INPUT_EVENT::MOVE_UP:
+			m_userSettings.up = newKey;
+			break;
+		case INPUT_EVENT::MOVE_DOWN:
+			m_userSettings.down = newKey;
+			break;
+		case INPUT_EVENT::MOVE_LEFT:
+			m_userSettings.left = newKey;
+			break;
+		case INPUT_EVENT::MOVE_RIGHT:
+			m_userSettings.right = newKey;
+			break;
+		case INPUT_EVENT::INTERACT:
+			m_userSettings.interact = newKey;
+		}
+	}
+	
+	m_renderer.setUserSettingStrings(keyStrings[m_userSettings.up], keyStrings[m_userSettings.down], keyStrings[m_userSettings.left], keyStrings[m_userSettings.right], keyStrings[m_userSettings.interact]);
+
+	//TODO: Save user Settings
+}
+
+std::vector<animationControls::trainerAnimationPoint> GameEngine::getAnimationPoints(Direction direction, bool jump)
+{
+	std::vector<animationControls::trainerAnimationPoint> animationPoints;
+
+	float firstFrame = (1.0f / 4.0f);
+	float lastFrame = (3.0f / 4.0f);
+
+	if (jump)
+	{
+		firstFrame = (1.0f / 8.0f);
+		lastFrame = (7.0f / 8.0f);
+	}
+
+	if (m_rightFoot)
+	{
+		animationPoints.push_back({ direction, SpriteState::STEP1, firstFrame });
+		m_rightFoot = false;
+	}
+	else
+	{
+		animationPoints.push_back({ direction, SpriteState::STEP2, firstFrame });
+		m_rightFoot = true;
+	}
+
+	animationPoints.push_back({ direction, SpriteState::IDLE, lastFrame });
+
+	return animationPoints;
 }
 
 void GameEngine::turnPlayer(unsigned int direction)
@@ -625,6 +662,8 @@ void GameEngine::transferMaps(unsigned int direction)
 	glm::vec2 playerPosition = m_gameMap.swapMapSections(direction, &m_renderer);
 
 	setPlayerPosition(playerPosition.x, playerPosition.y);
+
+	m_pc.autoSave(m_trainer, m_gameMap.getMapID(), m_gameMap.getPlayerPosition().x, m_gameMap.getPlayerPosition().y, m_playerDirection, m_gameMap.getNptData());
 }
 
 void GameEngine::transferBuilding(bool PokeCenter)
@@ -635,6 +674,7 @@ void GameEngine::transferBuilding(bool PokeCenter)
 		m_pc.setBuildingEvent(Events::pokeCenter);
 
 		setPlayerPosition(playerPosition.x, playerPosition.y);
+		m_pc.autoSave(m_trainer, m_gameMap.getMapID(), m_gameMap.getPlayerPosition().x, m_gameMap.getPlayerPosition().y, m_playerDirection, m_gameMap.getNptData());
 	}
 	else
 	{
@@ -1033,7 +1073,7 @@ void GameEngine::interactNPT()
 
 	onUpdate();
 
-	if (npt.nptResources.hasPokemon())
+	if (npt.hasPokemon())
 		attemptEncounter(false,m_gameMap.getNptID(npt));
 	else
 	{
@@ -1044,7 +1084,7 @@ void GameEngine::interactNPT()
 
 unsigned int GameEngine::selectPokemon(bool swapPokemon)
 {
-
+	//TODO: Use encounters select pokemon
 	bool firstEntered = true;
 
 	unsigned int selectedIndex = 7;

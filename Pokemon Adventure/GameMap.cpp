@@ -35,6 +35,10 @@ std::vector<unsigned int> GameMap::pollEvents()
 	/// 0 - Top Link
 	/// 1 - Bot Link
 	/// U - Cutscene
+	/// V - Jump Down
+	/// ^ - Jump Up
+	/// > - Jump Right
+	/// < - Jump Left
 	///		~ DRAWING MAP ~
 
 	std::vector<unsigned int> events;
@@ -67,15 +71,20 @@ std::vector<unsigned int> GameMap::pollEvents()
 				events.push_back(Events::pokeShop);
 				return events;
 			}
+			if (tileValue == '^')
+			{
+				events.push_back(Events::jumpUp);
+				return events;
+			}
 			if (tileValue == 'G')
 			{
 				events.push_back(Events::inGrass);
 			}
-			if (tileValue != '#' && tileValue != 'N' && tileValue != 'C' && tileValue != 'I' && tileValue != 'M' && tileValue != 'T')
+			if (tileValue != '#' && tileValue != 'N' && tileValue != 'C' && tileValue != 'I' && tileValue != 'M' && tileValue != 'T' && tileValue != 'V' && tileValue != '<' && tileValue != '>')
 			{
 				events.push_back(Events::movedUp);
 			}
-			if (tileValue == '#' || tileValue == 'N' || tileValue == 'C' || tileValue == 'I' || tileValue == 'M' || tileValue == 'T')
+			if (tileValue == '#' || tileValue == 'N' || tileValue == 'C' || tileValue == 'I' || tileValue == 'M' || tileValue == 'T' || tileValue == 'V' || tileValue == '<' || tileValue == '>')
 			{
 				events.push_back(Events::turnUp);
 			}
@@ -105,15 +114,20 @@ std::vector<unsigned int> GameMap::pollEvents()
 			else
 				tileValue = m_currentBuilding.sectionLayout.at(m_yPos - 1).at(m_xPos);
 
+			if (tileValue == 'V')
+			{
+				events.push_back(Events::jumpDown);
+				return events;
+			}
 			if (tileValue == 'G')
 			{
 				events.push_back(Events::inGrass);
 			}
-			if (tileValue != '#' && tileValue != 'T')
+			if (tileValue != '#' && tileValue != 'T' && tileValue != '^' && tileValue != '<' && tileValue != '>')
 			{
 				events.push_back(Events::movedDown);
 			}
-			if (tileValue == '#' || tileValue == 'T')
+			if (tileValue == '#' || tileValue == 'T' || tileValue == '^' || tileValue == '<' || tileValue == '>')
 			{
 				events.push_back(Events::turnDown);
 			}
@@ -138,15 +152,20 @@ std::vector<unsigned int> GameMap::pollEvents()
 			else
 				tileValue = m_currentBuilding.sectionLayout.at(m_yPos).at(m_xPos - 1);
 
+			if (tileValue == '<')
+			{
+				events.push_back(Events::jumpLeft);
+				return events;
+			}
 			if (tileValue == 'G')
 			{
 				events.push_back(Events::inGrass);
 			}
-			if (tileValue != '#' && tileValue != 'T')
+			if (tileValue != '#' && tileValue != 'T' && tileValue != '^' && tileValue != 'V' && tileValue != '>')
 			{
 				events.push_back(Events::movedLeft);
 			}
-			if (tileValue == '#' || tileValue == 'T')
+			if (tileValue == '#' || tileValue == 'T' || tileValue == '^' || tileValue == 'V' || tileValue == '>')
 			{
 				events.push_back(Events::turnLeft);
 			}
@@ -170,15 +189,20 @@ std::vector<unsigned int> GameMap::pollEvents()
 			else
 				tileValue = m_currentBuilding.sectionLayout.at(m_yPos).at(m_xPos + 1);
 
+			if (tileValue == '>')
+			{
+				events.push_back(Events::jumpRight);
+				return events;
+			}
 			if (tileValue == 'G')
 			{
 				events.push_back(Events::inGrass);
 			}
-			if (tileValue != '#' && tileValue != 'T')
+			if (tileValue != '#' && tileValue != 'T' && tileValue != '^' && tileValue != 'V' && tileValue != '<')
 			{
 				events.push_back(Events::movedRight);
 			}
-			if (tileValue == '#' || tileValue == 'T')
+			if (tileValue == '#' || tileValue == 'T' || tileValue == '^' || tileValue == 'V' || tileValue == '<')
 			{
 				events.push_back(Events::turnRight);
 			}
@@ -447,6 +471,10 @@ void GameMap::setupMapSections()
 	/// 0 - Top Link
 	/// 1 - Bot Link
 	/// U - Cutscene
+	/// V - Jump Down
+	/// ^ - Jump Up
+	/// > - Jump Right
+	/// < - Jump Left
 	///		~ DRAWING MAP ~
 
 
@@ -493,7 +521,7 @@ void GameMap::setupMapSections()
 	m_pokeCenter.setPokeCenterSpawn(6, 0);
 
 
-
+	//TODO: Bug if you walk to the bottom of the pokeshop or the bottom of the pokecenter because there is no guard rails lol
 	std::vector<std::string> pokeShopLayout = {
 		"##############",
 		"##############",
@@ -508,8 +536,6 @@ void GameMap::setupMapSections()
 	};
 	m_pokeShop = MapSection("Images/Map/PokeShop.png", 101, 224, 160, pokeShopLayout);
 	m_pokeShop.setPokeShopSpawn(6, 0);
-
-	//TODO: Create entrances for the homes and pokemart
 	
 
 	// Home Village and Route 1
@@ -601,8 +627,11 @@ void GameMap::setupMapSections()
 
 
 	NPT test = NPT("AI", 18, 12, Direction::DOWN, 3);
-	test.nptResources.addedPokemon(test1);
-	test.nptResources.addedPokemon(test2);
+	test.addedPokemon(test1);
+	test.addedPokemon(test2);
+	//test.nptResources.addItem(id_to_item[itemIDs::smallHeal]);
+
+
 	test.setFightText(std::vector<std::string>{"Im testing out my new","Will you be my"}, std::vector<std::string>{"Pokemon","Opponent"});
 	test.setDefaultText(std::vector<std::string>{"Default Text", "Giggga"}, std::vector<std::string>{"for all", "Chad"});
 	test.setCutsceneText(std::vector<std::string>{"Test Top Text 1","Thank god it Works"}, std::vector<std::string>{"Test Bot Text 1","Cutscenes are complete"});
@@ -613,7 +642,17 @@ void GameMap::setupMapSections()
 
 	homeVillage.setCutsceneID(0);
 
-	homeVillage.setCutsceneScript("I0X18Y8U3R1U1L1SS");
+	homeVillage.addToCutScene(cutsceneEvents::AI_INDEX, 0);
+	homeVillage.addToCutScene(cutsceneEvents::SET_X_TILE, 18);
+	homeVillage.addToCutScene(cutsceneEvents::SET_Y_TILE, 8);
+	homeVillage.addToCutScene(cutsceneEvents::MOVE_UP, 3);
+	homeVillage.addToCutScene(cutsceneEvents::MOVE_RIGHT, 1);
+	homeVillage.addToCutScene(cutsceneEvents::MOVE_UP, 1);
+	homeVillage.addToCutScene(cutsceneEvents::MOVE_LEFT, 1);
+	homeVillage.addToCutScene(cutsceneEvents::SPEAK);
+	homeVillage.addToCutScene(cutsceneEvents::SPEAK);
+
+
 	
 	
 	// Small Town and Route 2
@@ -767,7 +806,7 @@ int GameMap::nptSpottedIndex(bool evaluatingEvents)
 		}
 		
 
-		if (!m_allSections.at(m_currentMap).getAI().at(i).nptResources.hasPokemon())
+		if (!m_allSections.at(m_currentMap).getAI().at(i).hasPokemon())
 			return nptIndex;
 
 		for (int d = 1; d <= detectDistance; d++)

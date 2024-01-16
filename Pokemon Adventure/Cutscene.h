@@ -3,26 +3,16 @@
 #include "NPT.h"
 #include "MapSection.h"
 #include "Encounter.h"	//TODO: Remove encounter from here. Its only here because of await click. Await click doesnt even need to be in encounter. Make it global or inside of input
+#include "Animation.h"
 
-namespace cutsceneEvents
-{
-	static unsigned int NONE = 0;
-	static unsigned int INDEX = 1;
-	static unsigned int UP = 2;
-	static unsigned int DOWN = 3;
-	static unsigned int LEFT = 4;
-	static unsigned int RIGHT = 5;
-	static unsigned int SPEAK = 6;
-	static unsigned int SET_X_TILE = 7;
-	static unsigned int SET_Y_TILE = 8;
-}
 
+//TODO: Entire class needs refactoring
 class Cutscene
 {
 public:
 	Cutscene();
 
-	void setup(Renderer* renderer, Encounter* encounter);
+	void setup(Renderer* renderer, Encounter* encounter, bool* fasterText);
 
 	void setCutsceneCount(unsigned int count);
 	unsigned int getCutsceneCount();
@@ -33,11 +23,11 @@ public:
 	
 	void spottedTrainer(NPT& npt, unsigned int trainerTileX, unsigned int trainerTileY);
 	void nptDialogue(NPT& npt);
-	//TODO: Alpha controls for screen transitioning
+	//TODO: Alpha controls for screen transitioning (Fade in scenes - GPU Alpha)
 
 private:
 	bool isCutScene();
-	void evaluateCutscene(unsigned int cutsceneEvent, int value);
+	void evaluateCutscene(std::string cutsceneEvent, int value);
 
 	void moveNPTUp(NPT& npt);
 	void moveNPTDown(NPT& npt);
@@ -62,4 +52,6 @@ private:
 
 	float m_playerSpeed = 4.0f;	//TODO: Make this a pointer to real player speed
 	float m_textWriteSpeed = 5.0f;
+
+	bool* m_fasterText = nullptr;
 };

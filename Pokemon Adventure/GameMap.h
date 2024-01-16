@@ -2,39 +2,44 @@
 #include "MapSection.h"
 #include "SpeciesChart.h"
 
-namespace Events
+static enum Events
 {
-	static unsigned int inGrass			= 0;
+	inGrass,
 
-	static unsigned int movedUp			= 2;
-	static unsigned int movedDown		= 3;
-	static unsigned int movedLeft		= 4;
-	static unsigned int movedRight		= 5;
+	movedUp,
+	movedDown,
+	movedLeft,
+	movedRight,
 
-	static unsigned int turnUp			= 6;
-	static unsigned int turnDown		= 7;
-	static unsigned int turnLeft		= 8;
-	static unsigned int turnRight		= 9;
+	jumpUp,
+	jumpDown,
+	jumpLeft,
+	jumpRight,
 
-	static unsigned int transferUp		= 10;
-	static unsigned int transferDown	= 11;
-	static unsigned int transferLeft	= 12;
-	static unsigned int transferRight	= 13;
+	turnUp,
+	turnDown,
+	turnLeft,
+	turnRight,
 
-	static unsigned int trainerSpotted	= 14;
+	transferUp,
+	transferDown,
+	transferLeft,
+	transferRight,
 
-	static unsigned int pokeCenter		= 15;
-	static unsigned int pokeShop		= 16;
-	static unsigned int returnSection	= 17;
+	trainerSpotted,
 
-	static unsigned int interactPC		= 18;
-	static unsigned int interactNurse	= 19;
-	static unsigned int interactTrainer	= 20;
-	static unsigned int interactItemBuy	= 21;
-	static unsigned int interactMoveBuy	= 22;
+	pokeCenter,
+	pokeShop,
+	returnSection,
 
-	static unsigned int startCutScene	= 23;
-}
+	interactPC,
+	interactNurse,
+	interactTrainer,
+	interactItemBuy,
+	interactMoveBuy,
+
+	startCutScene
+};
 
 class GameMap
 {
