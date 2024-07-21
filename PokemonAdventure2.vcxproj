@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{f512d8e4-3926-4b98-a5b3-60f51bec8e90}</ProjectGuid>
+    <RootNamespace>PokemonAdventure2</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;GLEW_STATIC;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies;$(SolutionDir)vendor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLFW\lib-vc2022;$(SolutionDir)Dependencies\GLEW\lib\Release\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;User32.lib;Gdi32.lib;Shell32.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;GLEW_STATIC;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies;$(SolutionDir)vendor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLFW\lib-vc2022;$(SolutionDir)Dependencies\GLEW\lib\Release\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;User32.lib;Gdi32.lib;Shell32.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Battle\Attack\Attack.h" />
+    <ClInclude Include="src\Battle\BattleAnimations.h" />
+    <ClInclude Include="src\Battle\BattleSimulator.h" />
+    <ClInclude Include="src\Battle\Item\Item.h" />
+    <ClInclude Include="src\Battle\SimulationCommands.h" />
+    <ClInclude Include="src\Battle\Status\Status.h" />
+    <ClInclude Include="src\Characters\CharacterMover.h" />
+    <ClInclude Include="src\Characters\Pokemon\Pokemon.h" />
+    <ClInclude Include="src\Characters\Pokemon\PokemonSpecies.h" />
+    <ClInclude Include="src\Characters\Trainer\ItemStorage.h" />
+    <ClInclude Include="src\Characters\Trainer\NPT.h" />
+    <ClInclude Include="src\Characters\Trainer\Trainer.h" />
+    <ClInclude Include="src\ExternalData\DataManager.h" />
+    <ClInclude Include="src\ExternalData\Logger.h" />
+    <ClInclude Include="src\ExternalData\saveData.h" />
+    <ClInclude Include="src\Game\Game.h" />
+    <ClInclude Include="src\Game\Handlers\EncounterHandler.h" />
+    <ClInclude Include="src\Game\Handlers\InteractionHandler.h" />
+    <ClInclude Include="src\Game\Handlers\PauseHandler.h" />
+    <ClInclude Include="src\Game\Handlers\StartupHandler.h" />
+    <ClInclude Include="src\Game\Input\Input.h" />
+    <ClInclude Include="src\Game\Input\InputData.h" />
+    <ClInclude Include="src\Game\Interactions\Cutscene.h" />
+    <ClInclude Include="src\Game\Interactions\PC.h" />
+    <ClInclude Include="src\Game\Timer.h" />
+    <ClInclude Include="src\GlobalData\globalIDs.h" />
+    <ClInclude Include="src\GlobalData\helperFunctions.h" />
+    <ClInclude Include="src\Graphics\Animator.h" />
+    <ClInclude Include="src\Graphics\Buffers\EBO.h" />
+    <ClInclude Include="src\Graphics\Buffers\VAO.h" />
+    <ClInclude Include="src\Graphics\Buffers\VBO.h" />
+    <ClInclude Include="src\Graphics\Colors.h" />
+    <ClInclude Include="src\Graphics\DialogueRenderer.h" />
+    <ClInclude Include="src\Graphics\PositionalData.h" />
+    <ClInclude Include="src\Graphics\Renderer.h" />
+    <ClInclude Include="src\Graphics\Shader\ShaderClass.h" />
+    <ClInclude Include="src\Graphics\TextData.h" />
+    <ClInclude Include="src\Graphics\TextRenderer.h" />
+    <ClInclude Include="src\Graphics\Texture\Texture.h" />
+    <ClInclude Include="src\Graphics\Texture\TextureLocations.h" />
+    <ClInclude Include="src\Map\MapHandler.h" />
+    <ClInclude Include="src\Map\MapSection.h" />
+    <ClInclude Include="src\Menu\Menu.h" />
+    <ClInclude Include="src\Menu\menuData.h" />
+    <ClInclude Include="src\Menu\Scene.h" />
+    <ClInclude Include="vendor\stb_image.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Battle\Attack\Attack.cpp" />
+    <ClCompile Include="src\Battle\BattleSimulator.cpp" />
+    <ClCompile Include="src\Battle\Item\Item.cpp" />
+    <ClCompile Include="src\Battle\Status\Status.cpp" />
+    <ClCompile Include="src\Characters\CharacterMover.cpp" />
+    <ClCompile Include="src\Characters\Pokemon\Pokemon.cpp" />
+    <ClCompile Include="src\Characters\Trainer\ItemStorage.cpp" />
+    <ClCompile Include="src\Characters\Trainer\Trainer.cpp" />
+    <ClCompile Include="src\ExternalData\DataManager.cpp" />
+    <ClCompile Include="src\Game\Game.cpp" />
+    <ClCompile Include="src\Game\Handlers\EncounterHandler.cpp" />
+    <ClCompile Include="src\Game\Handlers\InteractionHandler.cpp" />
+    <ClCompile Include="src\Game\Handlers\PauseHandler.cpp" />
+    <ClCompile Include="src\Game\Handlers\StartupHandler.cpp" />
+    <ClCompile Include="src\Game\Input\Input.cpp" />
+    <ClCompile Include="src\Game\Interactions\Cutscene.cpp" />
+    <ClCompile Include="src\Game\Interactions\PC.cpp" />
+    <ClCompile Include="src\Graphics\Buffers\EBO.cpp" />
+    <ClCompile Include="src\Graphics\Buffers\VAO.cpp" />
+    <ClCompile Include="src\Graphics\Buffers\VBO.cpp" />
+    <ClCompile Include="src\Graphics\Renderer.cpp" />
+    <ClCompile Include="src\Graphics\Shader\ShaderClass.cpp" />
+    <ClCompile Include="src\Graphics\TextRenderer.cpp" />
+    <ClCompile Include="src\Graphics\Texture\Texture.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Map\MapHandler.cpp" />
+    <ClCompile Include="src\Map\MapSection.cpp" />
+    <ClCompile Include="src\Menu\Menu.cpp" />
+    <ClCompile Include="src\Menu\Scene.cpp" />
+    <ClCompile Include="vendor\stb_image.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\ExternalData\emailScript.py" />
+    <None Include="src\Graphics\Shader\default.frag" />
+    <None Include="src\Graphics\Shader\default.vert" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

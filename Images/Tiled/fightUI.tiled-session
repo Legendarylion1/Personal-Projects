@@ -1,0 +1,32 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "Youtube-logo-vector-PNG.tsx": {
+            "scaleInDock": 0.25,
+            "scaleInEditor": 1
+        }
+    },
+    "last.imagePath": "C:/Users/Torin Middlebrooks/Downloads",
+    "map.height": 563,
+    "map.tileHeight": 1,
+    "map.tileWidth": 1,
+    "map.width": 1000,
+    "openFiles": [
+        "Youtube-logo-vector-PNG.tsx"
+    ],
+    "project": "fightUI.tiled-project",
+    "recentFiles": [
+        "Youtube-logo-vector-PNG.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 100,
+        "width": 100
+    }
+}
