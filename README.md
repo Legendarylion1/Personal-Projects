@@ -1,6 +1,6 @@
 # Personal-Projects
 
-Thanks for coming to check out my projects.Check out my top 3 projects [Pokemon Adventure](#pokemon-adventure), [Dungeon Crawler](#dungeon-crawler), and my [Casino](#casino). These were my favorite projects to work on. I have learned so much over the years and each program in this repository grows in size and complexity. This repository showcases my growing knowledge of object-oriented concepts from coding the casino to my most recent Pokemon project. These three projects boast my hardest coding problems and you get to read about and see my solutions to all of them within their branches.
+My top 3 must-see projects are [Pokemon Adventure](#pokemon-adventure), [Dungeon Crawler](#dungeon-crawler), and my [Casino](#casino). These were my favorite projects that I have worked on. I have learned so much over the years and each program in this repository grows in size and complexity. This repository showcases my growing knowledge of object-oriented concepts from coding the casino to my most recent Pokemon project. These three projects boast my hardest coding problems and you get to read about and see my solutions to all of them within their branches.
 
 ## Projects
 For all of my projects here you can click on the branch below the title or at the top to get more information and to pull the code.
