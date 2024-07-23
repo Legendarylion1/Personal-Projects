@@ -13,7 +13,7 @@ Click the branch link for each project to view the code.
 
 ## Pokemon Adventure
 #### Currently In Development ...
-[Pokemon Game Branch](../Pokemon-Adventure)
+[Pokemon Adventure Branch](../Pokemon-Adventure)
 
 This pokemon game is a large scale refactor of my below pokemon game. There were a lot of things that I worked on to improve this version over the old one with the most notable things highlighted in the branches readme. This is my best work as a software engineer so far, and I have more to add. 
 
