@@ -12,7 +12,7 @@ For all of my projects here you can click on the branch below the title or at th
 - [Casino](#casino)
 
 ## Pokemon Adventure
-#### Currently In Development
+#### Currently In Development ...
 [Pokemon Game Branch](../Pokemon-Adventure)
 
 This pokemon game is a large scale refactor of my below pokemon game. There were a lot of things that I worked on to improve this version over the old one with the most notable things highlighted in the branches readme. This is my best work as a software engineer so far, and I have more to add. 
