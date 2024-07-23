@@ -1,67 +1,49 @@
-# Personal-Projects
+# Pokemon Game
 
-Thanks for coming to check out my projects. In this repository, I have my favorite projects that I have worked on so far. My absolute must-see top 3 projects are my [Pokemon Game](#pokemon-game), [Dungeon Crawler](#dungeon-crawler), and my [Casino](#casino). These were my favorite projects to work on. I have learned so much over the years and each program in this repository grows in size and complexity. This repository showcases my growing knowledge of object-oriented concepts from coding the casino to my most recent Pokemon project. These three projects boast my hardest coding problems and you get to read about and see my solutions to all of them. A lot of my programming is inspired by the outside world, whether it be challenges that I face and I want to program a solution for them, or my friends and I playing a game that I want to try and recreate. The only project that is not in here is a reinforcement-based machine learning project that I am creating to play my Pokemon game. I plan on adding it soon so that you can try my Pokemon game and the AI at the same time. I hope you can feel the love and passion as you read and appreciate my journey as a software engineer alongside me.
-
-## Projects
-For all of my projects here you can click on the branch below the title or at the top to get more information and to pull the code.
-- [Pokemon Game](#pokemon-game)
-- [Dungeon Crawler](#dungeon-crawler)
-- [Chess Game](#chess-game)
-- [Pong Game](#pong-game)
-- [Torin's Hardest Game](#torins-hardest-game)
-- [Casino](#casino)
-
-## Pokemon Game
-#### Work in progress...
-[Pokemon Game Branch](../Pokemon-Game)
-
-This Pokemon game is a really fun project. Recently my friends and I got back into Pokemon Go, and I was inspired to create my own Pokemon game. I am uploading the code as I have it right now, and I do know that there are some spots that I wish to change. I plan on refactoring, making this code spotless and the most beautiful project that I have ever worked on. Currently, there are only three main things to work on. One is the art for the Pokemon and the map. Two is the animations for the attacks of the Pokemon, and three is the cutscenes for the player as they progress through the story. I mainly just have to do the art and directing for the story. I am not a game designer so these things take time, but I will complete this project as I am very determined to do so. This is turning out to be my favorite project so far because I feel that I have really nailed the feel of the old-school Pokemon games. The movement feels really good, and the Pokemon art feels straight out of the game. Please feel free to check out the code. Again thank you for checking out my Pokemon code.
-
-![pokemongif](https://github.com/Legendarylion1/Personal-Projects/assets/74434159/6b69e2d8-7e4a-4a1a-83f7-d1e847e67bb8)
-
-## Dungeon Crawler
-#### Completed May 25, 2023
-[Dungeon Crawler Branch](../Dungeon-Crawler)
-
-This dungeon crawler was a challenging one. I would say that this is the most challenging coding project that I have ever done. The goal was to create an infinite scrolling fighting game that I could play online with my friends. A lot of the code in the project looks weird, but it was designed with multiplayer in mind. I learned a lot of lessons from the project that will be more explained in the branch's readme. This code was so much fun to design because of the numerous challenges that I had to overcome. Solving problems and having to come up with creative solutions is my favorite part of programming. My favorite parts of this project were figuring out how to design the levels, and figuring out the math behind the items and particles. I try not to look up things when I am coding these personal projects so my math is kind of wrong which I go into more detail about, but trying to figure out a solution is the fun part for me. I really enjoy problem solving and I get to share my creative solutions with you. I was doing an internship at Lockheed Martin at the time that I was coding this, so I wasn't able to finish development, but this code gave me the building blocks for my Pokemon Project. I wanted to explore pointers and complex mathematics in this project which I think I did successfully. I left the game in a playable state where you can run around an infinite dungeon and fight enemies, but multiplayer and menu screens were never created. I had SO much fun with this project and I hope you enjoy exploring the complexities of this one.
-
-![Dungeon Crawler Gif](https://github.com/Legendarylion1/Personal-Projects/assets/74434159/92e54f8a-9fde-42c3-86eb-b0de70623514)
+This is a fan-made Pokemon game that I have spent about 4 months programming. This is a large-scale refactor of my other Pokemon game to fix difficulties in rendering and battle limitations. I am very happy with my accomplishments in this program. The renderer class is a lot smaller than what it was before. My previous implementation was designed to be a state machine, which quickly scaled too large to refactor. This new design allows objects to use the renderer themselves so that the renderer does not need to know how to render each object decoupling the two. Meaning that if I need to make changes to the renderer I do not have to update every single object. The second large change that I made was to the battle system. Previously using object-oriented programming I coded it so that the Pokemon owned their attacks. The problem this caused is that now attacks can't take in the opposing Pokemon to do calculations. This becomes a bigger deal when I want to create moves that trigger special abilities depending on the Pokemon it is being used on. In the new system, the Pokemon holds an integer representing the move, and the battle system will know which move is being used based on the integer. This decoupling has been used in many different aspects of my new Pokemon Game. The classes that I am most proud of are my Menu Class, Renderer Class, Animator Class, and Battle Simulator Class. There is still refactoring that needs to be done specifically for the battle simulator class, but I am very proud of the work that I have accomplished so far. Thanks for checking it out. 
 
 
-## Chess Game
-#### Completed April 8, 2023
-[Chess Branch](../Chess)
+## Contents
+   - [How To Build](#how-to-build)
+   - [Challenges and Lessons Learned](#challenges-and-lessons-learned)
+      - [Memory Management](#memory-management)
+      - [Blocking Functions](#blocking-functions)
+      - [Code Organization](#code-organization)
 
-I feel like chess is a right of passage when it comes to being a software engineer. When I look at other people coding on YouTube everyone has made a chess game. So I figured that I would need to make one in Python. I wasn't into chess at the time so I didn't really know how it worked, but I wanted to create a chess game that I could play online with my friends. I coded this project on and off for about a month. I probably put a max of 10 hours into this project. My favorite part about this project is that I was able to host multiple chess games at once on my server. People were able to play in the game and spectators could even join to watch. When I was done coding this project I invited my friends over and we all hopped onto the server to play chess games. We had a good time and the development of this project was also very smooth. After coding this I was inspired to learn chess and I reached 1300 playing 5-minute blitz on chess.com. The idea of creating games with servers was so much fun to me that I decided to learn networking. I have since learned a lot about the different PDUs and protocols involved in networking through school and personal research. I hope in the future to make an online fighting game using what I have learned from this chess game. Thanks for checking out my chess project.
+## Requirements
+* Visual Studio Community
+* Windows
 
-![2023-11-15_13-47-49](https://github.com/Legendarylion1/Personal-Projects/assets/74434159/78c93ac3-9920-4ab2-988a-32e1f6d65842)
+## How to build
+1. Git clone the repository to your local computer
+2. Checkout the Pokemon Game Branch using `git checkout Pokemon-Game`
+3. You will need to run the Visual Studio community solution
+   - The file is "`PokemonAdventure2.sln`"
+4. When you open the solution set the build platform x86 at the top middle
+   - If you are having trouble finding it. It is under that menu tab at the top that says "`Test`"
+   - It is also to the left of the green arrow for the "`Local Windows Debugger`"
+5. Now you can navigate to the build tab at the top middle and select "`build solution`"
+6. This creates an executable for you to run and play the game
+7. You can find the executable in the Debug folder created.
+   - The executable should be named "`PokemonAdventure2.exe`"
+   - Note that the executable needs to be placed in the same directory as the solution
+8. To build and run in debug click the green arrow at the top middle for Local Windows Debugger
+
+## Challenges and Lessons Learned
+Three challenges that are my top priority are memory management, blocking functions, code organization
+
+These challenges are important to any C++ project, but for me they are aspects that I want to master to further myself as a developer. 
 
 
+### Memory Management
+Memory management for this project isn't terrible. The one thing I know that I will get hate for is my use of the new keyword to declare variables without explicitly calling delete. Memory is cleaned up after program executions so I haven't worried about this problem just yet. In the near future I plan on using smart pointers to manage my memory specifically for the Menu class. Almost everything in the Menu class is heap allocated. The button was my first struct created and it utilizes a linked list to reference other buttons on the screen. Therefore I heap allocated the buttons, and I simply repeated the process for the other structs used by the menu. Heap allocation here isn't the end of the world but it’s not necessary. In the future, I plan on stack allocating all that I can unless I need to use the heap for something like object reference in the case of my button.
 
-## Pong Game
-#### Completed Dec 29, 2022
-[Pong Game Branch](../Pong-Game)
 
-This is just a fun project creating pong using openGL32, glfw, and C++. The thing that I can say I learned the most while creating this was abstraction. As I created more things in the project I found myself needing to use similar functionality more often meaning that I should try to refactor my old code to work with the new code that I was trying to write. This led to the creation of the objectRenderer class. I also left up the square renderer class as a look of what I started with but there was a lot of refactoring with this project once I realized what I was doing. Before this project, I coded almost exclusively in Python. I took C++ classes at Princeton when I was younger, but I was trying to create more than a console rock paper scissors. Relearning C++ was a lot of fun and I got to learn more about the resources I have available as well. I didn't realize until this project how much of a skill it is to be able to correctly access a problem and to search for help online. Using these resources I got to learn a lot about C++ which I planned on using in my future projects. I hope you enjoy a look at my first steps back into C++.
-
-![pong gif](https://github.com/Legendarylion1/Personal-Projects/assets/74434159/2436ceb9-5410-40c3-9aeb-ae9ce2fea170)
+### Blocking Functions
+Blocking functions have become a recent pain point for me. I recently added animations to my game, and some animations can be canceled with a button click handled in the input class. This means that both functions need to be checked at the same time. I could remedy this by having both functions be non-blocking in a loop or thread both functions. In another project, I will thread the renderer, but in this project, I decided to make the functions non-blocking so that both can render and check for input. I wish I thought of this as a design point when I was first creating the game because it would make my code a lot simpler to have an API call to the renderer. Then it would run an animation in another thread using the renderer while I check for input in the main thread. Small things like this are bound to pop up as I increase in scope and complexity, and it helps me know what to consider when I am programming in the future. Another notable point where I "coded myself into a corner" was with the battle simulator. I originally coded the battle simulator to be text-based and then added the renderer to it later. However, I did not yet conceive of the menu class that I would later use in the battle simulator. So the Menu class has code that specifically addresses the battle simulator that shouldn't be there due to the battle simulator not knowing it had to be non-blocking.
 
 
 
-## Torin's Hardest Game
-#### Completed Dec 25, 2021
-[Torin's Hardest Game Branch](../Torins-Hardest-Game)
 
-For this project, I wanted to try my best to complete an original game idea working about 3 hours a day in the 4 days leading up to Christmas. I wanted to make a game for my friends and I to speedrun, and it worked out pretty well for the time spent on it.  The file system from my casino game was being abused by my friends so I changed how that worked as well as the login in general. The attempt counter doesn't work as intended, but I ran out of time to debug that problem. The main point of the game is to try and complete it as fast as possible. Also, another part of the game is that I am not supposed to explain to you how to play. So have fun, and don't cheat! The fastest time to complete every single level was set by my friend Tobiah, who did it in 6 seconds. He did cheat, but I'm not going to let my faulty code take away from his win.
-
-Sorry, but I'm not going to show you the game here. You should play it for yourself, and figure out how it works. Part of the rules of the game is that I can't explain the rules of the game. Have fun :)
-
-## Casino
-#### Completed Sept 13, 2021
-[Casino Branch](../Casino)
-
-This casino project was inspired by a trip I took with my grandma to the casinos. I don’t know much about gambling but every time I saw the spin on the digital computer screen I thought to myself. I think I can do that. I would brainstorm the entire trip home, and then I got to work. I had a fun time completing that project. Writing this description a year later I can look back on the project and say that I wish I had used classes a lot more. It would've saved me so much time and headache. In “casinoBack.py” the spin function is 600 lines longer than it needs to be if I had just used a class, but that comes with learning. Again, thanks for supporting my journey as a programmer.
-
-
-![casinogif](https://github.com/Legendarylion1/Personal-Projects/assets/74434159/fdac9a95-00f6-4b53-90b5-bd55d0dce8ec)
-
+### Code Organization
+Code organization for this project is going really well. I have a lot of classes that all follow the single responsibility principle for design. Code organization was something that I tried to pay a lot of attention to when developing this project. The only class that I think doesn't directly adhere to this structure is once again the battle simulator. I should have taken more time with the design of the battle simulator so that I could appropriately break up its code. The idea for the battle simulator is that it works in three stages. Stage one is to get the user and AI input. Stage two is to generate all of the battle data for the simulation. Stage three is to simulate the battle for the user to see. I should have broken up these stages into their own separate classes. This would help a lot with debugging the project and testing while also shrinking the class considerably. When I refactor the battle simulator this will be my main focus. The battle simulator technically does what it is supposed to but I do not think the code is clean enough to represent me as a developer so I will have to refactor it.
