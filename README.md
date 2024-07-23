@@ -3,7 +3,7 @@
 My top 3 must-see projects are [Pokemon Adventure](#pokemon-adventure), [Dungeon Crawler](#dungeon-crawler), and my [Casino](#casino). These were my favorite projects that I have worked on. I have learned so much over the years and each program in this repository grows in size and complexity. This repository showcases my growing knowledge of object-oriented concepts from coding the casino to my most recent Pokemon project. These three projects boast my hardest coding problems and you get to read about and see my solutions to all of them by clicking the links to their branches.
 
 ## Projects
-For all of my projects here you can click on the branch below the title or at the top to get more information and to pull the code.
+Click the branch link for each project to view the code.
 - [Pokemon Game](#pokemon-game)
 - [Dungeon Crawler](#dungeon-crawler)
 - [Chess Game](#chess-game)
