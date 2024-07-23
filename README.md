@@ -1,6 +1,6 @@
 # Personal-Projects
 
-Thanks for coming to check out my projects. In this repository, I have my favorite projects that I have worked on so far. My absolute must-see top 3 projects are my [Pokemon Game](#pokemon-game), [Dungeon Crawler](#dungeon-crawler), and my [Casino](#casino). These were my favorite projects to work on. I have learned so much over the years and each program in this repository grows in size and complexity. This repository showcases my growing knowledge of object-oriented concepts from coding the casino to my most recent Pokemon project. These three projects boast my hardest coding problems and you get to read about and see my solutions to all of them. A lot of my programming is inspired by the outside world, whether it be challenges that I face and I want to program a solution for them, or my friends and I playing a game that I want to try and recreate. The only project that is not in here is a reinforcement-based machine learning project that I am creating to play my Pokemon game. I plan on adding it soon so that you can try my Pokemon game and the AI at the same time. I hope you can feel the love and passion as you read and appreciate my journey as a software engineer alongside me.
+Thanks for coming to check out my projects.Check out my top 3 projects [Pokemon Adventure](#pokemon-adventure), [Dungeon Crawler](#dungeon-crawler), and my [Casino](#casino). These were my favorite projects to work on. I have learned so much over the years and each program in this repository grows in size and complexity. This repository showcases my growing knowledge of object-oriented concepts from coding the casino to my most recent Pokemon project. These three projects boast my hardest coding problems and you get to read about and see my solutions to all of them within their branches.
 
 ## Projects
 For all of my projects here you can click on the branch below the title or at the top to get more information and to pull the code.
@@ -11,8 +11,14 @@ For all of my projects here you can click on the branch below the title or at th
 - [Torin's Hardest Game](#torins-hardest-game)
 - [Casino](#casino)
 
+## Pokemon Adventure
+#### Currently In Development
+[Pokemon Game Branch](../Pokemon-Adventure)
+
+This pokemon game is a large scale refactor of my below pokemon game. There were a lot of things that I worked on to improve this version over the old one with the most notable things highlighted in the branches readme. This is my best work as a software engineer so far, and I have more to add. 
+
 ## Pokemon Game
-#### Work in progress...
+#### Completed March 16, 2024
 [Pokemon Game Branch](../Pokemon-Game)
 
 This Pokemon game is a really fun project. Recently my friends and I got back into Pokemon Go, and I was inspired to create my own Pokemon game. I am uploading the code as I have it right now, and I do know that there are some spots that I wish to change. I plan on refactoring, making this code spotless and the most beautiful project that I have ever worked on. Currently, there are only three main things to work on. One is the art for the Pokemon and the map. Two is the animations for the attacks of the Pokemon, and three is the cutscenes for the player as they progress through the story. I mainly just have to do the art and directing for the story. I am not a game designer so these things take time, but I will complete this project as I am very determined to do so. This is turning out to be my favorite project so far because I feel that I have really nailed the feel of the old-school Pokemon games. The movement feels really good, and the Pokemon art feels straight out of the game. Please feel free to check out the code. Again thank you for checking out my Pokemon code.
