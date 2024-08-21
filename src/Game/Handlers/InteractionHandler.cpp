@@ -1,12 +1,14 @@
 #include "InteractionHandler.h"
 
-void InteractionHandler::setup(Trainer* player, MapHandler* mapHandler, Menu* menu, PC* pc, BattleSimulator* battleSimulator)
+void InteractionHandler::setup(Trainer* player, MapHandler* mapHandler, Menu* menu, PC* pc, Battle* battleSimulator, DialogueRenderer* dialogueRenderer, Renderer* renderer)
 {
 	m_player = player;
 	m_mapHandler = mapHandler;
 	m_menu = menu;
 	m_pc = pc;
 	m_battleSimulator = battleSimulator;
+	m_dialogueRenderer = dialogueRenderer;
+	m_renderer = renderer;
 
 	m_menu->setupInteractionData(&m_availableItems, &m_playerBalance);
 }
@@ -112,11 +114,10 @@ void InteractionHandler::aiInteraction(Coordinate aiPosition)
 
 	NPT* ai = m_mapHandler->getAI(aiPosition);
 
+	turnAIToPlayer(ai);
+
 	for (Dialogue dialogue : ai->getDialogue())
-	{
-		std::cout << dialogue.topLine << "\n" << dialogue.botLine << std::endl;
-		system("pause");
-	}
+		renderDialogue(dialogue.topLine, dialogue.botLine, true);
 
 	if (ai == nullptr)
 	{
@@ -130,15 +131,9 @@ void InteractionHandler::aiInteraction(Coordinate aiPosition)
 		m_battleSimulator->beginBattle(ai);
 
 
-		//Check the winner
-
-		//If the winner is AI then white out
-
-		//If the winner is player then mark the AI as unable to fight. Maybe mark the AI in battle sim
-
 		if (m_player->unableToBattle())
 		{
-			//Handle White out. Maybe set a flag for the game to handle white out 
+			//TODO: Handle White out. Maybe set a flag for the game to handle white out 
 		}
 	}
 
@@ -196,4 +191,36 @@ void InteractionHandler::purchaseItem(int index)
 		m_player->addItem(id);
 	}
 
+}
+
+void InteractionHandler::turnAIToPlayer(NPT* npt)
+{
+	switch (m_player->position.direction)
+	{
+	case Direction::UP:
+		npt->position.direction = Direction::DOWN;
+		break;
+	case Direction::DOWN:
+		npt->position.direction = Direction::UP;
+		break;
+	case Direction::LEFT:
+		npt->position.direction = Direction::RIGHT;
+		break;
+	case Direction::RIGHT:
+		npt->position.direction = Direction::LEFT;
+		break;
+	}
+}
+
+void InteractionHandler::renderDialogue(std::string topLine, std::string botLine, bool awaitClick)
+{
+	m_dialogueRenderer->setDialogue(topLine, botLine, awaitClick);
+
+	while (m_dialogueRenderer->rendereringDialogue())
+	{
+		m_mapHandler->onUpdate();
+		m_player->onUpdate(m_renderer);
+		m_dialogueRenderer->renderDialogue();
+		m_renderer->onUpdate();
+	}
 }

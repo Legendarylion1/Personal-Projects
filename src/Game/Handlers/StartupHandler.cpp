@@ -55,6 +55,7 @@ void StartupHandler::playIntro()
 		
 	}
 
+
 	// Fade Out from Intro Links
 	{
 		m_animator->setAnimation(Animation::FADE_OUT);
@@ -142,10 +143,10 @@ void StartupHandler::playIntro()
 	}
 
 	m_animator->unloadAnimations({ Animation::LEGENDARY_STUDIO, Animation::FADE_IN, Animation::FADE_OUT, Animation::LEGENDARY_POKEMON });
+	//TODO: Load these as items when they are in the players bag. Unload when they arent. Loading it here for testing purposes
+	// Player Moves and item animations need to be loaded before they are used. Im not sure how to do that besides pre loading everything
 	m_animator->loadAnimations({ Animation::THROW_POKEBALL, Animation::THROW_GREATBALL, Animation::THROW_ULTRABALL, Animation::THROW_MASTERBALL, Animation::ESCAPE_POKEBALL, Animation::ESCAPE_GREATBALL, Animation::ESCAPE_ULTRABALL, Animation::ESCAPE_MASTERBALL, Animation::XP_GAIN, Animation::XP_LEVEL_UP_UI });
 
-	//TODO: Load these as items when they are in the players bag. Unload when they arent. Loading it here for testing purposes
-	
 
 	m_menu->postRun();
 	m_menu->setCanLeave(true);

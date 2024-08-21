@@ -11,7 +11,7 @@ void PauseHandler::setup(Menu* menu, Trainer* player, Input* input, DataManager*
 	m_timer = timer;
 	m_rosterData = rosterData;
 
-	m_menu->setupPauseData(&m_items, &m_playerBalance, &m_playTime, m_rosterData, &m_badgeData, &m_pauseSettingData);
+	m_menu->setupPauseData(&m_items, &m_pauseMenuData, m_rosterData, &m_pauseSettingData);
 }
 
 void PauseHandler::run()
@@ -22,8 +22,12 @@ void PauseHandler::run()
 	m_menu->setRequestedData(&m_selection);
 	m_menu->preRun();
 
-	m_playerBalance = std::to_string(m_player->getBalance());
-	m_playTime = m_timer->getPlayTimeDisplay();
+	m_pauseMenuData.playerBalance = std::to_string(m_player->getBalance());
+	m_pauseMenuData.playTime = m_timer->getPlayTimeDisplay();
+
+	//m_playerBalance = std::to_string(m_player->getBalance());
+	//m_playTime = m_timer->getPlayTimeDisplay();
+
 	setBadgeVisibility();
 
 	while (true)
@@ -33,6 +37,16 @@ void PauseHandler::run()
 
 		if (m_menu->leaveRequested())
 			break;
+
+		if (m_menu->getButtonIndex() == 1)
+			m_pauseMenuData.pokedexHighlightVisible = true;
+		else if (m_menu->getButtonIndex() == 2)
+			m_pauseMenuData.mapHighlightVisible = true;
+		else
+		{
+			m_pauseMenuData.pokedexHighlightVisible = false;
+			m_pauseMenuData.mapHighlightVisible = false;
+		}
 
 		if (m_selection != NONE)
 		{
@@ -597,21 +611,21 @@ void PauseHandler::setBadgeVisibility()
 	switch (m_player->getBadgeCount())
 	{
 	case 8:
-		m_badgeData.dragonBadgeVisibility = true;
+		m_pauseMenuData.badgeData.dragonBadgeVisibility = true;
 	case 7:
-		m_badgeData.waterBadgeVisibility = true;
+		m_pauseMenuData.badgeData.waterBadgeVisibility = true;
 	case 6:
-		m_badgeData.rockBadgeVisibility = true;
+		m_pauseMenuData.badgeData.rockBadgeVisibility = true;
 	case 5:
-		m_badgeData.normalBadgeVisibility = true;
+		m_pauseMenuData.badgeData.normalBadgeVisibility = true;
 	case 4:
-		m_badgeData.iceBadgeVisibility = true;
+		m_pauseMenuData.badgeData.iceBadgeVisibility = true;
 	case 3:
-		m_badgeData.grassBadgeVisibility = true;
+		m_pauseMenuData.badgeData.grassBadgeVisibility = true;
 	case 2:
-		m_badgeData.flyingBadgeVisibility = true;
+		m_pauseMenuData.badgeData.flyingBadgeVisibility = true;
 	case 1:
-		m_badgeData.fireBadgeVisibility = true;
+		m_pauseMenuData.badgeData.fireBadgeVisibility = true;
 		break;
 	default:
 		break;

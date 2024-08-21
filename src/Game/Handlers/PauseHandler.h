@@ -44,6 +44,8 @@ private:
 	CharacterMover* m_characterMover = nullptr;
 	Timer* m_timer = nullptr;
 
+	PauseMenuData m_pauseMenuData;
+
 	PokemonStringData m_pokemonStringData;	//TODO: Replace
 	TrainerBadgeData m_badgeData;
 	PausePokemonData m_pausePokemonData;

@@ -18,8 +18,9 @@ Game::Game()
 	m_input.setup(m_renderer.getWindow(), m_pauseHandler.getPauseSettingData());
 	m_menu.setup(&m_inputVariables, &m_renderer);
 	m_dataManager.setup(&m_player, &m_pc, &m_mapHandler, &m_input, &m_renderer, &m_timer, &m_characterMover);
+	m_battlesimulator.setup(&m_player, &m_menu, &m_rosterData, &m_dialogueRenderer, &m_animator, &m_renderer, &m_input, &m_timer);
 	m_encounterHandler.setup(&m_battlesimulator, &m_mapHandler, &m_player, &m_pc, &m_menu, &m_characterMover, &m_rosterData, &m_dialogueRenderer, &m_animator, &m_renderer, &m_input, &m_timer);
-	m_interactionHandler.setup(&m_player, &m_mapHandler, &m_menu, &m_pc, &m_battlesimulator);
+	m_interactionHandler.setup(&m_player, &m_mapHandler, &m_menu, &m_pc, &m_battlesimulator, &m_dialogueRenderer, &m_renderer);
 	m_pauseHandler.setup(&m_menu, &m_player, &m_input, &m_dataManager, &m_renderer, &m_characterMover, &m_timer, &m_rosterData);
 	m_dialogueRenderer.setup(&m_menu, &m_input, &m_timer);	//TODO: Remove Timer From classes that dont need it
 	m_mapHandler.setup();

@@ -19,7 +19,7 @@ void Scene::goUp()
 	if (m_buttons.size() == 0)
 		return;
 
-	if (buttonVisible(m_buttons.at(m_currentButtonIndex)->up))
+	if (buttonActive(m_buttons.at(m_currentButtonIndex)->up))
 		m_currentButtonIndex = m_buttons.at(m_currentButtonIndex)->up->index;
 }
 
@@ -28,7 +28,7 @@ void Scene::goDown()
 	if (m_buttons.size() == 0)
 		return;
 
-	if (buttonVisible(m_buttons.at(m_currentButtonIndex)->down))
+	if (buttonActive(m_buttons.at(m_currentButtonIndex)->down))
 		m_currentButtonIndex = m_buttons.at(m_currentButtonIndex)->down->index;
 }
 
@@ -37,7 +37,7 @@ void Scene::goLeft()
 	if (m_buttons.size() == 0)
 		return;
 
-	if (buttonVisible(m_buttons.at(m_currentButtonIndex)->left))
+	if (buttonActive(m_buttons.at(m_currentButtonIndex)->left))
 		m_currentButtonIndex = m_buttons.at(m_currentButtonIndex)->left->index;
 }
 
@@ -46,7 +46,7 @@ void Scene::goRight()
 	if (m_buttons.size() == 0)
 		return;
 
-	if (buttonVisible(m_buttons.at(m_currentButtonIndex)->right))
+	if (buttonActive(m_buttons.at(m_currentButtonIndex)->right))
 		m_currentButtonIndex = m_buttons.at(m_currentButtonIndex)->right->index;
 }
 
@@ -79,7 +79,10 @@ void Scene::onUpdate(bool renderBackground)
 
 	for (Button* button : m_buttons)
 	{
-		if (!buttonVisible(button))
+		if (!buttonActive(button))
+			continue;
+
+		if (button->renderData.visible != nullptr && *button->renderData.visible == false)
 			continue;
 
 		std::string text = button->text;
@@ -119,15 +122,15 @@ void Scene::onUpdate(bool renderBackground)
 		return;
 }
 
-bool Scene::buttonVisible(Button* button)
+bool Scene::buttonActive(Button* button)
 {
 	if (button == nullptr)
 		return false;
 
-	if (button->visible == nullptr)
+	if (button->active == nullptr)
 		return true;
 
-	if (*button->visible == false)
+	if (*button->active == false)
 		return false;
 
 	return true;

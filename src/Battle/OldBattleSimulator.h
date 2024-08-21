@@ -9,9 +9,25 @@
 #include "../Graphics/Animator.h"
 #include "BattleAnimations.h"
 
-//NOTE: I really want to pull out generate Simulation data and run simnulation data into seperate classes, but the data is so coupled that it looks ugly to me. In the future I will come back and seperate these components <3
 
-class BattleSimulator
+///	===============================================================
+/// 
+///					~ Deprecated Code ~	
+/// 
+///	This class has been completely refactored and renamed to Battle
+/// The new file is Battle.h
+/// 
+/// I am keeping this file here as reference for my Battle Class
+/// 
+/// This class will be deleted eventually, but I want to spend some
+/// time to make sure that everything in here has been transfererd
+/// 
+/// Currently Battle.h has more functionality than this class, but
+/// just in case this file will be kept for reference
+/// 
+/// ===============================================================
+
+class OldBattleSimulator
 {
 public:
 	void setup(Trainer* trainer, Menu* menu, RosterDisplayData* rosterData, DialogueRenderer* dialogueRenderer, Animator* animator, Input* input, Timer* timer);
@@ -94,7 +110,6 @@ private:
 	void adjustPokemonDisplay(SelectedUser user);
 	void adjustHealthPercentage(SelectedUser user);
 	void adjustXPPercentage();
-
 	bool validItemSelection(int selection);
 
 private:

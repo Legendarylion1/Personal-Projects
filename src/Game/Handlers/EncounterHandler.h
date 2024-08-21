@@ -3,16 +3,16 @@
 #include "../../Graphics/PositionalData.h"
 #include "../../Characters/Trainer/NPT.h"
 #include "../../Characters/Pokemon/Pokemon.h"
-#include "../../Battle/BattleSimulator.h"
 #include "../../Characters/CharacterMover.h"
 #include "../Interactions/PC.h"
+#include "../../Battle/Battle.h"
 
 class EncounterHandler
 {
 public:
 	EncounterHandler() {};
 
-	void setup(BattleSimulator* battleSimulator, MapHandler* mapHandler, Trainer* trainer, PC* pc, Menu* menu, CharacterMover* characterMover, RosterDisplayData* rosterData, DialogueRenderer* dialogueRenderer, Animator* animator, Renderer* renderer, Input* input, Timer* timer);
+	void setup(Battle* battleSimulator, MapHandler* mapHandler, Trainer* trainer, PC* pc, Menu* menu, CharacterMover* characterMover, RosterDisplayData* rosterData, DialogueRenderer* dialogueRenderer, Animator* animator, Renderer* renderer, Input* input, Timer* timer);
 
 	void onUpdate();
 private:
@@ -30,7 +30,7 @@ private:
 
 private:
 
-	BattleSimulator* m_battleSim = nullptr;
+	Battle* m_battleSim = nullptr;
 	CharacterMover* m_characterMover = nullptr;
 	Trainer* m_player = nullptr;
 	PC* m_pc = nullptr;

@@ -24,7 +24,9 @@ enum class MenuScene
 	BATTLE_ROSTER,
 	BATTLE_ITEMS,
 	SET_PLAYER_NAME,
-	PROFESSOR_M
+	PROFESSOR_M,
+	LEARN_MOVE,
+	EVOLUTION
 };
 
 enum class MenuOverlay	//TODO: Page For Menu Data
@@ -41,7 +43,12 @@ enum class MenuOverlay	//TODO: Page For Menu Data
 	RESOLUTION_SELECTION,
 	CHANGE_INPUT,
 	LEVEL_UP_STAT_CHANGE,
-	LEVEL_UP_STAT_VALUE
+	LEVEL_UP_STAT_VALUE,
+	SWAP_POKEMON_QUESTION,
+	MOVE_OUTLINE,
+	LEARN_MOVE,
+	POKEDEX_OUTLINE,
+	MAP_OUTLINE
 };
 
 static std::unordered_map<CharacterID, std::string> g_CharacterTextureLocations = {
@@ -89,6 +96,8 @@ static std::unordered_map<MenuScene, std::string> g_sceneTextureLocations = {
 	{MenuScene::PAUSE_MENU, "Images/Backgrounds/Scenes/pauseMenu.png" },
 	{MenuScene::PAUSE_SETTINGS, "Images/Backgrounds/Scenes/settings.png" },
 	{MenuScene::BATTLE_ITEMS, "Images/Backgrounds/Scenes/battle_items.png" },
+	{MenuScene::LEARN_MOVE, "Images/Backgrounds/Scenes/learnMove.png" },
+	{MenuScene::EVOLUTION, "Images/Backgrounds/Scenes/evolution.png" },
 };
 
 static std::unordered_map<MenuOverlay, std::string> g_overlayTextureLocations ={
@@ -98,6 +107,9 @@ static std::unordered_map<MenuOverlay, std::string> g_overlayTextureLocations ={
 	{MenuOverlay::IMAGE_FRAME, "Images/Backgrounds/overlays/imageFrame.png"},
 	{MenuOverlay::LEVEL_UP_STAT_CHANGE, "Images/Backgrounds/overlays/levelUp.png"},
 	{MenuOverlay::LEVEL_UP_STAT_VALUE, "Images/Backgrounds/overlays/levelUp.png"},
+	{MenuOverlay::MOVE_OUTLINE, "Images/Backgrounds/overlays/moveOutline.png"},
+	{MenuOverlay::POKEDEX_OUTLINE, "Images/Backgrounds/overlays/pokedexOverlay.png"},
+	{MenuOverlay::MAP_OUTLINE, "Images/Backgrounds/overlays/mapOverlay.png"},
 };
 
 static std::string pokemonFrontTexture(std::string pokemonName)

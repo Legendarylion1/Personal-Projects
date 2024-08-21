@@ -146,9 +146,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Battle\Attack\Attack.h" />
+    <ClInclude Include="src\Battle\Battle.h" />
     <ClInclude Include="src\Battle\BattleAnimations.h" />
-    <ClInclude Include="src\Battle\BattleSimulator.h" />
+    <ClInclude Include="src\Battle\BattleFunctions\BattleAction.h" />
+    <ClInclude Include="src\Battle\BattleFunctions\BattleDataGenerator.h" />
+    <ClInclude Include="src\Battle\BattleFunctions\BattleDataSimulator.h" />
+    <ClInclude Include="src\Battle\BattleFunctions\BattleMenuGraphics.h" />
+    <ClInclude Include="src\Battle\BattleFunctions\BattleExperience.h" />
     <ClInclude Include="src\Battle\Item\Item.h" />
+    <ClInclude Include="src\Battle\OldBattleSimulator.h" />
     <ClInclude Include="src\Battle\SimulationCommands.h" />
     <ClInclude Include="src\Battle\Status\Status.h" />
     <ClInclude Include="src\Characters\CharacterMover.h" />
@@ -194,8 +200,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Battle\Attack\Attack.cpp" />
-    <ClCompile Include="src\Battle\BattleSimulator.cpp" />
+    <ClCompile Include="src\Battle\Battle.cpp" />
+    <ClCompile Include="src\Battle\BattleFunctions\BattleExperience.cpp" />
+    <ClCompile Include="src\Battle\BattleFunctions\BattleAction.cpp" />
+    <ClCompile Include="src\Battle\BattleFunctions\BattleDataGenerator.cpp" />
+    <ClCompile Include="src\Battle\BattleFunctions\BattleDataSimulator.cpp" />
+    <ClCompile Include="src\Battle\BattleFunctions\BattleMenuGraphics.cpp" />
     <ClCompile Include="src\Battle\Item\Item.cpp" />
+    <ClCompile Include="src\Battle\OldBattleSimulator.cpp" />
     <ClCompile Include="src\Battle\Status\Status.cpp" />
     <ClCompile Include="src\Characters\CharacterMover.cpp" />
     <ClCompile Include="src\Characters\Pokemon\Pokemon.cpp" />

@@ -201,6 +201,8 @@ static void formatMoveStringData(Pokemon displayPokemon, RosterDisplayData* data
 
 	if (moveIndex == 1)
 	{
+		//MoveStringData* data
+
 		attack = getAttackFromID(displayPokemon.getMoveset().move1);
 		move = &data->pausePokemonData.move1;
 		move->currentPP = std::to_string(displayPokemon.getMoveset().move1pp);
@@ -228,14 +230,14 @@ static void formatMoveStringData(Pokemon displayPokemon, RosterDisplayData* data
 	{
 		move->moveName = attack->getName();
 		move->maxPP = std::to_string(attack->getPP());
-		move->moveTextureLocation = g_typeTextureLocations[attack->getType()];
+		move->moveTypeTextureLocation = g_typeTextureLocations[attack->getType()];
 	}
 	else
 	{
 		move->moveName = "NONE";
 		move->currentPP = "0";
 		move->maxPP = "NONE";
-		move->moveTextureLocation = "";
+		move->moveTypeTextureLocation = "";
 	}
 }
 

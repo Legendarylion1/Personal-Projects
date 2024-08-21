@@ -42,9 +42,6 @@
     <ClInclude Include="src\Battle\Status\Status.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Battle\BattleSimulator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Battle\SimulationCommands.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -156,6 +153,27 @@
     <ClInclude Include="src\Game\Interactions\PC.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Battle\OldBattleSimulator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Battle\Battle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Battle\BattleFunctions\BattleAction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Battle\BattleFunctions\BattleDataGenerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Battle\BattleFunctions\BattleDataSimulator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Battle\BattleFunctions\BattleMenuGraphics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Battle\BattleFunctions\BattleExperience.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="vendor\stb_image.cpp">
@@ -177,9 +195,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Battle\Status\Status.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Battle\BattleSimulator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Characters\Pokemon\Pokemon.cpp">
@@ -246,6 +261,27 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Game\Interactions\PC.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Battle\OldBattleSimulator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Battle\Battle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Battle\BattleFunctions\BattleDataSimulator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Battle\BattleFunctions\BattleDataGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Battle\BattleFunctions\BattleAction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Battle\BattleFunctions\BattleMenuGraphics.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Battle\BattleFunctions\BattleExperience.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

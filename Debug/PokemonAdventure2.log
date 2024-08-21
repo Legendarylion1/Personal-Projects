@@ -1,5 +1,6 @@
-﻿  stb_image.cpp
-LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
-LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
-glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'V:\GitHub Stuff and Things\Laptop-PC-Link\PokemonAdventure2\Debug\vc120.pdb'; linking object as if no debug info
+﻿  PauseHandler.cpp
+  Menu.cpp
+V:\GitHub Stuff and Things\Laptop-PC-Link\PokemonAdventure2\src\Menu\Menu.cpp(1429,35): warning C4305: 'initializing': truncation from 'double' to 'float'
+  Generating Code...
+V:\GitHub Stuff and Things\Laptop-PC-Link\PokemonAdventure2\src\Battle\Item\Item.h(109): warning C4715: 'getItemFromID': not all control paths return a value
   PokemonAdventure2.vcxproj -> V:\GitHub Stuff and Things\Laptop-PC-Link\PokemonAdventure2\Debug\PokemonAdventure2.exe

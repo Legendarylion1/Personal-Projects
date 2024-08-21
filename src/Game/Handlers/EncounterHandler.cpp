@@ -7,7 +7,7 @@
 //	m_battleSim.setup(trainer, menu, rosterData);
 //}
 
-void EncounterHandler::setup(BattleSimulator* battleSimulator, MapHandler* mapHandler, Trainer* trainer, PC* pc, Menu* menu, CharacterMover* characterMover, RosterDisplayData* rosterData, DialogueRenderer* dialogueRenderer, Animator* animator, Renderer* renderer, Input* input, Timer* timer)
+void EncounterHandler::setup(Battle* battleSimulator, MapHandler* mapHandler, Trainer* trainer, PC* pc, Menu* menu, CharacterMover* characterMover, RosterDisplayData* rosterData, DialogueRenderer* dialogueRenderer, Animator* animator, Renderer* renderer, Input* input, Timer* timer)
 {
 	m_mapHandler = mapHandler;
 	m_player = trainer;
@@ -20,7 +20,6 @@ void EncounterHandler::setup(BattleSimulator* battleSimulator, MapHandler* mapHa
 	m_dialogueRenderer = dialogueRenderer;
 
 	m_battleSim = battleSimulator;
-	m_battleSim->setup(trainer, menu, rosterData, dialogueRenderer, animator, input, timer);	//TODO: Setup Battle sim externally like everything else
 }
 
 void EncounterHandler::onUpdate()

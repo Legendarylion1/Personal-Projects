@@ -47,8 +47,10 @@ public:
 
 	std::vector<Dialogue> getDialogue()
 	{
-		if (wantsToBattle())
+		if (wantsToBattle() && !unableToBattle())
 			return m_battleDialogue;
+		else if (wantsToBattle() && unableToBattle())
+			return m_postDefeatDialogue;
 
 		return m_normalConversation;
 	}
@@ -57,6 +59,7 @@ public:
 
 	void addBattleDialogue(Dialogue dialogue) { m_battleDialogue.push_back(dialogue); };
 	void addNormalDialogue(Dialogue dialogue) { m_normalConversation.push_back(dialogue); };
+	void addDefeatDialogue(Dialogue dialogue) { m_postDefeatDialogue.push_back(dialogue); };
 	void addScriptInstruction(CharacterMoveDirections instruction) { m_script.push_back(instruction); };
 
 	void removeItem(ItemID item)
@@ -111,6 +114,7 @@ private:
 
 	std::vector<Dialogue> m_battleDialogue;
 	std::vector<Dialogue> m_normalConversation;
+	std::vector<Dialogue> m_postDefeatDialogue;
 
 	std::vector<CharacterMoveDirections> m_script;
 };

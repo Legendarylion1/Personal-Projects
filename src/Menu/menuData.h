@@ -75,7 +75,7 @@ struct MoveStringData
 	std::string moveName;
 	std::string currentPP;
 	std::string maxPP;
-	std::string moveTextureLocation;
+	std::string moveTypeTextureLocation;	//TODO: Rename to move type
 };
 
 struct PausePokemonData
@@ -98,6 +98,33 @@ struct PausePokemonData
 	MoveStringData move2;
 	MoveStringData move3;
 	MoveStringData move4;
+};
+
+struct LearnMoveData
+{
+	MoveStringData move1;
+	MoveStringData move2;
+	MoveStringData move3;
+	MoveStringData move4;
+
+	MoveStringData newMove;
+
+	std::string power;
+	std::string accuracy;
+	std::string description;
+
+	std::string pokemonName;
+	std::string pokemonType1TextureLocation;
+	std::string pokemonType2TextureLocation;
+	std::string pokemonImageTextureLocation;
+
+	bool buttonVisibility = false;
+
+	bool move1OutlineVisiblity = false;
+	bool move2OutlineVisiblity = false;
+	bool move3OutlineVisiblity = false;
+	bool move4OutlineVisiblity = false;
+	bool newMoveOutlineVisiblity = false;
 };
 
 struct PauseControlData
@@ -127,6 +154,33 @@ struct PauseControlData
 	std::string SprintAlt;
 };
 
+struct TrainerBadgeData
+{
+	bool fireBadgeVisibility = false;
+	bool flyingBadgeVisibility = false;
+	bool grassBadgeVisibility = false;
+	bool iceBadgeVisibility = false;
+	bool normalBadgeVisibility = false;
+	bool rockBadgeVisibility = false;
+	bool waterBadgeVisibility = false;
+	bool dragonBadgeVisibility = false;
+};
+
+struct PauseMenuData
+{
+	std::string playTime;
+	std::string playerBalance;
+
+	TrainerBadgeData badgeData;
+
+	bool pokedexHighlight = false;
+	bool mapHighlight = false;
+
+	bool pokedexHighlightVisible = false;
+	bool mapHighlightVisible = false;
+	bool buttonVisibility = false;
+};
+
 struct PauseSettingsData
 {
 	PauseControlData keyboardData;
@@ -145,18 +199,6 @@ struct RosterPokemonData
 	std::string pokemonTexture;
 	std::string hp;
 	std::string level;
-};
-
-struct TrainerBadgeData
-{
-	bool fireBadgeVisibility	= false;
-	bool flyingBadgeVisibility	= false;
-	bool grassBadgeVisibility	= false;
-	bool iceBadgeVisibility		= false;
-	bool normalBadgeVisibility	= false;
-	bool rockBadgeVisibility	= false;
-	bool waterBadgeVisibility	= false;
-	bool dragonBadgeVisibility	= false;
 };
 
 struct RosterDisplayData

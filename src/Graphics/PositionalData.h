@@ -77,6 +77,8 @@ struct ButtonRenderData
 	Color color = Color::RED;
 
 	int fontSize = renderOptions::autoSizeText;
+
+	bool* visible = nullptr;
 };
 
 struct TextBoxRenderData
@@ -104,6 +106,21 @@ struct ImageRenderData
 	bool* visible = nullptr;
 };
 
+struct ImageTextureCoords
+{
+	float bottomLeftX = 0.0f;
+	float bottomLeftY = 0.0f;
+
+	float bottomRightX = 1.0f;
+	float bottomRightY = 0.0f;
+
+	float topRightX = 1.0f;
+	float topRightY = 1.0f;
+
+	float topLeftX = 0.0f;
+	float topLeftY = 1.0f;
+};
+
 struct DynamicImageRenderData
 {
 	float percentageX = 50.0f;
@@ -116,7 +133,9 @@ struct DynamicImageRenderData
 
 	glm::vec4 color = glm::vec4(0.0f);
 
-	float alpha = 0.0f;
+	ImageTextureCoords imageTextureCoords{};
+
+	float alpha = 0.0f;	//TODO: Redundant alpha reference
 };
 
 struct RectangleRenderData

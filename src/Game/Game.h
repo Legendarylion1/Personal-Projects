@@ -6,7 +6,7 @@
 #include "Handlers/PauseHandler.h"
 #include "Handlers/StartupHandler.h"
 #include "Interactions/Cutscene.h"
-#include "../Battle/BattleSimulator.h"
+#include "../Battle/OldBattleSimulator.h"
 #include "../Map/MapHandler.h"
 #include "Input/InputData.h"
 #include "../Menu/menuData.h"
@@ -14,6 +14,7 @@
 #include "Input/Input.h"
 #include "Interactions/PC.h"
 #include "../Menu/Menu.h"
+#include "../Battle/Battle.h"
 
 class Game
 {
@@ -39,7 +40,7 @@ private:
 
 	Cutscene m_cutScene;
 	StartupHandler startupHandler;			//TODO: I want this to be deleted after startup
-	BattleSimulator m_battlesimulator;
+	Battle m_battlesimulator;
 	InteractionHandler m_interactionHandler;
 	EncounterHandler m_encounterHandler;
 	MapHandler m_mapHandler;

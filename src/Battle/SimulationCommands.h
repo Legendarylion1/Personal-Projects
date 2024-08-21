@@ -77,7 +77,7 @@ struct AttackCommand
 struct StatusCommand
 {
 	SelectedUser recipient;
-	int damage;
+	int damage = 0;
 	StatusID statusGiven = StatusID::NO_STATUS;
 	StatusID curedStatus = StatusID::NO_STATUS;
 	std::string message;

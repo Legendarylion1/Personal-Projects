@@ -357,10 +357,10 @@ void Renderer::renderDynamicImage(DynamicImageRenderData data)
 	GLfloat fightUI[]
 	{
 		//TOP Environment
-		imageX - imageWidth, imageY - imageHeight, 0.0f,		data.color.r, data.color.g, data.color.b, data.color.a,		0.0f, 0.0f,
-		imageX - imageWidth, imageY + imageHeight, 0.0f,		data.color.r, data.color.g, data.color.b, data.color.a,		0.0f, 1.0f,
-		imageX + imageWidth, imageY + imageHeight, 0.0f,		data.color.r, data.color.g, data.color.b, data.color.a,		1.0f, 1.0f,
-		imageX + imageWidth, imageY - imageHeight, 0.0f,		data.color.r, data.color.g, data.color.b, data.color.a,		1.0f, 0.0f,
+		imageX - imageWidth, imageY - imageHeight, data.alpha,		data.color.r, data.color.g, data.color.b, data.color.a,		data.imageTextureCoords.bottomLeftX, data.imageTextureCoords.bottomLeftY,
+		imageX - imageWidth, imageY + imageHeight, data.alpha,		data.color.r, data.color.g, data.color.b, data.color.a,		data.imageTextureCoords.topLeftX, data.imageTextureCoords.topLeftY,
+		imageX + imageWidth, imageY + imageHeight, data.alpha,		data.color.r, data.color.g, data.color.b, data.color.a,		data.imageTextureCoords.topRightX, data.imageTextureCoords.topRightY,
+		imageX + imageWidth, imageY - imageHeight, data.alpha,		data.color.r, data.color.g, data.color.b, data.color.a,		data.imageTextureCoords.bottomRightX, data.imageTextureCoords.bottomRightY,
 	};
 
 	GLuint indices1[] =

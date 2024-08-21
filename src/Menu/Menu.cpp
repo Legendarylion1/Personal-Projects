@@ -647,9 +647,9 @@ void Menu::setupStartupData(SharedString* header1, SharedString* header2, Shared
 		deleteFile3->up = playFile3;
 		deleteFile3->left = deleteFile2;
 		
-		deleteFile1->visible = f1Visible;
-		deleteFile2->visible = f2Visible;
-		deleteFile3->visible = f3Visible;
+		deleteFile1->active = f1Visible;
+		deleteFile2->active = f2Visible;
+		deleteFile3->active = f3Visible;
 		
 		file1PlayerName->dynamic_text = &header1->string1;
 		file2PlayerName->dynamic_text = &header2->string1;
@@ -759,10 +759,8 @@ void Menu::setupStartupData(SharedString* header1, SharedString* header2, Shared
 	
 }
 
-void Menu::setupBattleData(SharedString* moves, SimulationCommand* menuCommand, RosterDisplayData* rosterData, ItemDisplayData* battleItemData, BattlePokemonData* battleData, DynamicImageRenderData* playerPokemon, DynamicImageRenderData* oppPokemon)
+void Menu::setupBattleData(SharedString* moves, SimulationCommand* menuCommand, RosterDisplayData* rosterData, ItemDisplayData* battleItemData, BattlePokemonData* battleData, DynamicImageRenderData* playerPokemon, DynamicImageRenderData* oppPokemon, LearnMoveData* learnMoveData)
 {
-	m_menuCommand = menuCommand;
-
 	//		Main Battle
 	{
 		Scene mainBattle(m_renderer);
@@ -962,6 +960,13 @@ void Menu::setupBattleData(SharedString* moves, SimulationCommand* menuCommand, 
 		item4->data = 3;
 		item5->data = 4;
 
+		item1->scene = MenuScene::BATTLE_ROSTER;
+		item2->scene = MenuScene::BATTLE_ROSTER;
+		item3->scene = MenuScene::BATTLE_ROSTER;
+		item4->scene = MenuScene::BATTLE_ROSTER;
+		item5->scene = MenuScene::BATTLE_ROSTER;
+
+
 		upArrow->text = "UP";
 		item1Name->dynamic_text = &battleItemData->itemName.string1;
 		item2Name->dynamic_text = &battleItemData->itemName.string2;
@@ -1088,8 +1093,8 @@ void Menu::setupBattleData(SharedString* moves, SimulationCommand* menuCommand, 
 		speed->text = "SPEED";
 
 
-		name->renderData = TextBoxRenderData{75.0f, 47.0f, 5.0f};
-		level->renderData = TextBoxRenderData{93.0f, 53.0f, 2.5f, Color::BLACK, Alignment::RIGHT_ALIGN};
+		name->renderData = TextBoxRenderData{ 75.0f, 47.0f, 5.0f };
+		level->renderData = TextBoxRenderData{ 93.0f, 53.0f, 2.5f, Color::BLACK, Alignment::RIGHT_ALIGN };
 
 		float xPos = 57.0f;
 		float yPos = 38.0f;
@@ -1101,12 +1106,12 @@ void Menu::setupBattleData(SharedString* moves, SimulationCommand* menuCommand, 
 
 		Alignment textPosition = Alignment::LEFT_ALIGN;
 
-		maxHP->renderData =		TextBoxRenderData{xPos, yPos - (0 * yGap), fontSize, textColor, textPosition};
-		attack->renderData =	TextBoxRenderData{xPos, yPos - (1 * yGap), fontSize, textColor, textPosition};
-		defense->renderData =	TextBoxRenderData{xPos, yPos - (2 * yGap), fontSize, textColor, textPosition};
-		spAttack->renderData =	TextBoxRenderData{xPos, yPos - (3 * yGap), fontSize, textColor, textPosition};
-		spDefense->renderData = TextBoxRenderData{xPos, yPos - (4 * yGap), fontSize, textColor, textPosition};
-		speed->renderData =		TextBoxRenderData{xPos, yPos - (5 * yGap), fontSize, textColor, textPosition};
+		maxHP->renderData = TextBoxRenderData{ xPos, yPos - (0 * yGap), fontSize, textColor, textPosition };
+		attack->renderData = TextBoxRenderData{ xPos, yPos - (1 * yGap), fontSize, textColor, textPosition };
+		defense->renderData = TextBoxRenderData{ xPos, yPos - (2 * yGap), fontSize, textColor, textPosition };
+		spAttack->renderData = TextBoxRenderData{ xPos, yPos - (3 * yGap), fontSize, textColor, textPosition };
+		spDefense->renderData = TextBoxRenderData{ xPos, yPos - (4 * yGap), fontSize, textColor, textPosition };
+		speed->renderData = TextBoxRenderData{ xPos, yPos - (5 * yGap), fontSize, textColor, textPosition };
 
 		levelUpStats.addTextBox(name);
 		levelUpStats.addTextBox(level);
@@ -1136,12 +1141,12 @@ void Menu::setupBattleData(SharedString* moves, SimulationCommand* menuCommand, 
 			spDefenseDiff->dynamic_text = &battleData->pokemonStatDifference.string5;
 			speedDiff->dynamic_text = &battleData->pokemonStatDifference.string6;
 
-			maxHPDiff->renderData =		TextBoxRenderData{ 93.0f, yPos - (0 * yGap), fontSize, textColor, Alignment::RIGHT_ALIGN};
-			attackDiff->renderData =	TextBoxRenderData{ 93.0f, yPos - (1 * yGap), fontSize, textColor, Alignment::RIGHT_ALIGN};
-			defenseDiff->renderData =	TextBoxRenderData{ 93.0f, yPos - (2 * yGap), fontSize, textColor, Alignment::RIGHT_ALIGN};
-			spAttackDiff->renderData =	TextBoxRenderData{ 93.0f, yPos - (3 * yGap), fontSize, textColor, Alignment::RIGHT_ALIGN};
-			spDefenseDiff->renderData = TextBoxRenderData{ 93.0f, yPos - (4 * yGap), fontSize, textColor, Alignment::RIGHT_ALIGN};
-			speedDiff->renderData =		TextBoxRenderData{ 93.0f, yPos - (5 * yGap), fontSize, textColor, Alignment::RIGHT_ALIGN};
+			maxHPDiff->renderData = TextBoxRenderData{ 93.0f, yPos - (0 * yGap), fontSize, textColor, Alignment::RIGHT_ALIGN };
+			attackDiff->renderData = TextBoxRenderData{ 93.0f, yPos - (1 * yGap), fontSize, textColor, Alignment::RIGHT_ALIGN };
+			defenseDiff->renderData = TextBoxRenderData{ 93.0f, yPos - (2 * yGap), fontSize, textColor, Alignment::RIGHT_ALIGN };
+			spAttackDiff->renderData = TextBoxRenderData{ 93.0f, yPos - (3 * yGap), fontSize, textColor, Alignment::RIGHT_ALIGN };
+			spDefenseDiff->renderData = TextBoxRenderData{ 93.0f, yPos - (4 * yGap), fontSize, textColor, Alignment::RIGHT_ALIGN };
+			speedDiff->renderData = TextBoxRenderData{ 93.0f, yPos - (5 * yGap), fontSize, textColor, Alignment::RIGHT_ALIGN };
 
 			m_overlays[MenuOverlay::LEVEL_UP_STAT_CHANGE].addTextBox(maxHPDiff);
 			m_overlays[MenuOverlay::LEVEL_UP_STAT_CHANGE].addTextBox(attackDiff);
@@ -1167,13 +1172,13 @@ void Menu::setupBattleData(SharedString* moves, SimulationCommand* menuCommand, 
 			spDefenseValue->dynamic_text = &battleData->pokemonStatValue.string5;
 			speedValue->dynamic_text = &battleData->pokemonStatValue.string6;
 
-			maxHPValue->renderData =		TextBoxRenderData{ 93.0f, yPos - (0 * yGap), fontSize, textColor, Alignment::RIGHT_ALIGN };
-			attackValue->renderData =		TextBoxRenderData{ 93.0f, yPos - (1 * yGap), fontSize, textColor, Alignment::RIGHT_ALIGN };
-			defenseValue->renderData =		TextBoxRenderData{ 93.0f, yPos - (2 * yGap), fontSize, textColor, Alignment::RIGHT_ALIGN };
-			spAttackValue->renderData =		TextBoxRenderData{ 93.0f, yPos - (3 * yGap), fontSize, textColor, Alignment::RIGHT_ALIGN };
-			spDefenseValue->renderData =	TextBoxRenderData{ 93.0f, yPos - (4 * yGap), fontSize, textColor, Alignment::RIGHT_ALIGN };
-			speedValue->renderData =		TextBoxRenderData{ 93.0f, yPos - (5 * yGap), fontSize, textColor, Alignment::RIGHT_ALIGN };
-		
+			maxHPValue->renderData = TextBoxRenderData{ 93.0f, yPos - (0 * yGap), fontSize, textColor, Alignment::RIGHT_ALIGN };
+			attackValue->renderData = TextBoxRenderData{ 93.0f, yPos - (1 * yGap), fontSize, textColor, Alignment::RIGHT_ALIGN };
+			defenseValue->renderData = TextBoxRenderData{ 93.0f, yPos - (2 * yGap), fontSize, textColor, Alignment::RIGHT_ALIGN };
+			spAttackValue->renderData = TextBoxRenderData{ 93.0f, yPos - (3 * yGap), fontSize, textColor, Alignment::RIGHT_ALIGN };
+			spDefenseValue->renderData = TextBoxRenderData{ 93.0f, yPos - (4 * yGap), fontSize, textColor, Alignment::RIGHT_ALIGN };
+			speedValue->renderData = TextBoxRenderData{ 93.0f, yPos - (5 * yGap), fontSize, textColor, Alignment::RIGHT_ALIGN };
+
 			m_overlays[MenuOverlay::LEVEL_UP_STAT_VALUE].addTextBox(maxHPValue);
 			m_overlays[MenuOverlay::LEVEL_UP_STAT_VALUE].addTextBox(attackValue);
 			m_overlays[MenuOverlay::LEVEL_UP_STAT_VALUE].addTextBox(defenseValue);
@@ -1181,8 +1186,264 @@ void Menu::setupBattleData(SharedString* moves, SimulationCommand* menuCommand, 
 			m_overlays[MenuOverlay::LEVEL_UP_STAT_VALUE].addTextBox(spDefenseValue);
 			m_overlays[MenuOverlay::LEVEL_UP_STAT_VALUE].addTextBox(speedValue);
 		}
-		
+	}
 
+	// Swap Pokemon From Opponent Faint
+	{
+		Overlay wouldLikeToSwapPokemon{ m_renderer };
+
+		Button* swapPokemon = new Button;
+		Button* keepBattling = new Button;
+
+		swapPokemon->data = (int)true;
+		keepBattling->data = (int)false;
+
+		swapPokemon->text = "Swap Pokemon";
+		keepBattling->text = "Keep Battling";
+
+		swapPokemon->up = keepBattling;
+		swapPokemon->down = keepBattling;
+
+		keepBattling->up = swapPokemon;
+		keepBattling->down = swapPokemon;
+
+		swapPokemon->renderData = ButtonRenderData{ 50.0f,	17.75f, 20.0f, 6.5f, Color::WHITE };
+		keepBattling->renderData = ButtonRenderData{ 50.0f,	7.25f, 20.0f, 6.5f, Color::WHITE };
+
+		wouldLikeToSwapPokemon.addButton(swapPokemon);
+		wouldLikeToSwapPokemon.addButton(keepBattling);
+
+		m_overlays[MenuOverlay::SWAP_POKEMON_QUESTION] = wouldLikeToSwapPokemon;
+	}
+
+	// Learn Move Yes NO
+	{
+		Overlay learnNewMove{ m_renderer };
+
+		Button* learnMove = new Button;
+		Button* forgetMove = new Button;
+
+		learnMove->data = (int)true;
+		forgetMove->data = (int)false;
+
+		learnMove->text = "Learn Move";
+		forgetMove->text = "Dont Learn";
+
+		learnMove->up = forgetMove;
+		learnMove->down = forgetMove;
+
+		forgetMove->up = learnMove;
+		forgetMove->down = learnMove;
+
+		learnMove->renderData = ButtonRenderData{ 50.0f,	17.75f, 20.0f, 6.5f, Color::WHITE };
+		forgetMove->renderData = ButtonRenderData{ 50.0f,	7.25f, 20.0f, 6.5f, Color::WHITE };
+
+		learnNewMove.addButton(learnMove);
+		learnNewMove.addButton(forgetMove);
+
+		m_overlays[MenuOverlay::LEARN_MOVE] = learnNewMove;
+	}
+
+	// Learn a new Move 
+	{
+		Scene learnNewMove{ m_renderer };
+		learnNewMove.setBackgroundPath(g_sceneTextureLocations[MenuScene::LEARN_MOVE]);
+
+		// Moves
+		{
+			// Buttons
+			{
+				Button* move1Button = new Button();
+				Button* move2Button = new Button();
+				Button* move3Button = new Button();
+				Button* move4Button = new Button();
+				Button* newMoveButton = new Button();
+
+				move1Button->data = 0;
+				move2Button->data = 1;
+				move3Button->data = 2;
+move4Button->data = 3;
+newMoveButton->data = 4;
+
+move1Button->up = move4Button;
+move1Button->down = move2Button;
+move1Button->left = newMoveButton;
+
+move2Button->up = move1Button;
+move2Button->down = move3Button;
+move2Button->left = newMoveButton;
+
+move3Button->up = move2Button;
+move3Button->down = move4Button;
+move3Button->left = newMoveButton;
+
+move4Button->up = move3Button;
+move4Button->down = move1Button;
+move4Button->left = newMoveButton;
+
+newMoveButton->right = move1Button;
+
+move1Button->renderData = ButtonRenderData{ 0,0,0,0, Color::TRANSPARENT, 0,&learnMoveData->buttonVisibility };
+move2Button->renderData = ButtonRenderData{ 0,0,0,0, Color::TRANSPARENT, 0,&learnMoveData->buttonVisibility };
+move3Button->renderData = ButtonRenderData{ 0,0,0,0, Color::TRANSPARENT, 0,&learnMoveData->buttonVisibility };
+move4Button->renderData = ButtonRenderData{ 0,0,0,0, Color::TRANSPARENT, 0,&learnMoveData->buttonVisibility };
+newMoveButton->renderData = ButtonRenderData{ 0,0,0,0, Color::TRANSPARENT, 0,&learnMoveData->buttonVisibility };
+
+learnNewMove.addButton(move1Button);
+learnNewMove.addButton(move2Button);
+learnNewMove.addButton(move3Button);
+learnNewMove.addButton(move4Button);
+learnNewMove.addButton(newMoveButton);
+			}
+
+			// Move Data
+			{
+				TextBox* moveText = new TextBox();
+				moveText->text = "MOVES";
+				moveText->renderData = TextBoxRenderData{ 84.0f, (473.0f / 563.0f) * 100.0f, 4.0f, Color::BLACK };
+				learnNewMove.addTextBox(moveText);
+
+				TextBox* move1Name = new TextBox();
+				TextBox* move2Name = new TextBox();
+				TextBox* move3Name = new TextBox();
+				TextBox* move4Name = new TextBox();
+				TextBox* newMoveName = new TextBox();
+
+				TextBox* currentPP1 = new TextBox();
+				TextBox* currentPP2 = new TextBox();
+				TextBox* currentPP3 = new TextBox();
+				TextBox* currentPP4 = new TextBox();
+				TextBox* newMovePP	= new TextBox();
+
+				TextBox* maxPP1			= new TextBox();
+				TextBox* maxPP2			= new TextBox();
+				TextBox* maxPP3			= new TextBox();
+				TextBox* maxPP4			= new TextBox();
+				TextBox* newMoveMaxPP	= new TextBox();
+
+				move1Name->dynamic_text = &learnMoveData->move1.moveName;
+				move2Name->dynamic_text = &learnMoveData->move2.moveName;
+				move3Name->dynamic_text = &learnMoveData->move3.moveName;
+				move4Name->dynamic_text = &learnMoveData->move4.moveName;
+				newMoveName->dynamic_text = &learnMoveData->newMove.moveName;
+
+				currentPP1->dynamic_text = &learnMoveData->move1.currentPP;
+				currentPP2->dynamic_text = &learnMoveData->move2.currentPP;
+				currentPP3->dynamic_text = &learnMoveData->move3.currentPP;
+				currentPP4->dynamic_text = &learnMoveData->move4.currentPP;
+				newMovePP->dynamic_text = &learnMoveData->newMove.currentPP;
+
+				maxPP1->dynamic_text = &learnMoveData->move1.maxPP;
+				maxPP2->dynamic_text = &learnMoveData->move2.maxPP;
+				maxPP3->dynamic_text = &learnMoveData->move3.maxPP;
+				maxPP4->dynamic_text = &learnMoveData->move4.maxPP;
+newMoveMaxPP->dynamic_text = &learnMoveData->newMove.maxPP;
+
+move1Name->renderData = TextBoxRenderData{ 73.0f, (373.0f / 563.0f) * 100.0f, 2.0f, Color::BLACK, Alignment::LEFT_ALIGN };
+move2Name->renderData = TextBoxRenderData{ 73.0f, (283.0f / 563.0f) * 100.0f, 2.0f, Color::BLACK, Alignment::LEFT_ALIGN };
+move3Name->renderData = TextBoxRenderData{ 73.0f, (193.0f / 563.0f) * 100.0f, 2.0f, Color::BLACK, Alignment::LEFT_ALIGN };
+move4Name->renderData = TextBoxRenderData{ 73.0f, (103.0f / 563.0f) * 100.0f, 2.0f, Color::BLACK, Alignment::LEFT_ALIGN };
+newMoveName->renderData = TextBoxRenderData{ 5.6f, (373.0f / 563.0f) * 100.0f, 2.0f, Color::BLACK, Alignment::LEFT_ALIGN };
+
+currentPP1->renderData = TextBoxRenderData{ (880.0f / 1000.0f) * 100.0f, (330.0f / 563.0f) * 100.0f, 4.0f, Color::BLACK, Alignment::RIGHT_ALIGN };
+currentPP2->renderData = TextBoxRenderData{ (880.0f / 1000.0f) * 100.0f, (240.0f / 563.0f) * 100.0f, 4.0f, Color::BLACK, Alignment::RIGHT_ALIGN };
+currentPP3->renderData = TextBoxRenderData{ (880.0f / 1000.0f) * 100.0f, (150.0f / 563.0f) * 100.0f, 4.0f, Color::BLACK, Alignment::RIGHT_ALIGN };
+currentPP4->renderData = TextBoxRenderData{ (880.0f / 1000.0f) * 100.0f, (60.0f / 563.0f) * 100.0f, 4.0f, Color::BLACK, Alignment::RIGHT_ALIGN };
+newMovePP->renderData = TextBoxRenderData{ (206.0f / 1000.0f) * 100.0f, (330.0f / 563.0f) * 100.0f, 4.0f, Color::BLACK, Alignment::RIGHT_ALIGN };
+
+maxPP1->renderData = TextBoxRenderData{ (880.0f / 1000.0f) * 100.0f, (330.0f / 563.0f) * 100.0f, 4.0f, Color::BLACK, Alignment::LEFT_ALIGN };
+maxPP2->renderData = TextBoxRenderData{ (880.0f / 1000.0f) * 100.0f, (240.0f / 563.0f) * 100.0f, 4.0f, Color::BLACK, Alignment::LEFT_ALIGN };
+maxPP3->renderData = TextBoxRenderData{ (880.0f / 1000.0f) * 100.0f, (150.0f / 563.0f) * 100.0f, 4.0f, Color::BLACK, Alignment::LEFT_ALIGN };
+maxPP4->renderData = TextBoxRenderData{ (880.0f / 1000.0f) * 100.0f, (60.0f / 563.0f) * 100.0f, 4.0f, Color::BLACK, Alignment::LEFT_ALIGN };
+newMoveMaxPP->renderData = TextBoxRenderData{ (206.0f / 1000.0f) * 100.0f, (330.0f / 563.0f) * 100.0f, 4.0f, Color::BLACK, Alignment::LEFT_ALIGN };
+
+learnNewMove.addTextBox(move1Name);
+learnNewMove.addTextBox(move2Name);
+learnNewMove.addTextBox(move3Name);
+learnNewMove.addTextBox(move4Name);
+learnNewMove.addTextBox(newMoveName);
+
+learnNewMove.addTextBox(currentPP1);
+learnNewMove.addTextBox(currentPP2);
+learnNewMove.addTextBox(currentPP3);
+learnNewMove.addTextBox(currentPP4);
+learnNewMove.addTextBox(newMovePP);
+
+learnNewMove.addTextBox(maxPP1);
+learnNewMove.addTextBox(maxPP2);
+learnNewMove.addTextBox(maxPP3);
+learnNewMove.addTextBox(maxPP4);
+learnNewMove.addTextBox(newMoveMaxPP);
+
+learnNewMove.addImage(new ImageRenderData{ 77.0f, (353.0f / 563.0f) * 100.0f, 3.0f, 1.5f, " " ,&learnMoveData->move1.moveTypeTextureLocation });
+learnNewMove.addImage(new ImageRenderData{ 77.0f, (263.0f / 563.0f) * 100.0f, 3.0f, 1.5f, " " ,&learnMoveData->move2.moveTypeTextureLocation });
+learnNewMove.addImage(new ImageRenderData{ 77.0f, (173.0f / 563.0f) * 100.0f, 3.0f, 1.5f, " " ,&learnMoveData->move3.moveTypeTextureLocation });
+learnNewMove.addImage(new ImageRenderData{ 77.0f, (083.0f / 563.0f) * 100.0f, 3.0f, 1.5f, " " ,&learnMoveData->move4.moveTypeTextureLocation });
+learnNewMove.addImage(new ImageRenderData{ 09.2f, (353.0f / 563.0f) * 100.0f, 3.0f, 1.5f, " " ,&learnMoveData->newMove.moveTypeTextureLocation });
+			}
+
+			//	Highlighted Move Data
+			{
+			TextBox* power = new TextBox();
+			TextBox* accuracy = new TextBox();
+			TextBox* description = new TextBox();
+
+			power->dynamic_text = &learnMoveData->power;
+			accuracy->dynamic_text = &learnMoveData->accuracy;
+			description->dynamic_text = &learnMoveData->description;
+
+			power->renderData = TextBoxRenderData{ 50.0f, (411.0f / 563.0f) * 100.0f, 4.0f };
+			accuracy->renderData = TextBoxRenderData{ 50.0f, (334.0f / 563.0f) * 100.0f, 4.0f };
+			description->renderData = TextBoxRenderData{ 36.8f, (230.0f / 563.0f) * 100.0f, 4.0f, Color::BLACK, Alignment::LEFT_ALIGN };
+
+			learnNewMove.addTextBox(power);
+			learnNewMove.addTextBox(accuracy);
+			learnNewMove.addTextBox(description);
+			}
+
+			// Move Highlight Images
+			{
+				//Width  = 226 px
+				//Height =  98 px
+
+				float leftAdjustment = 1.6f;
+				float downAdjustment = 0.7f;
+
+				float xPercent = ((835.5f - leftAdjustment) / 1000.0f) * 100.0f;
+				float newMovexPercent = ((161.5f - leftAdjustment) / 1000.0f) * 100.0f;
+
+				learnNewMove.addImage(new ImageRenderData{ xPercent,		((367.5f - downAdjustment) / 563.0f) * 100.0f,  (113.0f / 1000.0f) * 100.0f, (50.0f / 563.0f) * 100.0f, g_overlayTextureLocations[MenuOverlay::MOVE_OUTLINE], nullptr, &learnMoveData->move1OutlineVisiblity });	//Move 1
+				learnNewMove.addImage(new ImageRenderData{ xPercent,		((278.5f - downAdjustment) / 563.0f) * 100.0f,  (113.0f / 1000.0f) * 100.0f, (50.0f / 563.0f) * 100.0f, g_overlayTextureLocations[MenuOverlay::MOVE_OUTLINE], nullptr, &learnMoveData->move2OutlineVisiblity });	//Move 2
+				learnNewMove.addImage(new ImageRenderData{ xPercent,		((188.5f - downAdjustment) / 563.0f) * 100.0f,  (113.0f / 1000.0f) * 100.0f, (50.0f / 563.0f) * 100.0f, g_overlayTextureLocations[MenuOverlay::MOVE_OUTLINE], nullptr, &learnMoveData->move3OutlineVisiblity });	//Move 3
+				learnNewMove.addImage(new ImageRenderData{ xPercent,		((98.5f - downAdjustment) / 563.0f) * 100.0f,  (113.0f / 1000.0f) * 100.0f, (50.0f / 563.0f) * 100.0f, g_overlayTextureLocations[MenuOverlay::MOVE_OUTLINE], nullptr, &learnMoveData->move4OutlineVisiblity });	//Move 4
+				learnNewMove.addImage(new ImageRenderData{ newMovexPercent, ((367.5f - downAdjustment) / 563.0f) * 100.0f,  (113.0f / 1000.0f) * 100.0f, (50.0f / 563.0f) * 100.0f, g_overlayTextureLocations[MenuOverlay::MOVE_OUTLINE], nullptr, &learnMoveData->newMoveOutlineVisiblity });	//New Move
+			}
+		}
+
+		// Pokemon
+		{
+		TextBox* pokemonName = new TextBox();
+		pokemonName->dynamic_text = &learnMoveData->pokemonName;
+		pokemonName->renderData = TextBoxRenderData{ 15.0f, (210.0f / 563.0f) * 100.0f, 4.0f };
+
+		float pokemonSizeReduction = 1.3;	//Always Greater than 1
+
+		learnNewMove.addTextBox(pokemonName);
+		learnNewMove.addImage(new ImageRenderData{ 15.0f, (189.0f / 563.0f) * 100.0f, 5.0f, 2.5f, "", &learnMoveData->pokemonType1TextureLocation });
+		learnNewMove.addImage(new ImageRenderData{ 25.0f, (189.0f / 563.0f) * 100.0f, 5.0f, 2.5f, "", &learnMoveData->pokemonType2TextureLocation });
+		learnNewMove.addImage(new ImageRenderData{ 15.0f, (94.5f / 563.0f) * 100.0f, 9.0f / pokemonSizeReduction, 16.0f / pokemonSizeReduction, "", &learnMoveData->pokemonImageTextureLocation });
+		}
+
+		m_scenes[MenuScene::LEARN_MOVE] = learnNewMove;
+	}
+
+	// Evolution
+	{
+		Scene evolution{ m_renderer };
+		evolution.setBackgroundPath(g_sceneTextureLocations[MenuScene::EVOLUTION]);
+		evolution.addDynamicImage(playerPokemon);
+		evolution.addDynamicImage(oppPokemon);
+		m_scenes[MenuScene::EVOLUTION] = evolution;
 	}
 
 	logger->log(LogLevel::INFO, "Menu Scenes Setup", "setupScenes", "Menu");
@@ -1612,7 +1873,7 @@ void Menu::setupInteractionData(SharedString* items, std::string* balance)
 
 }
 
-void Menu::setupPauseData(SharedString* items, std::string* balance, std::string* time, RosterDisplayData* rosterData, TrainerBadgeData* badgeData, PauseSettingsData* settingData)
+void Menu::setupPauseData(SharedString* items, PauseMenuData* pauseMenuData, RosterDisplayData* rosterData, PauseSettingsData* settingData)
 {
 	// Pause Main Menu
 	{
@@ -1620,11 +1881,11 @@ void Menu::setupPauseData(SharedString* items, std::string* balance, std::string
 		pauseMainMenu.setBackgroundPath(g_sceneTextureLocations[MenuScene::PAUSE_MENU]);
 
 		TextBox* playerBalance = new TextBox();
-		playerBalance->dynamic_text = balance;
+		playerBalance->dynamic_text = &pauseMenuData->playerBalance;
 		playerBalance->renderData = TextBoxRenderData{ 2.0f, 74.4f, 4.0f, Color::BLACK, Alignment::LEFT_ALIGN};
 
 		TextBox* playTime = new TextBox();
-		playTime->dynamic_text = time;
+		playTime->dynamic_text = &pauseMenuData->playTime;
 		playTime->renderData = TextBoxRenderData{ 98.0f, 74.4f, 4.0f, Color::BLACK, Alignment::RIGHT_ALIGN };
 
 		pauseMainMenu.addTextBox(playerBalance);
@@ -1635,78 +1896,112 @@ void Menu::setupPauseData(SharedString* items, std::string* balance, std::string
 			Button* pokemonRoster = new Button;
 			Button* bagOfItems = new Button;
 			Button* mapView = new Button;
+			Button* pokedex = new Button;
 			Button* changeSettings = new Button;
 			Button* saveGame = new Button;
 			Button* exitGame = new Button;
 
 			//TODO: Probably dont hard code these but also i dont care
 			pokemonRoster->data = 0;
-			bagOfItems->data = 1;
 			mapView->data = 2;
+			bagOfItems->data = 1;
 			changeSettings->data = 3;
 			saveGame->data = 4;
 			exitGame->data = 5;
+			pokedex->data = 6;
 
 
-			pokemonRoster->down = mapView;
+			pokemonRoster->down = saveGame;
+			pokemonRoster->left = pokedex;
 			pokemonRoster->right = bagOfItems;
 
 			bagOfItems->down = changeSettings;
 			bagOfItems->left = pokemonRoster;
+			bagOfItems->right = mapView;
 
-			mapView->up = pokemonRoster;
-			mapView->down = saveGame;
-			mapView->right = changeSettings;
+			pokedex->down = exitGame;
+			pokedex->right = pokemonRoster;
+
+			mapView->down = exitGame;
+			mapView->left = bagOfItems;
+
+			saveGame->up = pokemonRoster;
+			saveGame->down = exitGame;
+			saveGame->left = pokedex;
+			saveGame->right = changeSettings;
 
 			changeSettings->up = bagOfItems;
-			changeSettings->left = mapView;
 			changeSettings->down = exitGame;
+			changeSettings->left = saveGame;
+			changeSettings->right = mapView;
 
-			saveGame->up = mapView;
-			saveGame->right = exitGame;
-
-			exitGame->up = changeSettings;
-			exitGame->left = saveGame;
-
+			exitGame->up = saveGame;
+			exitGame->left = pokedex;
+			exitGame->right = mapView;
 
 			pokemonRoster->text = "ROSTER";
 			bagOfItems->text = "BAG";
-			mapView->text = "MAP";
 			changeSettings->text = "SETTINGS";
 			saveGame->text = "SAVE";
 			exitGame->text = "EXIT";
 
-			pokemonRoster->renderData = { 27.5f, 66.0f,	25.0f, 18.0f, Color::BLUE };
-			bagOfItems->renderData = { 72.5, 66.0f,		25.0f, 18.0f, Color::BLUE };
-			mapView->renderData = { 27.5f, 41.0f,		25.0f, 18.0f, Color::BLUE };
-			changeSettings->renderData = { 72.5, 41.0f,	25.0f, 18.0f, Color::BLUE };
-			saveGame->renderData = { 27.5f, 16.0f,		25.0f, 18.0f, Color::BLUE };
-			exitGame->renderData = { 72.5f, 16.0f,		25.0f, 18.0f, Color::BLUE };
+			float xPos = 37.5f;
+			float yPos = 60.0f;
+			float widthPercent = 18.75;
+			float heightPercent = 13.5;
+
+			float yGap = 20.0f;
+			float xGap = 25.0f;
+
+			pokemonRoster->renderData =		{ xPos, yPos, widthPercent, heightPercent, Color::BLUE };
+			saveGame->renderData =			{ xPos, yPos - yGap, widthPercent, heightPercent, Color::BLUE };
+
+			bagOfItems->renderData =		{ xPos + xGap, yPos, widthPercent, heightPercent, Color::BLUE };
+			changeSettings->renderData =	{ xPos + xGap, yPos - yGap,	widthPercent, heightPercent, Color::BLUE };
+
+			exitGame->renderData =			{ xPos + (xGap / 2.0f), yPos - (yGap * 2.0f), widthPercent, heightPercent, Color::BLUE};
+			
+			pokedex->renderData = { 0.0f, 0.0f,	0.0f, 0.0f, Color::TRANSPARENT, renderOptions::autoSizeText, &pauseMenuData->buttonVisibility };
+			mapView->renderData = { 0.0f, 0.0f,	0.0f, 0.0f, Color::TRANSPARENT, renderOptions::autoSizeText, &pauseMenuData->buttonVisibility };
 
 			pokemonRoster->scene = MenuScene::PAUSE_ROSTER;
 			changeSettings->scene = MenuScene::PAUSE_SETTINGS;
 			bagOfItems->scene = MenuScene::PAUSE_BAG;
 
 			pauseMainMenu.addButton(pokemonRoster);
-			pauseMainMenu.addButton(bagOfItems);
+			pauseMainMenu.addButton(pokedex);
 			pauseMainMenu.addButton(mapView);
+			pauseMainMenu.addButton(bagOfItems);
 			pauseMainMenu.addButton(changeSettings);
 			pauseMainMenu.addButton(saveGame);
 			pauseMainMenu.addButton(exitGame);
+
+
+			float pokedexXPercent = (124.5f / 1000.0f) * 100.0f;
+			float pokedexYPercent = (246.0f / 563.0f) * 100.0f;
+
+			float mapXPercent = (874.5f / 1000.0f) * 100.0f;
+			float mapYPercent = (246.0f / 563.0f) * 100.0f;
+
+			float imageWidthPercent = ((123.0f / 1000.0f) * 100.0f) / 2.0f;
+			float imageHeightPercent = ((252.0f / 563.0f) * 100.0f) / 2.0f;
+
+			pauseMainMenu.addImage(new ImageRenderData{pokedexXPercent, pokedexYPercent, imageWidthPercent, imageHeightPercent, g_overlayTextureLocations[MenuOverlay::POKEDEX_OUTLINE], nullptr, &pauseMenuData->pokedexHighlightVisible});
+			pauseMainMenu.addImage(new ImageRenderData{mapXPercent, mapYPercent, imageWidthPercent, imageHeightPercent, g_overlayTextureLocations[MenuOverlay::MAP_OUTLINE], nullptr, &pauseMenuData->mapHighlightVisible });
 		}
 
 		// Badge Images
 		{
 			//31% 70
 
-			pauseMainMenu.addImage(new ImageRenderData{ (309.0f/1000.0f) * 100.0f, (493.5f/563.0f) * 100.0f, 2.5f, 4.440497336f, "Images/Badges/normalBadge.png",	nullptr, &badgeData->normalBadgeVisibility});
-			pauseMainMenu.addImage(new ImageRenderData{ (365.0f/1000.0f) * 100.0f, (493.5f/563.0f) * 100.0f, 2.5f, 4.440497336f, "Images/Badges/waterBadge.png",	nullptr, &badgeData->waterBadgeVisibility});
-			pauseMainMenu.addImage(new ImageRenderData{ (421.0f/1000.0f) * 100.0f, (493.5f/563.0f) * 100.0f, 2.5f, 4.440497336f, "Images/Badges/rockBadge.png",		nullptr, &badgeData->rockBadgeVisibility});
-			pauseMainMenu.addImage(new ImageRenderData{ (477.0f/1000.0f) * 100.0f, (493.5f/563.0f) * 100.0f, 2.5f, 4.440497336f, "Images/Badges/flyingBadge.png",	nullptr, &badgeData->flyingBadgeVisibility});
-			pauseMainMenu.addImage(new ImageRenderData{ (533.0f/1000.0f) * 100.0f, (493.5f/563.0f) * 100.0f, 2.5f, 4.440497336f, "Images/Badges/grassBadge.png",	nullptr, &badgeData->grassBadgeVisibility});
-			pauseMainMenu.addImage(new ImageRenderData{ (589.0f/1000.0f) * 100.0f, (493.5f/563.0f) * 100.0f, 2.5f, 4.440497336f, "Images/Badges/iceBadge.png",		nullptr, &badgeData->iceBadgeVisibility});
-			pauseMainMenu.addImage(new ImageRenderData{ (645.0f/1000.0f) * 100.0f, (493.5f/563.0f) * 100.0f, 2.5f, 4.440497336f, "Images/Badges/fireBadge.png",		nullptr, &badgeData->fireBadgeVisibility});
-			pauseMainMenu.addImage(new ImageRenderData{ (701.0f/1000.0f) * 100.0f, (493.5f/563.0f) * 100.0f, 2.5f, 4.440497336f, "Images/Badges/dragonBadge.png",	nullptr, &badgeData->dragonBadgeVisibility});
+			pauseMainMenu.addImage(new ImageRenderData{ (309.0f/1000.0f) * 100.0f, (493.5f/563.0f) * 100.0f, 2.5f, 4.440497336f, "Images/Badges/normalBadge.png",	nullptr, &pauseMenuData->badgeData.normalBadgeVisibility});
+			pauseMainMenu.addImage(new ImageRenderData{ (365.0f/1000.0f) * 100.0f, (493.5f/563.0f) * 100.0f, 2.5f, 4.440497336f, "Images/Badges/waterBadge.png",	nullptr, &pauseMenuData->badgeData.waterBadgeVisibility});
+			pauseMainMenu.addImage(new ImageRenderData{ (421.0f/1000.0f) * 100.0f, (493.5f/563.0f) * 100.0f, 2.5f, 4.440497336f, "Images/Badges/rockBadge.png",		nullptr, &pauseMenuData->badgeData.rockBadgeVisibility});
+			pauseMainMenu.addImage(new ImageRenderData{ (477.0f/1000.0f) * 100.0f, (493.5f/563.0f) * 100.0f, 2.5f, 4.440497336f, "Images/Badges/flyingBadge.png",	nullptr, &pauseMenuData->badgeData.flyingBadgeVisibility});
+			pauseMainMenu.addImage(new ImageRenderData{ (533.0f/1000.0f) * 100.0f, (493.5f/563.0f) * 100.0f, 2.5f, 4.440497336f, "Images/Badges/grassBadge.png",	nullptr, &pauseMenuData->badgeData.grassBadgeVisibility});
+			pauseMainMenu.addImage(new ImageRenderData{ (589.0f/1000.0f) * 100.0f, (493.5f/563.0f) * 100.0f, 2.5f, 4.440497336f, "Images/Badges/iceBadge.png",		nullptr, &pauseMenuData->badgeData.iceBadgeVisibility});
+			pauseMainMenu.addImage(new ImageRenderData{ (645.0f/1000.0f) * 100.0f, (493.5f/563.0f) * 100.0f, 2.5f, 4.440497336f, "Images/Badges/fireBadge.png",		nullptr, &pauseMenuData->badgeData.fireBadgeVisibility});
+			pauseMainMenu.addImage(new ImageRenderData{ (701.0f/1000.0f) * 100.0f, (493.5f/563.0f) * 100.0f, 2.5f, 4.440497336f, "Images/Badges/dragonBadge.png",	nullptr, &pauseMenuData->badgeData.dragonBadgeVisibility});
 		}
 		
 		
@@ -1995,10 +2290,10 @@ void Menu::setupPauseData(SharedString* items, std::string* balance, std::string
 			maxPP4->renderData = TextBoxRenderData{ (880.0f / 1000.0f) * 100.0f, (60.0f / 563.0f) * 100.0f, 4.0f, Color::BLACK, Alignment::LEFT_ALIGN };
 
 
-			pauseRosterMenu.addImage(new ImageRenderData{ 77.0f, (353.0f / 563.0f) * 100.0f, 3.0f, 1.5f, " " ,&rosterData->pausePokemonData.move1.moveTextureLocation });
-			pauseRosterMenu.addImage(new ImageRenderData{ 77.0f, (263.0f / 563.0f) * 100.0f, 3.0f, 1.5f, " " ,&rosterData->pausePokemonData.move2.moveTextureLocation });
-			pauseRosterMenu.addImage(new ImageRenderData{ 77.0f, (173.0f / 563.0f) * 100.0f, 3.0f, 1.5f, " " ,&rosterData->pausePokemonData.move3.moveTextureLocation });
-			pauseRosterMenu.addImage(new ImageRenderData{ 77.0f, (83.0f / 563.0f) * 100.0f, 3.0f, 1.5f, " " ,&rosterData->pausePokemonData.move4.moveTextureLocation });
+			pauseRosterMenu.addImage(new ImageRenderData{ 77.0f, (353.0f / 563.0f) * 100.0f, 3.0f, 1.5f, " " ,&rosterData->pausePokemonData.move1.moveTypeTextureLocation });
+			pauseRosterMenu.addImage(new ImageRenderData{ 77.0f, (263.0f / 563.0f) * 100.0f, 3.0f, 1.5f, " " ,&rosterData->pausePokemonData.move2.moveTypeTextureLocation });
+			pauseRosterMenu.addImage(new ImageRenderData{ 77.0f, (173.0f / 563.0f) * 100.0f, 3.0f, 1.5f, " " ,&rosterData->pausePokemonData.move3.moveTypeTextureLocation });
+			pauseRosterMenu.addImage(new ImageRenderData{ 77.0f, (83.0f / 563.0f) * 100.0f, 3.0f, 1.5f, " " ,&rosterData->pausePokemonData.move4.moveTypeTextureLocation });
 
 			pauseRosterMenu.addTextBox(moveText);
 
@@ -2736,20 +3031,14 @@ bool Menu::handleSelection(Button* button)
 		{
 		case MenuScene::BATTLE_ROSTER:
 		case MenuScene::BATTLE_ITEMS:
-			if (m_requestedData == nullptr)
-				m_menuCommand->selection1 = button->data;
-			else
-				*m_requestedData = button->data;
-			break;
 		case MenuScene::USE_PC:
 		case MenuScene::PAUSE_MENU:
 		case MenuScene::PAUSE_ROSTER:
 		case MenuScene::PAUSE_SETTINGS:
 		case MenuScene::PAUSE_BAG:
 		case MenuScene::STARTUP_SCENE:
-			*m_requestedData = button->data;
-			break;
 		default:
+			*m_requestedData = button->data;
 			logger->log(LogLevel::ERROR, "Selected button has not been programmed for data", "handleSelection", "Menu");
 			break;
 		}
@@ -2758,33 +3047,14 @@ bool Menu::handleSelection(Button* button)
 	{
 		switch (m_currentOverlay)
 		{
-
-
-		case MenuOverlay::BATTLE_OPTIONS:
-
-			if (button->data == SimulationType::ATTACK_SELECTED)
-				m_menuCommand->type = SimulationType::ATTACK_SELECTED;
-			else if (button->data == SimulationType::POKEMON_SELECTED)
-				m_menuCommand->type = SimulationType::POKEMON_SELECTED;
-			else if (button->data == SimulationType::ITEM_SELECTED)
-				m_menuCommand->type = SimulationType::ITEM_SELECTED;
-			else if (button->data == SimulationType::FLEE_SELECTED)
-			{
-				m_menuCommand->type = SimulationType::FLEE_SELECTED;
-				m_menuCommand->selection1 = 0;
-			}
-			m_currentOverlay = MenuOverlay::NONE;
-			break;
-		case MenuOverlay::ATTACK_SELECT:
-			m_menuCommand->selection1 = button->data;
-			break;
 		case MenuOverlay::DELETE_CONFIRMATION:
 		case MenuOverlay::RESOLUTION_SELECTION:
 		case MenuOverlay::CHANGE_INPUT:
 			m_overlays[m_currentOverlay].reset();
 			m_currentOverlay = MenuOverlay::NONE;
-
 		case MenuOverlay::ON_SCREEN_KEYBOARD:
+		case MenuOverlay::BATTLE_OPTIONS:
+		case MenuOverlay::ATTACK_SELECT:
 		default:
 			*m_requestedData = button->data;
 			break;
@@ -2801,8 +3071,8 @@ bool Menu::handleSelection(Button* button)
 	}
 
 	// Switch Overlay
-	if (button->overlay != MenuOverlay::NONE)
-		setOverlay(button->overlay);
+	//if (button->overlay != MenuOverlay::NONE)
+	setOverlay(button->overlay);
 
 	return false;	//TODO: Make void function
 }
@@ -2812,12 +3082,9 @@ bool Menu::handleLeave()	//TODO: Also a void function
 	m_leaveRequested = true;
 	logger->log(LogLevel::INFO, "Leave Requested", "handleLeave", "Menu");
 
-	if (m_currentOverlay != MenuOverlay::NONE && m_canLeave && m_currentOverlay != MenuOverlay::BATTLE_OPTIONS)
+	if (m_currentOverlay != MenuOverlay::NONE && m_canLeave)
 	{
-		if (m_currentOverlay == MenuOverlay::ATTACK_SELECT)
-			m_currentOverlay = MenuOverlay::BATTLE_OPTIONS;
-		else
-			m_currentOverlay = MenuOverlay::NONE;
+		m_currentOverlay = MenuOverlay::NONE;
 		return true;
 	}
 

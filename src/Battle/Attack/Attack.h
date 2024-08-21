@@ -28,6 +28,7 @@ public:
 	int getPP() { return m_pp; };
 	int getCritChance() { return m_critChance; };
 	int getAccuracy() { return m_accuracy; };
+	std::string getDescription() { return m_description; };
 
 	int calculateAttackDamage(Pokemon* attacker, Pokemon* defender, Attack* attack, bool applyDamage = false, AttackCommand* command = nullptr);
 public:
@@ -50,6 +51,8 @@ private:
 	int m_pp = 0;
 	int m_critChance = 0;
 	int m_accuracy = 0;
+
+	std::string m_description;
 };
 
 

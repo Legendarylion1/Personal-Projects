@@ -16,7 +16,7 @@ struct Button
 	Button* left = nullptr;
 	Button* right = nullptr;
 
-	bool* visible = nullptr;
+	bool* active = nullptr;
 
 	MenuScene scene = MenuScene::NONE;
 	MenuOverlay overlay = MenuOverlay::NONE;
@@ -88,7 +88,7 @@ public:
 	virtual void onUpdate(bool renderBackground = true);
 
 private:
-	bool buttonVisible(Button* button);
+	bool buttonActive(Button* button);
 	bool textBoxVisible(TextBox* textBox);
 
 

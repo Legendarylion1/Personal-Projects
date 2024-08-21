@@ -150,7 +150,7 @@ static int calculateEvGain(int* evTotal, int currentEv, int newEv)
 	return newEv;
 }
 
-static const Species baroot = { "Baroot", PokemonID::Baroot,Type::GRASS, Type::NONE, {50, 75, 35, 70, 30, 40}, LevelingRate::MediumSlow, 25, {0,1,0,0,0,0}, {{16,AttackID::BONERUSH}}, {20, PokemonID::Bery} };
+static const Species baroot = { "Baroot", PokemonID::Baroot,Type::GRASS, Type::NONE, {50, 75, 35, 70, 30, 40}, LevelingRate::MediumSlow, 25, {0,1,0,0,0,0}, {{14,AttackID::BONERUSH}}, {15, PokemonID::Bery} };
 static const Species fitty = { "Fitty", PokemonID::Fitty, Type::FIRE, Type::NONE, {45, 65, 40, 60, 40, 70}, LevelingRate::MediumSlow, 32, { 0,0,0,0,0,1 }, {{1, AttackID::EMBER}, {5, AttackID::LONG_JAB}}, {16, PokemonID::Baroot} };
 static const Species bery = { "Bery", PokemonID::Bery, Type::GRASS, Type::WATER, {45, 35, 45, 62, 53, 35}, LevelingRate::MediumFast, 25, {0,0,0,1,0,0}, {}, {25, PokemonID::Fitty} };
 

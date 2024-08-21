@@ -116,6 +116,7 @@ MapHandler::MapHandler(Trainer* trainer, Renderer* renderer)
 
 	NPT* testNPT = new NPT("Jake", CharacterID::FIRST_TRAINER, 27, 53, Direction::LEFT, 1000, 3);
 	testNPT->setPokemon(0, Pokemon(baroot, 5));
+	//testNPT->setPokemon(1, Pokemon(bery, 6));
 	
 	testNPT->addBattleDialogue({"Im so excited", "Lets fight"});
 	testNPT->addNormalDialogue({"That was a good fight", "I need to train more"});

@@ -1,8 +1,8 @@
-#include "BattleSimulator.h"
+#include "OldBattleSimulator.h"
 #include <iostream>
 #include <cstdlib>
 
-void BattleSimulator::setup(Trainer* trainer, Menu* menu, RosterDisplayData* rosterData, DialogueRenderer* dialogueRenderer, Animator* animator, Input* input, Timer* timer)
+void OldBattleSimulator::setup(Trainer* trainer, Menu* menu, RosterDisplayData* rosterData, DialogueRenderer* dialogueRenderer, Animator* animator, Input* input, Timer* timer)
 {
     m_player = trainer;
     m_battleItems = trainer->getItemStorage()->getBattleItems();
@@ -12,19 +12,19 @@ void BattleSimulator::setup(Trainer* trainer, Menu* menu, RosterDisplayData* ros
     m_input = input;
     m_timer = timer;
 
-    m_menu->setupBattleData(&m_playerAttacks, &m_menuCommand, rosterData, &m_playerBattleItems, &m_battleData, &m_playerPokemonData, &m_opponentPokemonData);
+    //m_menu->setupBattleData(&m_playerAttacks, &m_menuCommand, rosterData, &m_playerBattleItems, &m_battleData, &m_playerPokemonData, &m_opponentPokemonData);
 
     m_rosterData = rosterData;
     m_playerDisplayPokemon = m_player->getRoster();
 
     updatePlayerItems();
-    logger->log(LogLevel::INFO, "Setup Complete", "setup", "BattleSimulator");
+    logger->log(LogLevel::INFO, "Setup Complete", "setup", "OldBattleSimulator");
 }
 
-void BattleSimulator::beginBattle(NPT* npt)
+void OldBattleSimulator::beginBattle(NPT* npt)
 {
     //TODO: Fade in and out of battle with some kinda animation
-    logger->log(LogLevel::INFO, "npt Battle Started", "beginBattle", "BattleSimulator");
+    logger->log(LogLevel::INFO, "npt Battle Started", "beginBattle", "OldBattleSimulator");
     setupTrainer();
     setupNPT(npt);
     setupXP();
@@ -47,9 +47,9 @@ void BattleSimulator::beginBattle(NPT* npt)
     m_menu->setscene(MenuScene::NONE);
 }
 
-Pokemon BattleSimulator::beginBattle(Pokemon pokemon)
+Pokemon OldBattleSimulator::beginBattle(Pokemon pokemon)
 {
-    logger->log(LogLevel::INFO, "pokemon Battle started", "beginBattle", "BattleSimulator");
+    logger->log(LogLevel::INFO, "pokemon Battle started", "beginBattle", "OldBattleSimulator");
     setupTrainer();
     setupPokemon(pokemon);
     setupXP();
@@ -69,7 +69,7 @@ Pokemon BattleSimulator::beginBattle(Pokemon pokemon)
     return Pokemon();
 }
 
-void BattleSimulator::updatePlayerItems()
+void OldBattleSimulator::updatePlayerItems()
 {
     int count = 0;
     int indexCount = 0;
@@ -144,7 +144,7 @@ void BattleSimulator::updatePlayerItems()
     }
 }
 
-bool BattleSimulator::canIncrementItemList()
+bool OldBattleSimulator::canIncrementItemList()
 {
     //Note that if list size changes or we want to make modifications in any way then we need to adjust the count here and in other functions
 
@@ -168,7 +168,7 @@ bool BattleSimulator::canIncrementItemList()
     return false;
 }
 
-void BattleSimulator::setupTrainer()
+void OldBattleSimulator::setupTrainer()
 {
     m_playerPokemonData = { 25.5f, (253.5f / 563.0f) * 100.0f, 20.0f * (9.0f / 16.0f), 20.0f };
 
@@ -196,7 +196,7 @@ void BattleSimulator::setupTrainer()
     updateDisplayPokemon(m_player, m_rosterData);
 }
 
-void BattleSimulator::setupNPT(NPT* npt)
+void OldBattleSimulator::setupNPT(NPT* npt)
 {
     m_opponentPokemonIndex = 0;
     m_npt = npt;
@@ -223,7 +223,7 @@ void BattleSimulator::setupNPT(NPT* npt)
     adjustPokemonDisplay(SelectedUser::AI);
 }
 
-void BattleSimulator::setupPokemon(Pokemon pokemon)
+void OldBattleSimulator::setupPokemon(Pokemon pokemon)
 {
     Moveset tempMoveSet = pokemon.getMoveset();
 
@@ -251,7 +251,7 @@ void BattleSimulator::setupPokemon(Pokemon pokemon)
     
 }
 
-void BattleSimulator::setupXP()
+void OldBattleSimulator::setupXP()
 {
     for (int i = 0; i < 6; i++)
     {
@@ -259,14 +259,14 @@ void BattleSimulator::setupXP()
     }
 }
 
-bool BattleSimulator::simulateBattle()
+bool OldBattleSimulator::simulateBattle()
 {
     while (!m_animator->loadingComplete())
     {
         //TODO: Add a loading card for when a battle starts that gives us time to load these animations
         std::cout << "Waiting on animations to load" << std::endl;
     }
-    logger->log(LogLevel::DEBUG, "simulation Starting", "simulateBattle", "BattleSimulator");
+    logger->log(LogLevel::DEBUG, "simulation Starting", "simulateBattle", "OldBattleSimulator");
     m_menu->setCanLeave(true);
     m_menu->preRun();
 
@@ -299,7 +299,7 @@ bool BattleSimulator::simulateBattle()
     return false;
 }
 
-void BattleSimulator::onUpdate()
+void OldBattleSimulator::onUpdate()
 {
     m_menu->renderMenu();
     m_animator->updateRenderer();
@@ -311,7 +311,7 @@ void BattleSimulator::onUpdate()
     //std::cout << "\n";
 }
 
-void BattleSimulator::generateSimulationData(SimulationCommand playerCommand, SimulationCommand aiCommand)
+void OldBattleSimulator::generateSimulationData(SimulationCommand playerCommand, SimulationCommand aiCommand)
 {
     switch (playerCommand.type)
     {
@@ -329,7 +329,7 @@ void BattleSimulator::generateSimulationData(SimulationCommand playerCommand, Si
         handleFleeSelection(aiCommand);
         break;
     default:
-        logger->log(LogLevel::CRITICAL, "unhandled simulation data type: " + std::to_string((int)playerCommand.type), "generateSimulationData", "BattleSimulator");
+        logger->log(LogLevel::CRITICAL, "unhandled simulation data type: " + std::to_string((int)playerCommand.type), "generateSimulationData", "OldBattleSimulator");
         logger->reportCriticalError(ErrorCodes::UNHANDLED_SIM_DATA);
     }
 
@@ -340,7 +340,7 @@ void BattleSimulator::generateSimulationData(SimulationCommand playerCommand, Si
     }
 }
 
-void BattleSimulator::generateStatusData(SelectedUser user, IncrementTime afflictionTime)
+void OldBattleSimulator::generateStatusData(SelectedUser user, IncrementTime afflictionTime)
 {
 
     //Major Status
@@ -411,7 +411,7 @@ void BattleSimulator::generateStatusData(SelectedUser user, IncrementTime afflic
     }
 }
 
-bool BattleSimulator::runSimulation()
+bool OldBattleSimulator::runSimulation()
 {
     if (m_commands.size() == 0)
     {
@@ -444,7 +444,7 @@ bool BattleSimulator::runSimulation()
             simulateStat(command);
             break;
         default:
-            logger->log(LogLevel::CRITICAL, "Unhandled simulation type: " + std::to_string((int)command.type), "runSimulation", "BattleSimulator");
+            logger->log(LogLevel::CRITICAL, "Unhandled simulation type: " + std::to_string((int)command.type), "runSimulation", "OldBattleSimulator");
             logger->reportCriticalError(ErrorCodes::UNHANDLED_SIM_DATA);
         }
     }
@@ -454,7 +454,7 @@ bool BattleSimulator::runSimulation()
     return true;
 }
 
-bool BattleSimulator::battleOver()
+bool OldBattleSimulator::battleOver()
 {
     if (m_flee || m_pokemonCaught)
         return true;
@@ -485,17 +485,17 @@ bool BattleSimulator::battleOver()
 
     if (m_playerDisplayPokemon[m_displayPokemonIndex].getCurHealth() == 0 && m_opponentDisplayPokemon[m_opponentPokemonIndex].getCurHealth() == 0)
     {
-        logger->log(LogLevel::INFO, "Both Pokemon Fainted", "battleOver", "BattleSimulator");
+        logger->log(LogLevel::INFO, "Both Pokemon Fainted", "battleOver", "OldBattleSimulator");
         handleFaintSelection(SelectedUser::BOTH);
     }
     else if (m_opponentDisplayPokemon[m_opponentPokemonIndex].getCurHealth() == 0)
     {
-        logger->log(LogLevel::INFO, "AI Pokemon Fainted", "battleOver", "BattleSimulator");
+        logger->log(LogLevel::INFO, "AI Pokemon Fainted", "battleOver", "OldBattleSimulator");
         handleFaintSelection(SelectedUser::AI);
     }
     else if (m_playerDisplayPokemon[m_displayPokemonIndex].getCurHealth() == 0)
     {
-        logger->log(LogLevel::INFO, "Player Pokemon Fainted", "battleOver", "BattleSimulator");
+        logger->log(LogLevel::INFO, "Player Pokemon Fainted", "battleOver", "OldBattleSimulator");
         handleFaintSelection(SelectedUser::PLAYER);
     }
 
@@ -503,12 +503,12 @@ bool BattleSimulator::battleOver()
     return false;
 }
 
-void BattleSimulator::grantNPTRewards()
+void OldBattleSimulator::grantNPTRewards()
 {
     m_player->giveMoney(m_npt->getBalance());
 }
 
-Pokemon BattleSimulator::handleCatch()
+Pokemon OldBattleSimulator::handleCatch()
 {
     for (int i = 0; i < 6; i++)
     {
@@ -520,11 +520,11 @@ Pokemon BattleSimulator::handleCatch()
         }
     }
 
-    logger->log(LogLevel::INFO, "Pokemon Caught", "handleCatch", "BattleSimulator");
+    logger->log(LogLevel::INFO, "Pokemon Caught", "handleCatch", "OldBattleSimulator");
     return m_opponentDisplayPokemon[m_opponentPokemonIndex];
 }
 
-SimulationCommand BattleSimulator::getAICommand()
+SimulationCommand OldBattleSimulator::getAICommand()
 {
     SimulationCommand aiCommand{};
     aiCommand.type = SimulationType::ITEM_SELECTED;
@@ -649,7 +649,7 @@ SimulationCommand BattleSimulator::getAICommand()
     return aiCommand;
 }
 
-int BattleSimulator::getMoveFromCommand(int commandMove, SelectedUser user)
+int OldBattleSimulator::getMoveFromCommand(int commandMove, SelectedUser user)
 {
     if (commandMove == MOVE_FIVE)
         return AttackID::STRUGGLE;
@@ -668,7 +668,7 @@ int BattleSimulator::getMoveFromCommand(int commandMove, SelectedUser user)
         case MOVE_FOUR:
             return m_p1moveset.move4;
         default:
-            logger->log(LogLevel::CRITICAL, "Invalid Player Move choice: " + std::to_string((int)commandMove), "getMoveFromCommand", "BattleSimulator");
+            logger->log(LogLevel::CRITICAL, "Invalid Player Move choice: " + std::to_string((int)commandMove), "getMoveFromCommand", "OldBattleSimulator");
             logger->reportCriticalError(ErrorCodes::UNHANDLED_ENUM);
             break;
         }
@@ -684,13 +684,13 @@ int BattleSimulator::getMoveFromCommand(int commandMove, SelectedUser user)
         case MOVE_FOUR:
             return m_opponentTestPokemon[m_opponentPokemonIndex].getMoveset().move4;
         default:
-            logger->log(LogLevel::CRITICAL, "Invalid AI Move choice: " + std::to_string((int)commandMove), "getMoveFromCommand", "BattleSimulator");
+            logger->log(LogLevel::CRITICAL, "Invalid AI Move choice: " + std::to_string((int)commandMove), "getMoveFromCommand", "OldBattleSimulator");
             logger->reportCriticalError(ErrorCodes::UNHANDLED_ENUM);
             break;
         }
         break;
     default:
-        logger->log(LogLevel::CRITICAL, "Invalid user choice: " + std::to_string((int)commandMove), "getMoveFromCommand", "BattleSimulator");
+        logger->log(LogLevel::CRITICAL, "Invalid user choice: " + std::to_string((int)commandMove), "getMoveFromCommand", "OldBattleSimulator");
         logger->reportCriticalError(ErrorCodes::UNHANDLED_ENUM);
         break;
     }
@@ -699,7 +699,7 @@ int BattleSimulator::getMoveFromCommand(int commandMove, SelectedUser user)
     return 4;
 }
 
-ItemID BattleSimulator::getItemFromCommand(int itemIndex, SelectedUser user)
+ItemID OldBattleSimulator::getItemFromCommand(int itemIndex, SelectedUser user)
 {
     int count = 0;
     if (user == SelectedUser::PLAYER)
@@ -726,12 +726,12 @@ ItemID BattleSimulator::getItemFromCommand(int itemIndex, SelectedUser user)
         }
     }
     
-    logger->log(LogLevel::CRITICAL, "Unable to Retrieve Item", "getItemFromCommand", "BattleSimulator");
+    logger->log(LogLevel::CRITICAL, "Unable to Retrieve Item", "getItemFromCommand", "OldBattleSimulator");
     logger->reportCriticalError(ErrorCodes::UNIDENTIFIED_ITEM);
     return ItemID();
 }
 
-void BattleSimulator::appendCommands(std::vector<SimulationCommand> commands)
+void OldBattleSimulator::appendCommands(std::vector<SimulationCommand> commands)
 {
     for (SimulationCommand command : commands)
     {
@@ -739,7 +739,7 @@ void BattleSimulator::appendCommands(std::vector<SimulationCommand> commands)
     }
 }
 
-void BattleSimulator::generateAttack(SelectedUser attacker, SimulationCommand command)
+void OldBattleSimulator::generateAttack(SelectedUser attacker, SimulationCommand command)
 {
     int move = command.selection2;
     if (move == NONE)
@@ -783,7 +783,7 @@ void BattleSimulator::generateAttack(SelectedUser attacker, SimulationCommand co
     }
 }
 
-bool BattleSimulator::generateItem(SelectedUser commander, SimulationCommand command)
+bool OldBattleSimulator::generateItem(SelectedUser commander, SimulationCommand command)
 {
     if (command.selection1 == arrowDirections::UP)
     {
@@ -858,7 +858,7 @@ bool BattleSimulator::generateItem(SelectedUser commander, SimulationCommand com
         }
         else if (m_npt != nullptr)
         {
-            logger->log(LogLevel::ERROR, "Pokeball used on trainer pokemon", "generateItem", "BattleSimulator");
+            logger->log(LogLevel::ERROR, "Pokeball used on trainer pokemon", "generateItem", "OldBattleSimulator");
             return false;
         }
         else
@@ -884,7 +884,7 @@ bool BattleSimulator::generateItem(SelectedUser commander, SimulationCommand com
     return true;
 }
 
-SimulationCommand BattleSimulator::generateForcedAttack(SelectedUser commander)
+SimulationCommand OldBattleSimulator::generateForcedAttack(SelectedUser commander)
 {
     //Change selection 2 to whatever the forced move is
 
@@ -908,7 +908,7 @@ SimulationCommand BattleSimulator::generateForcedAttack(SelectedUser commander)
     }
 }
 
-void BattleSimulator::handleAttack(SimulationCommand playerCommand, SimulationCommand aiCommand)
+void OldBattleSimulator::handleAttack(SimulationCommand playerCommand, SimulationCommand aiCommand)
 {
     if (playerCommand.selection1 != NONE)
     {
@@ -970,7 +970,7 @@ void BattleSimulator::handleAttack(SimulationCommand playerCommand, SimulationCo
     }
 }
 
-void BattleSimulator::handlePokemonSwap(SimulationCommand playerCommand, SimulationCommand aiCommand)
+void OldBattleSimulator::handlePokemonSwap(SimulationCommand playerCommand, SimulationCommand aiCommand)
 {
     m_menu->setscene(MenuScene::BATTLE);
     //m_menu->setOverlay(MenuOverlay::NONE);
@@ -979,7 +979,7 @@ void BattleSimulator::handlePokemonSwap(SimulationCommand playerCommand, Simulat
         //TODO: Display an error of some kind that the pokemon cannot be selected
         m_menuCommand.selection1 = NONE;
         m_menu->setOverlay(MenuOverlay::BATTLE_OPTIONS);
-        logger->log(LogLevel::ERROR, "Cannot Swap to selected pokemon", "handlePokemonSwap", "BattleSimulator");
+        logger->log(LogLevel::ERROR, "Cannot Swap to selected pokemon", "handlePokemonSwap", "OldBattleSimulator");
         return;
     }
 
@@ -999,7 +999,7 @@ void BattleSimulator::handlePokemonSwap(SimulationCommand playerCommand, Simulat
         generateItem(SelectedUser::AI, aiCommand);
 }
 
-void BattleSimulator::handleItemSelection(SimulationCommand playerCommand, SimulationCommand aiCommand)
+void OldBattleSimulator::handleItemSelection(SimulationCommand playerCommand, SimulationCommand aiCommand)
 {
     if (!generateItem(SelectedUser::PLAYER, playerCommand))
         return;
@@ -1010,7 +1010,7 @@ void BattleSimulator::handleItemSelection(SimulationCommand playerCommand, Simul
         generateItem(SelectedUser::AI, aiCommand);
 }
 
-void BattleSimulator::handleFleeSelection(SimulationCommand aiCommand)
+void OldBattleSimulator::handleFleeSelection(SimulationCommand aiCommand)
 {
     if (m_playerDisplayPokemon[m_playerPokemonIndex].getStats().speed > m_opponentDisplayPokemon[m_opponentPokemonIndex].getStats().speed)
     {
@@ -1033,12 +1033,12 @@ void BattleSimulator::handleFleeSelection(SimulationCommand aiCommand)
         generateItem(SelectedUser::AI, aiCommand);
 }
 
-void BattleSimulator::handleFaintSelection(SelectedUser swapper)
+void OldBattleSimulator::handleFaintSelection(SelectedUser swapper)
 {
     handleFaintXP(swapper);
     if (swapper == SelectedUser::PLAYER)
     {
-        logger->log(LogLevel::DEBUG, "Player pokemon has fainted", "handleFaintSelection", "BattleSimulator");
+        logger->log(LogLevel::DEBUG, "Player pokemon has fainted", "handleFaintSelection", "OldBattleSimulator");
         displayFaintMessage(swapper);
         int pokemonIndex = m_displayPokemonIndex;
         m_menu->setRequestedData(&pokemonIndex);
@@ -1062,7 +1062,7 @@ void BattleSimulator::handleFaintSelection(SelectedUser swapper)
     }
     else if (swapper == SelectedUser::AI)
     {
-        logger->log(LogLevel::DEBUG, "AI Pokemon has fainted", "handleFaintSelection", "BattleSimulator");
+        logger->log(LogLevel::DEBUG, "AI Pokemon has fainted", "handleFaintSelection", "OldBattleSimulator");
         SimulationCommand aiSwapCommand{};
         aiSwapCommand.type = SimulationType::POKEMON;
         aiSwapCommand.commander = SelectedUser::AI;
@@ -1114,7 +1114,7 @@ void BattleSimulator::handleFaintSelection(SelectedUser swapper)
     }
     else
     {
-        logger->log(LogLevel::DEBUG, "Player pokemon and AI has fainted", "handleFaintSelection", "BattleSimulator");
+        logger->log(LogLevel::DEBUG, "Player pokemon and AI has fainted", "handleFaintSelection", "OldBattleSimulator");
         displayFaintMessage(SelectedUser::PLAYER);
         int pokemonIndex = m_displayPokemonIndex;
         m_menu->setRequestedData(&pokemonIndex);
@@ -1144,7 +1144,7 @@ void BattleSimulator::handleFaintSelection(SelectedUser swapper)
     }
 }
 
-void BattleSimulator::simulateAttack(SimulationCommand command)
+void OldBattleSimulator::simulateAttack(SimulationCommand command)
 {
     if (m_pokemonCaught)
         return;
@@ -1194,7 +1194,7 @@ void BattleSimulator::simulateAttack(SimulationCommand command)
     }
 }
 
-void BattleSimulator::simulatePokemon(SimulationCommand command)
+void OldBattleSimulator::simulatePokemon(SimulationCommand command)
 {
     if (command.commander == SelectedUser::PLAYER)
     {
@@ -1216,7 +1216,7 @@ void BattleSimulator::simulatePokemon(SimulationCommand command)
     }
 }
 
-void BattleSimulator::simulateItem(SimulationCommand command)
+void OldBattleSimulator::simulateItem(SimulationCommand command)
 {
     if (command.itemData.pokeballData.isPokeball)
     {
@@ -1302,7 +1302,7 @@ void BattleSimulator::simulateItem(SimulationCommand command)
         }
         else
         {
-            logger->log(LogLevel::DEBUG, "The Wild " + m_opponentDisplayPokemon[m_opponentPokemonIndex].getName() + " has escaped", "simulateItem", "BattleSimulator");
+            logger->log(LogLevel::DEBUG, "The Wild " + m_opponentDisplayPokemon[m_opponentPokemonIndex].getName() + " has escaped", "simulateItem", "OldBattleSimulator");
             std::cout << "The Wild " << m_opponentDisplayPokemon[m_opponentPokemonIndex].getName() << " has escaped" << std::endl;
             renderDialogue("The Wild " + m_opponentDisplayPokemon[m_opponentPokemonIndex].getName(), "has escaped", false);
             
@@ -1344,13 +1344,13 @@ void BattleSimulator::simulateItem(SimulationCommand command)
     }
 }
 
-void BattleSimulator::simulateFlee(SimulationCommand command)
+void OldBattleSimulator::simulateFlee(SimulationCommand command)
 {
     if (command.selection1 == (int)true)
     {
         m_flee = true;
         std::cout << "Flee was successful\n";
-        logger->log(LogLevel::DEBUG, "Flee was successful", "simulateFlee", "BattleSimulator");
+        logger->log(LogLevel::DEBUG, "Flee was successful", "simulateFlee", "OldBattleSimulator");
         renderDialogue("Flee was successful", "", false);
         return;
     }
@@ -1358,7 +1358,7 @@ void BattleSimulator::simulateFlee(SimulationCommand command)
     renderDialogue("Flee was unsuccessful", "", false);
 }
 
-void BattleSimulator::simulateStatus(SimulationCommand command)
+void OldBattleSimulator::simulateStatus(SimulationCommand command)
 {
     if (m_pokemonCaught)
         return;
@@ -1406,7 +1406,7 @@ void BattleSimulator::simulateStatus(SimulationCommand command)
     dripDamage(command.commander, command.statusData.damage);
 }
 
-void BattleSimulator::simulateStat(SimulationCommand command)
+void OldBattleSimulator::simulateStat(SimulationCommand command)
 {
     if (command.statData.recipient == SelectedUser::PLAYER)
         m_playerDisplayPokemon[m_playerPokemonIndex].addBattleStats(command.statData.stats);
@@ -1414,7 +1414,7 @@ void BattleSimulator::simulateStat(SimulationCommand command)
         m_opponentDisplayPokemon[m_opponentPokemonIndex].addBattleStats(command.statData.stats);
     else
     {
-        logger->log(LogLevel::CRITICAL, "Unknown Selected User", "simulateStat", "BattleSimulator");
+        logger->log(LogLevel::CRITICAL, "Unknown Selected User", "simulateStat", "OldBattleSimulator");
         logger->reportCriticalError(ErrorCodes::UNHANDLED_ENUM);
     }
 
@@ -1422,7 +1422,7 @@ void BattleSimulator::simulateStat(SimulationCommand command)
     renderDialogue(command.statData.message, "", true);
 }
 
-bool BattleSimulator::attackMissed(SimulationCommand command)
+bool OldBattleSimulator::attackMissed(SimulationCommand command)
 {
     int count = 0;
     std::string missed = "missed";
@@ -1444,7 +1444,7 @@ bool BattleSimulator::attackMissed(SimulationCommand command)
     return false;
 }
 
-void BattleSimulator::handleFaintXP(SelectedUser user)
+void OldBattleSimulator::handleFaintXP(SelectedUser user)
 {
     if (user == SelectedUser::PLAYER)
     {
@@ -1470,7 +1470,7 @@ void BattleSimulator::handleFaintXP(SelectedUser user)
     }
 }
 
-void BattleSimulator::dripDamage(SelectedUser pokemonToDamage, int value)
+void OldBattleSimulator::dripDamage(SelectedUser pokemonToDamage, int value)
 {
     if (pokemonToDamage == SelectedUser::PLAYER)
     {
@@ -1492,14 +1492,14 @@ void BattleSimulator::dripDamage(SelectedUser pokemonToDamage, int value)
     }
 }
 
-void BattleSimulator::addToXpRecord()
+void OldBattleSimulator::addToXpRecord()
 {
 
     if (std::find(m_xpRecords[m_opponentPokemonIndex].begin(), m_xpRecords[m_opponentPokemonIndex].end(), m_playerPokemonIndex) == m_xpRecords[m_opponentPokemonIndex].end())
         m_xpRecords[m_opponentPokemonIndex].push_back(m_playerPokemonIndex);
 }
 
-void BattleSimulator::removeXpRecord()
+void OldBattleSimulator::removeXpRecord()
 {
     for (int i = 0; i < 6; i++)
     {
@@ -1519,7 +1519,7 @@ void BattleSimulator::removeXpRecord()
     }
 }
 
-void BattleSimulator::grantEVs()
+void OldBattleSimulator::grantEVs()
 {
     int evSplit = (int)m_xpRecords[m_opponentPokemonIndex].size();
 
@@ -1543,7 +1543,7 @@ void BattleSimulator::grantEVs()
     }
 }
 
-void BattleSimulator::grantXP()
+void OldBattleSimulator::grantXP()
 {
     if (m_xpRecords[m_opponentPokemonIndex].size() == 0)
         return;
@@ -1611,7 +1611,7 @@ void BattleSimulator::grantXP()
     m_xpRecords[m_opponentPokemonIndex].clear();
 }
 
-void BattleSimulator::levelPokemon(int index)
+void OldBattleSimulator::levelPokemon(int index)
 {
     //TODO: Get Leveling Pokemon Name, Level and stats
     PokemonStats statIncrease = m_playerDisplayPokemon[index].levelUp();
@@ -1668,13 +1668,13 @@ void BattleSimulator::levelPokemon(int index)
     }
 }
 
-void BattleSimulator::evolvePokemon(int index)
+void OldBattleSimulator::evolvePokemon(int index)
 {
     if (m_playerDisplayPokemon[index].readyToEvolve())
         m_playerDisplayPokemon[index].evolve();
 }
 
-void BattleSimulator::teachMove(int index)
+void OldBattleSimulator::teachMove(int index)
 {
     bool moveSwapped = false;
     int newMove = m_playerDisplayPokemon[index].readyToLearnMove();
@@ -1713,7 +1713,7 @@ void BattleSimulator::teachMove(int index)
     }
 
     int option = 0;
-    logger->log(LogLevel::DEBUG, "Replacing move", "teachMove", "BattleSimulator");
+    logger->log(LogLevel::DEBUG, "Replacing move", "teachMove", "OldBattleSimulator");
     std::cout << "Do you want to replace a move?\n1) Yes\n2) No\n" << std::endl;
     std::cin >> option;
     std::cin.clear();
@@ -1742,7 +1742,7 @@ void BattleSimulator::teachMove(int index)
     if (!m_menu->leaveRequested())
     {
         m_playerDisplayPokemon[index].learnMove(option, newMove, getAttackFromID(newMove)->getPP());
-        logger->log(LogLevel::DEBUG, "pokemon has learned new move id: " + std::to_string(newMove), "teachMove", "BattleSimulator");
+        logger->log(LogLevel::DEBUG, "pokemon has learned new move id: " + std::to_string(newMove), "teachMove", "OldBattleSimulator");
         std::cout << "Pokemon has learned " << getAttackFromID(newMove)->getName() << std::endl;
         system("pause");
         std::cin >> option;
@@ -1750,7 +1750,7 @@ void BattleSimulator::teachMove(int index)
     }
 }
 
-void BattleSimulator::displayFaintMessage(SelectedUser user)
+void OldBattleSimulator::displayFaintMessage(SelectedUser user)
 {
 
 
@@ -1773,7 +1773,7 @@ void BattleSimulator::displayFaintMessage(SelectedUser user)
 
 }
 
-void BattleSimulator::reducePP(SelectedUser attacker, int move)
+void OldBattleSimulator::reducePP(SelectedUser attacker, int move)
 {
     if (move == NONE || move == MOVE_FIVE)
         return;
@@ -1841,7 +1841,7 @@ void BattleSimulator::reducePP(SelectedUser attacker, int move)
         }
         break;
     default:
-        logger->log(LogLevel::CRITICAL, "error reducing PP", "reducePP", "BattleSimulator");
+        logger->log(LogLevel::CRITICAL, "error reducing PP", "reducePP", "OldBattleSimulator");
         logger->reportCriticalError(ErrorCodes::FAILED_PP_REDUCTION);
         break;
     }
@@ -1850,7 +1850,7 @@ void BattleSimulator::reducePP(SelectedUser attacker, int move)
         updatePlayerAttacks();
 }
 
-void BattleSimulator::updatePP(SelectedUser user)
+void OldBattleSimulator::updatePP(SelectedUser user)
 {
     if (user == SelectedUser::PLAYER)
     {
@@ -1864,7 +1864,7 @@ void BattleSimulator::updatePP(SelectedUser user)
     }
 }
 
-void BattleSimulator::updatePlayerAttacks()
+void OldBattleSimulator::updatePlayerAttacks()
 {
     m_playerAttacks.string1 = getAttackFromID(m_p1moveset.move1)->getName() + "   " + std::to_string(m_p1moveset.move1pp) + ":" + std::to_string(getAttackFromID(m_p1moveset.move1)->getPP());
     m_playerAttacks.string2 = getAttackFromID(m_p1moveset.move2)->getName() + "   " + std::to_string(m_p1moveset.move2pp) + ":" + std::to_string(getAttackFromID(m_p1moveset.move2)->getPP());
@@ -1872,7 +1872,7 @@ void BattleSimulator::updatePlayerAttacks()
     m_playerAttacks.string4 = getAttackFromID(m_p1moveset.move4)->getName() + "   " + std::to_string(m_p1moveset.move4pp) + ":" + std::to_string(getAttackFromID(m_p1moveset.move4)->getPP());
 }
 
-void BattleSimulator::renderDialogue(std::string topLine, std::string bottomLine, bool awaitClick)
+void OldBattleSimulator::renderDialogue(std::string topLine, std::string bottomLine, bool awaitClick)
 {
     m_dialogueRenderer->setDialogue(topLine, bottomLine, awaitClick, true);
 
@@ -1883,7 +1883,7 @@ void BattleSimulator::renderDialogue(std::string topLine, std::string bottomLine
     }
 }
 
-void BattleSimulator::resetMenu()
+void OldBattleSimulator::resetMenu()
 {
     //TODO: Attack, Items, Pokemon all need to be set back to 0 index. So that we arent starting on the wrong move. Same with the main menu. We want it to start on attack
     m_hoverIndex = -1;
@@ -1894,7 +1894,7 @@ void BattleSimulator::resetMenu()
     m_menuCommand = SimulationCommand{};
 }
 
-void BattleSimulator::adjustPokemonDisplay(SelectedUser user)
+void OldBattleSimulator::adjustPokemonDisplay(SelectedUser user)
 {
     if (user == SelectedUser::PLAYER)
     {
@@ -1919,7 +1919,7 @@ void BattleSimulator::adjustPokemonDisplay(SelectedUser user)
     }
 }
 
-void BattleSimulator::adjustHealthPercentage(SelectedUser user)
+void OldBattleSimulator::adjustHealthPercentage(SelectedUser user)
 {
     float maxPlayPercent = 23.9f;
     float maxOppPercent = 17.4f;
@@ -1935,13 +1935,13 @@ void BattleSimulator::adjustHealthPercentage(SelectedUser user)
     }
 }
 
-void BattleSimulator::adjustXPPercentage()
+void OldBattleSimulator::adjustXPPercentage()
 {
     float maxPercent = 37.9f;
     m_battleData.playerXPPercent = maxPercent * ((float)m_playerDisplayPokemon[m_displayPokemonIndex].getCurXP() / (float)m_playerDisplayPokemon[m_displayPokemonIndex].getXPNeeded());
 }
 
-bool BattleSimulator::validItemSelection(int selection)
+bool OldBattleSimulator::validItemSelection(int selection)
 {
     if (selection == 0 && m_playerBattleItems.itemName.string1 == "NONE")
         return false;

@@ -91,6 +91,7 @@ private:
 private:
 	SharedString m_dialogueText;
 
+	Renderer* renderer = nullptr;
 	Menu* m_menu = nullptr;
 	Input* m_input = nullptr;
 	Timer* m_timer = nullptr;

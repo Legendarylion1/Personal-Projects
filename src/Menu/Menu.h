@@ -60,9 +60,9 @@ public:
 	void setupKeyboard(AlphabetStringData* alphabet, std::string* input);
 	void setupIntroData(bool* studioVisible, bool* pressAnyButtonVisible);
 	void setupStartupData(SharedString* header1, SharedString* header2, SharedString* header3, bool* f1Visible, bool* f2Visible, bool* f3Visible);
-	void setupBattleData(SharedString* moves, SimulationCommand* menuCommand, RosterDisplayData* rosterData, ItemDisplayData* battleItemData, BattlePokemonData* battleData, DynamicImageRenderData* playPokemon, DynamicImageRenderData* oppPokemon);
+	void setupBattleData(SharedString* moves, SimulationCommand* menuCommand, RosterDisplayData* rosterData, ItemDisplayData* battleItemData, BattlePokemonData* battleData, DynamicImageRenderData* playPokemon, DynamicImageRenderData* oppPokemon, LearnMoveData* learnMoveData);
 	void setupInteractionData(SharedString* items, std::string* balance);
-	void setupPauseData(SharedString* items, std::string* balance, std::string* time, RosterDisplayData* rosterData, TrainerBadgeData* badgeData, PauseSettingsData* settingData);
+	void setupPauseData(SharedString* items, PauseMenuData* pauseMenuData, RosterDisplayData* rosterData, PauseSettingsData* settingData);
 
 	void setscene(MenuScene scene);
 	void setOverlay(MenuOverlay overlay);
@@ -93,7 +93,6 @@ private:
 	bool handleLeave();
 
 private:
-	SimulationCommand* m_menuCommand = nullptr;
 	InputVariables* m_inputVariables = nullptr;
 	Renderer* m_renderer = nullptr;
 	Input* m_input = nullptr;

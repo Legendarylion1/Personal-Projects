@@ -48,6 +48,7 @@ public:
 
 		SimulationCommand applicationCommand;
 
+		applicationCommand.commander = recipient;
 		applicationCommand.type = SimulationType::STATUS;
 		applicationCommand.statusData.recipient = recipient;
 		applicationCommand.statusData.statusGiven = getData().id;
